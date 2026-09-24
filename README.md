@@ -26,6 +26,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\dev.ps1 Stop
 
 ## 版本与云端
 
+- 公网工具：https://sherlock3rd.github.io/Travelagent/ ，推送 main 自动检查、构建并发布；详见 [发布说明](docs/publishing.md)。
 - Git：https://github.com/Sherlock3rd/Travelagent
 - Supabase：免费独立 Travelagent 项目已创建，数据库/API 验证通过，详见 [云端环境](docs/supabase.md)。
 - 本地修改可直接刷新预览；提交和推送负责版本同步，二者独立运行。
