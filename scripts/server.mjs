@@ -16,7 +16,7 @@ const isInside = (path) => {
 export const server = http.createServer(async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   res.setHeader('X-Content-Type-Options', 'nosniff');
-  res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://tile.openstreetmap.org https://dohahamadairport.com https://betamedia.experienceegypt.eg; connect-src 'self' https://router.project-osrm.org https://tiles.openfreemap.org; worker-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'");
+  res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://tile.openstreetmap.org https://dohahamadairport.com https://betamedia.experienceegypt.eg https://egymonuments.gov.eg https://1442038683.rsc.cdn77.org; connect-src 'self' https://router.project-osrm.org https://tiles.openfreemap.org; worker-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'");
   const send = (status, body, type = 'text/plain; charset=utf-8') => {
     res.writeHead(status, { 'Content-Type': type });
     res.end(req.method === 'HEAD' ? undefined : body);
