@@ -149,14 +149,14 @@ function renderMapDetails() {
   $('#map-view-switch').hidden = !day;
   document.querySelectorAll('[data-map-view]').forEach(b => { b.classList.toggle('selected', b.dataset.mapView === mapView); b.setAttribute('aria-pressed', b.dataset.mapView === mapView); });
   $('#map-view-label').textContent = day ? 'D' + (state.days.indexOf(day) + 1) + ' · ' + (day.date || '日期待定') : '';
-  $('#day-map-detail').innerHTML = day ? '<button class="text-button" data-go-day="' + day.id + '">打开 D' + (state.days.indexOf(day) + 1) + ' 完整行程 ↗</button>' + mapOverview(day) : placeIndex();
+  $('#map-plan-switch').innerHTML = day && mapView === 'activities' && day.routePlans.length > 1 ? day.routePlans.map(p=>'<button class="'+(p.id===activePlan(day).id?'selected':'')+'" data-plan="'+p.id+'" data-day="'+day.id+'" aria-pressed="'+(p.id===activePlan(day).id)+'">'+esc(p.name)+'</button>').join('') : '';
   const country = COUNTRIES.find(c => c.code === state.trip.countryCode);
   $('#country-map').textContent = country ? '聚焦' + country.name : '设置目标国';
 }
 function renderRoutes() {
   renderMapDetails();
   $('#route-count').textContent = state.days.length + ' DAYS';
-  $('#route-list').innerHTML = state.days.length ? state.days.map((d, i) => '<button class="route-item ' + (selectedDay === d.id ? 'selected' : '') + '" data-route="' + d.id + '" aria-pressed="' + (selectedDay === d.id) + '"><span class="day-badge" style="--day-color:' + color(i) + '">D' + (i + 1) + '</span><span><strong>' + esc(routeName(d)) + '</strong><small>' + (d.activities.length ? d.activities.length + ' 项当日安排 · ' + (d.date || '日期待定') : d.road ? (d.road.distance / 1000).toFixed(1) + ' km · 公路估算' : d.stops.every(s => s.point) ? '站点连线 · 待规划道路' : '地图位置待补充') + '</small></span></button>').join('') : '<div class="route-empty">从一份日程开始，<br>慢慢描绘旅行的轮廓。</div>';
+  $('#route-list').innerHTML = state.days.length ? state.days.map((d, i) => '<div class="route-row"><button class="route-item ' + (selectedDay === d.id ? 'selected' : '') + '" data-route="' + d.id + '" aria-pressed="' + (selectedDay === d.id) + '"><span class="day-badge" style="--day-color:' + color(i) + '">D' + (i + 1) + '</span><span><strong>' + esc(routeName(d)) + '</strong><small>' + (d.activities.length ? d.activities.length + ' 项当日安排 · ' + (d.date || '日期待定') : d.road ? (d.road.distance / 1000).toFixed(1) + ' km · 公路估算' : d.stops.every(s => s.point) ? '站点连线 · 待规划道路' : '地图位置待补充') + '</small></span></button><button class="text-button route-day-link" data-go-day="'+d.id+'" aria-label="打开 D'+(i+1)+' 完整行程">行程 ↗</button></div>').join('') : '<div class="route-empty">从一份日程开始，<br>慢慢描绘旅行的轮廓。</div>';
 }
 let disposeDayMedia;
 function renderDays() {
@@ -438,10 +438,6 @@ function eventMapButtons(day, event) {
   const seen = new Set();
   return matches.filter(({s}) => { const key = placeKey(s.point); if (seen.has(key)) return false; seen.add(key); return true; }).map(({p,s}) => pointButton(s, day, p, '地图 · ' + s.name)).join('') || (event.point ? '<button class="text-button" data-place="' + placeKey(event.point) + '" data-day="' + day.id + '">在地图定位 ↗</button>' : '');
 }
-function placeIndex() {
-  const places = planPlaces(state.days);
-  return '<h3>具体地点 · ' + places.length + ' 处</h3><div class="place-index">' + places.map(p => '<button data-place="' + p.key + '"><strong>' + esc(p.name) + '</strong><small>' + [...new Set(p.refs.map(r => 'D' + (state.days.findIndex(d => d.id === r.dayId) + 1)))].join(' / ') + '</small></button>').join('') + '</div>';
-}
 function placePopup(place) {
   const seen = new Set();
   return '<div class="place-popup"><strong>' + esc(place.name) + '</strong>' + place.refs.map(ref => {
@@ -491,10 +487,6 @@ function legCard(day, plan, leg, popup = false) {
   const from = plan.stops.find(s => s.id === leg.from), to = plan.stops.find(s => s.id === leg.to);
   const events = [...new Set([...from.eventIds,...to.eventIds])];
   return '<div class="leg-card' + (highlightedLeg === leg.id ? ' selected' : '') + '" data-leg-card="' + leg.id + '"><div class="leg-endpoints">' + pointButton(from,day,plan) + '<span> → </span>' + pointButton(to,day,plan) + '</div><strong class="leg-time">' + esc(leg.mode) + ' · ' + esc(leg.duration || '时间待确认') + '</strong>' + (leg.road ? '<small>道路约 ' + (leg.road.distance/1000).toFixed(1) + ' km · 行驶基准 ' + Math.round(leg.road.duration/60) + ' 分钟</small>' : '<small>' + (from.point && to.point ? '虚线为顺序示意，不是导航轨迹' : '未知位置未连线') + '</small>') + (leg.note ? '<p>' + esc(leg.note) + '</p>' : '') + '<div class="leg-actions">' + (!popup ? '<button class="text-button" data-leg="' + leg.id + '" data-day="' + day.id + '" data-plan-id="' + plan.id + '">查看这一段 ↗</button>' : '') + events.map(id => '<button class="text-button" data-go-event="' + id + '" data-day="' + day.id + '">事件 ' + (day.activities.findIndex(a => a.id === id)+1) + ' ↗</button>').join('') + '<button class="text-button" data-go-day="' + day.id + '">完整行程 ↗</button><button class="text-button" data-edit-leg="' + leg.id + '" data-day="' + day.id + '" data-plan-id="' + plan.id + '">编辑交通</button></div>' + (leg.url ? '<a href="' + esc(leg.url) + '" target="_blank" rel="noopener noreferrer">估算 / 信息来源 ↗</a>' : '') + '<small>' + (leg.checkedDate ? '查阅于 ' + leg.checkedDate : '来源日期待补充') + '</small></div>';
-}
-function mapOverview(day) {
-  const plan=activePlan(day);
-  return '<div class="map-overview"><h3>'+esc(plan?.name || routeName(day))+'</h3><p>'+day.activities.length+' 项安排 · '+day.activities.filter(a=>a.status==='confirmed').length+' 项已确认</p>'+(plan?'<div class="plan-tabs">'+day.routePlans.map(p=>'<button class="'+(p.id===plan.id?'selected':'')+'" data-plan="'+p.id+'" data-day="'+day.id+'" aria-pressed="'+(p.id===plan.id)+'">'+esc(p.name)+'</button>').join('')+'</div><div class="overview-stops">'+plan.stops.map((stop,i)=>'<span>'+(i+1)+'. '+esc(stop.name)+'</span>').join('')+'</div>':'')+'</div>';
 }
 function itineraryTransport(day) {
   if(!day.routePlans.length)return '';
