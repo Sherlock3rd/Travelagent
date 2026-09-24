@@ -5,6 +5,7 @@ import { STORAGE_KEY, COLORS, CATEGORIES, MODES, GUIDE_CATEGORIES, blankState, v
 import { createMap, addBasemap } from './map.js';
 import { planPlaces, forgetEvent } from './journeys.js';
 import { COUNTRIES } from './countries.js';
+import { loadInitialTrip } from './initial-trip.js';
 mountLightbox();
 let mapView = 'transit', expanded = false, savedScroll = 0;
 const selectedPlans = new Map(), placeMarkers = new Map();
@@ -20,13 +21,19 @@ const stamp = () => new Date().toISOString();
 const formatTime = date => { const d = new Date(date); return Number.isFinite(d.getTime()) ? d.toLocaleString('zh-CN', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }) : '时间未知'; };
 let state = blankState(), lastSaved = null, writable = true, filter = 'all', selectedDay = null, toastTimer, editorSave, picker = null, pickerMarker = null, draftStops = [], pinIndex = null, editorBaseline = null;
 try {
-  lastSaved = localStorage.getItem(STORAGE_KEY);
-  if (lastSaved) state = validateState(JSON.parse(lastSaved));
+  const initial = await loadInitialTrip(localStorage, async () => {
+    const response = await fetch(new URL('./published-trip.json', import.meta.url), { cache: 'no-store', signal: AbortSignal.timeout(15000) });
+    if (response.status === 404) return null;
+    if (!response.ok) throw new Error('Published trip unavailable');
+    return response.json();
+  });
+  state = initial.state; lastSaved = initial.serialized;
 } catch {
   writable = false;
+  try { lastSaved = localStorage.getItem(STORAGE_KEY); } catch {}
   const warning = document.createElement('p');
   warning.className = 'storage-warning';
-  warning.textContent = '本机数据暂时无法读取。为保护原数据，已暂停保存；请先导出备份，不要清除浏览器数据。';
+  warning.textContent = '旅行内容暂时无法加载，已暂停保存。请检查网络后刷新；已有本机资料请先导出备份，不要清除浏览器数据。';
   $('#main').prepend(warning);
 }
 function toast(message) { clearTimeout(toastTimer); $('#toast').textContent = message; $('#toast').hidden = false; toastTimer = setTimeout(() => $('#toast').hidden = true, 4200); }

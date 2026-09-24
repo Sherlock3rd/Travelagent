@@ -33,6 +33,6 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\dev.ps1 Stop
 - 每次推送 main 或提交 PR，GitHub Actions 执行环境检查。
 - 当前页面包含地图、每日行程、物品准备、备注留言和附加攻略，详见 [五模块范围](spec/travel-workspace-v1.md)。
 - 内容保存在当前浏览器，可导出/导入 JSON 备份。Supabase 尚未接入业务同步，没有多人留言或跨设备同步。
-- 实际旅行资料待用户提供，参考图只参考样式。
+- 用户已授权当前旅行内容公开，新访客自动载入已发布快照；已有浏览器内容保留，不自动覆盖。后续本机编辑仍需重新发布才能供其他设备查看。
 
 更多信息见 [开发说明](docs/development.md)、[项目规则](rules/rules.md)、[会话记录](session/session.md)。
