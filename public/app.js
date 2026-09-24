@@ -1,4 +1,5 @@
 import { STORAGE_KEY, COLORS, CATEGORIES, MODES, GUIDE_CATEGORIES, blankState, validateState, routeSignature, dayForSave } from './model.js';
+import { createMap, addBasemap } from './map.js';
 const $ = selector => document.querySelector(selector);
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const empty = (title, detail) => '<div class="empty-state"><strong>' + esc(title) + '</strong>' + esc(detail) + '</div>';
@@ -52,18 +53,9 @@ function confirmAction(message) {
   });
 }
 let map, layers;
-function addTiles(target) {
-  const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 18, minZoom: 2, noWrap: true,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-  }).addTo(target);
-  tiles.on('tileerror', () => { $('#map-network').textContent = '部分地图图块未加载；可继续查看站点与行程。'; $('#map-network').hidden = false; });
-  tiles.on('load', () => { const images = target.getContainer().querySelectorAll('.leaflet-tile'); if (images.length && [...images].every(image => image.complete && image.naturalWidth > 0)) $('#map-network').hidden = true; });
-  return tiles;
-}
 try {
-  map = L.map('map', { scrollWheelZoom: false, worldCopyJump: false }).setView([27, 30], 2);
-  addTiles(map); layers = L.layerGroup().addTo(map);
+  map = createMap('map').setView([27, 30], 2);
+  addBasemap(map); layers = L.layerGroup().addTo(map);
 } catch { $('#map-network').hidden = false; $('#map-network').textContent = '地图暂时不可用，其余旅行内容仍可编辑。'; }
 function drawMap() {
   if (!map) return;
@@ -187,8 +179,8 @@ function pinStop(index) {
   $('#picker-instruction').textContent = '正在标记「' + (draftStops[index].name || '站点 ' + (index + 1)) + '」：拖动、缩放地图，然后点击准确位置。';
   if (!window.L) { toast('地图未加载，位置可稍后补充。'); return; }
   if (!picker) {
-    picker = L.map('picker-map', { scrollWheelZoom: true }).setView(map?.getCenter() || [27, 30], Math.max(3, map?.getZoom() || 3));
-    addTiles(picker);
+    picker = createMap('picker-map').setView(map?.getCenter() || [27, 30], Math.max(3, map?.getZoom() || 3));
+    addBasemap(picker);
     picker.on('click', event => {
       if (pinIndex === null || !draftStops[pinIndex]) return;
       const { lat, lng } = event.latlng.wrap();

@@ -9,11 +9,13 @@
   },
   "scripts": {
     "start": "node scripts/server.mjs",
-    "check": "node --check scripts/server.mjs && node --check scripts/check-supabase.mjs && node --check public/app.js && node --check public/model.js",
+    "check": "node --check scripts/server.mjs && node --check scripts/check-supabase.mjs && node --check public/app.js && node --check public/model.js && node --check public/map.js",
     "check:cloud": "node scripts/check-supabase.mjs",
     "test": "node --test"
   },
   "dependencies": {
-    "leaflet": "1.9.4"
+    "@maplibre/maplibre-gl-leaflet": "0.1.4",
+    "leaflet": "1.9.4",
+    "maplibre-gl": "6.11.1"
   }
 }

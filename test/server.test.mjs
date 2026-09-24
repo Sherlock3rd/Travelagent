@@ -9,6 +9,12 @@ test('服务可用且不暴露仓库文件', async () => {
     const home = await fetch(base);
     assert.equal(home.status, 200);
     assert.match(await home.text(), /Travelagent/);
+    for (const path of ['/vendor/maplibre/maplibre-gl.mjs', '/vendor/maplibre/maplibre-gl-worker.mjs', '/vendor/maplibre/maplibre-gl-shared.mjs']) {
+      const module = await fetch(base + path);
+      assert.equal(module.status, 200, path);
+      assert.match(module.headers.get('content-type'), /text\/javascript/, path);
+      await module.arrayBuffer();
+    }
     const health = await (await fetch(`${base}/healthz`)).json();
     assert.equal(health.service, 'travelagent');
     assert.equal(health.pid, process.pid);
