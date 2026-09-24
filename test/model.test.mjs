@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { blankState, validateState, routeSignature, dayForSave, mergeDayActivities, activitySegments } from '../public/model.js';
+import { blankState, validateState, routeSignature, dayForSave, mergeDayActivities, activitySegments, mergeRoutePlans } from '../public/model.js';
+import { legSignature, planPlaces, forgetEvent } from '../public/journeys.js';
 
 const day = () => ({ id: 'test-day', date: '', stops: [{ name: '测试起点', point: [30, 110] }, { name: '测试终点', point: [31, 111] }], mode: '自驾', departure: '', arrival: '', duration: '', lodging: '', lodgingStatus: 'pending', status: 'pending', source: '', note: '', road: null });
 test('空白项目不包含示例行程或自动确认', () => {
@@ -11,6 +12,35 @@ test('空白项目不包含示例行程或自动确认', () => {
   assert.throws(() => validateState(s), /住宿地点/);
 });
 const activity = (id, point = [30, 110], status = 'pending') => ({ id, name: '测试景点', point, status, time: '上午（建议）', duration: '', transport: '', note: '', url: '' });
+const plan = () => ({ id:'plan-a', name:'测试方案 A', note:'', stops:[{id:'s1',name:'起点',point:[30,110],eventIds:['a']},{id:'s2',name:'终点',point:[30.01,110.01],eventIds:['b']}], legs:[{id:'l1',from:'s1',to:'s2',mode:'出租车',duration:'建议 10–20 分'}] });
+test('分段补充保留全部原内容并拒绝覆盖及错误关联', () => {
+  const s=blankState();s.days=[{...day(),activities:[activity('a'),activity('b')]}];
+  s.packing=[{id:'checked',name:'保留',category:'其他物品',done:true}];s.guides=[];
+  const before=validateState(s),patch={schemaVersion:1,kind:'routePlans',updates:[{id:s.days[0].id,date:'',routePlans:[plan()]}]};
+  const next=mergeRoutePlans(s,patch);
+  assert.deepEqual({...next,days:next.days.map(d=>({...d,routePlans:[]}))},before);
+  assert.throws(()=>mergeRoutePlans(next,patch),/已有路线/);
+  const bad=structuredClone(patch);bad.updates[0].routePlans[0].stops[0].eventIds=['missing'];
+  assert.throws(()=>mergeRoutePlans(s,bad),/事件不存在/);
+  bad.updates[0].routePlans[0].stops[0].eventIds=['a'];bad.updates[0].routePlans[0].legs[0].to='absent';
+  assert.throws(()=>mergeRoutePlans(s,bad),/起终点/);
+});
+test('地点聚合保留跨日事件，备选方案分离，删除事件清理引用', () => {
+  const s=blankState();s.days=[{...day(),activities:[activity('a'),activity('b')],routePlans:[plan(),{...plan(),id:'plan-b',name:'备选 B'}]},{...day(),id:'another-day',activities:[activity('c')]}];
+  const next=validateState(s),places=planPlaces(next.days);
+  assert.equal(places.length,2);assert.equal(places[0].refs.length,3);
+  assert.equal(next.days[0].routePlans.length,2);
+  forgetEvent(next.days[0].routePlans,'a');next.days[0].activities=next.days[0].activities.filter(a=>a.id!=='a');
+  assert.doesNotThrow(()=>validateState(next));assert.deepEqual(next.days[0].routePlans[0].stops[0].eventIds,[]);
+});
+test('分段道路拒绝过期坐标、偏离轨迹及危险链接', () => {
+  const p=plan(),l=p.legs[0];l.road={signature:legSignature(p,l),points:[[30,110],[30.01,110.01]],duration:100,distance:1000};
+  const s=blankState();s.days=[{...day(),activities:[activity('a'),activity('b')],routePlans:[p]}];
+  assert.doesNotThrow(()=>validateState(s));p.stops[0].point=[31,110];
+  assert.throws(()=>validateState(s),/不一致/);p.stops[0].point=[30,110];l.road.points[0]=[40,110];
+  assert.throws(()=>validateState(s),/偏离/);l.road=null;p.stops[0].url='javascript:alert(1)';
+  assert.throws(()=>validateState(s),/http/);
+});
 test('旧备份兼容，补充当日安排只改指定日期并保护已有编辑', () => {
   const s = blankState(); delete s.trip.countryCode; s.days.push(day());
   s.packing.push({ id: 'p', name: '证件', category: '证件资料', done: true });

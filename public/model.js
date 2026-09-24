@@ -1,4 +1,5 @@
 import { COUNTRIES } from './countries.js';
+import { parsePlans } from './journeys.js';
 export const STORAGE_KEY = 'travelagent.workspace.v1';
 export const COLORS = ['#c44522', '#14764b', '#087e9d', '#7946bd', '#b07800', '#285dc2', '#b12b79'];
 export const CATEGORIES = ['证件资料', '衣物洗护', '电子设备', '健康用品', '其他物品'];
@@ -60,6 +61,7 @@ export function validateState(raw) {
     const day = { id: id(d.id), date: validDate(d.date), stops, mode: choice(d.mode, MODES), departure: time(d.departure), arrival: time(d.arrival), duration: str(d.duration, 80), lodging: str(d.lodging, 200), lodgingStatus: choice(d.lodgingStatus, ['pending', 'confirmed']), status: choice(d.status, ['pending', 'confirmed']), note: str(d.note), source: str(d.source, 500), road: null };
     day.activities = rows(d.activities ?? [], a => ({ id: id(a.id), name: str(a.name, 120), point: coordinates(a.point), time: str(a.time, 80), duration: str(a.duration, 80), transport: str(a.transport, 80), status: choice(a.status, ['pending', 'confirmed', 'optional']), note: str(a.note, 1500), url: safeURL(str(a.url, 2000)) }), 40);
     if (day.activities.some(a => !a.name)) throw new Error('请填写当日安排的名称。');
+    day.routePlans = parsePlans(d.routePlans, day.activities, { coordinates, safeURL, validDate });
     if (day.lodgingStatus === 'confirmed' && !day.lodging) throw new Error('确认住宿前请填写住宿地点。');
     if (d.road) {
       const r = d.road;
@@ -102,4 +104,16 @@ export function mergeDayActivities(current, patch) {
 export function dayForSave(original, updated) {
   const changed = original && JSON.stringify({ ...original, road: null, status: null }) !== JSON.stringify({ ...updated, road: null, status: null });
   return { ...updated, road: original && routeSignature(original) === routeSignature(updated) ? original.road : null, status: updated.status, changed: Boolean(changed) };
+}
+export function mergeRoutePlans(current, patch) {
+  if (patch?.kind !== 'routePlans' || patch.schemaVersion !== 1 || !Array.isArray(patch.updates) || !patch.updates.length || patch.updates.length > 120) throw Error('分段路线补充文件无效。');
+  const next = validateState(current), seen = new Set();
+  for (const update of patch.updates) {
+    const day = next.days.find(d => d.id === update.id && d.date === update.date);
+    if (!day || seen.has(day.id)) throw Error('路线日期不匹配或重复。');
+    if (day.routePlans.length) throw Error('已有路线方案，请在页面编辑，避免覆盖。');
+    if (!Array.isArray(update.routePlans) || !update.routePlans.length) throw Error('路线方案不能为空。');
+    seen.add(day.id); day.routePlans = update.routePlans;
+  }
+  return validateState(next);
 }
