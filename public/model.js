@@ -1,3 +1,4 @@
+import { parseGuideDetails } from './guides.js';
 import { COUNTRIES } from './countries.js';
 import { parsePlans } from './journeys.js';
 export const STORAGE_KEY = 'travelagent.workspace.v1';
@@ -75,7 +76,7 @@ export function validateState(raw) {
     schemaVersion: 1, revision: Number.isSafeInteger(raw.revision) && raw.revision >= 0 ? raw.revision : 0, trip, days,
     packing: rows(raw.packing, p => ({ id: id(p.id), name: str(p.name, 120), category: choice(p.category, CATEGORIES), done: boolean(p.done) })),
     notes: rows(raw.notes, n => ({ id: id(n.id), body: str(n.body), author: str(n.author, 40), createdAt: str(n.createdAt, 50) })),
-    guides: rows(raw.guides, g => ({ id: id(g.id), title: str(g.title, 120), category: choice(g.category, GUIDE_CATEGORIES), body: str(g.body, 8000), url: safeURL(str(g.url, 2000)), checkedDate: validDate(g.checkedDate) }))
+    guides: rows(raw.guides, g => ({ id: id(g.id), title: str(g.title, 120), category: choice(g.category, GUIDE_CATEGORIES), body: str(g.body, 8000), url: safeURL(str(g.url, 2000)), checkedDate: validDate(g.checkedDate), ...parseGuideDetails(g, { safeURL }) }))
   };
 }
 // Missing locations and alternatives must not create an invented continuous route.
@@ -115,5 +116,13 @@ export function mergeRoutePlans(current, patch) {
     if (!Array.isArray(update.routePlans) || !update.routePlans.length) throw Error('路线方案不能为空。');
     seen.add(day.id); day.routePlans = update.routePlans;
   }
+  return validateState(next);
+}
+
+export function mergeGuides(current, patch) {
+  if (patch?.kind !== 'guidesAppend' || patch.schemaVersion !== 1 || !Array.isArray(patch.guides) || !patch.guides.length) throw Error('攻略补充文件无效。');
+  const next = validateState(current);
+  if (patch.guides.some(g => next.guides.some(old => old.id === g.id))) throw Error('攻略已存在，不能重复导入或覆盖。');
+  next.guides = [...patch.guides, ...next.guides];
   return validateState(next);
 }

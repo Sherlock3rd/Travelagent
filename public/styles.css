@@ -319,3 +319,43 @@ body.map-is-expanded{overflow:hidden}
 @media(max-width:700px){.leg-actions button,.plan-tabs button,.activity-controls button{min-height:36px}.place-popup{min-width:170px;max-width:250px}.leaflet-popup-content{max-width:265px!important;margin:13px!important}.plan-stops .text-button{line-height:1.7}.route-sidebar #day-map-detail{max-height:440px}.map-expanded .route-sidebar #day-map-detail{max-height:none}}
 .map-label{width:max-content;max-width:220px;overflow-wrap:normal;word-break:normal}
 .event-travel{display:grid;gap:5px;background:#eef2e9;border-radius:7px;padding:9px;margin:8px 0}.event-travel>span{font-size:10px;color:var(--muted)}.event-travel button{text-align:left;font-size:11px;line-height:1.6}.event-travel small{display:block;color:#5b6b59;font-size:10px}path[role=button]:focus{outline:none;stroke:#d5952b}
+
+/* Expandable field guides */
+.guide-grid { align-items:start; }
+details.guide-card { display:block; padding:0; overflow:hidden; }
+.guide-card summary { list-style:none; padding:24px; cursor:pointer; }
+.guide-card summary::-webkit-details-marker { display:none; }
+.guide-card summary:focus-visible { outline:3px solid #14764b; outline-offset:-4px; }
+.guide-card summary h3 { font-size:19px; line-height:1.5; margin:12px 0; }
+.guide-summary { font-size:13px; line-height:1.85; color:#606963; margin:0 0 18px; }
+.guide-toggle { color:#14764b; font-weight:700; font-size:12px; }
+.guide-card .when-open { display:none; }
+.guide-card[open] { grid-column:1/-1; }
+.guide-card[open] .when-open { display:inline; }
+.guide-card[open] .when-closed { display:none; }
+.guide-card[open] summary { background:#edf3ec; border-bottom:1px solid #d9e4d7; }
+.guide-content { padding:24px 32px; max-width:1060px; margin:auto; }
+.guide-content .guide-body { font-size:14px; line-height:1.9; }
+.guide-toc { display:flex; flex-wrap:wrap; gap:8px; padding:16px 0 24px; }
+.guide-toc a { background:#f0f3ed; padding:8px 12px; border-radius:6px; font-size:12px; color:#285d46; }
+.guide-section { border-top:1px solid #e0e5da; padding:26px 0; scroll-margin-top:100px; }
+.guide-section h4 { font-size:19px; margin:0 0 20px; display:flex; gap:14px; align-items:baseline; }
+.guide-section h4>span { font:14px monospace; color:#8b9a81; flex-shrink:0; white-space:nowrap; }
+.guide-steps { padding-left:28px; }
+.guide-steps li { padding:0 0 16px 10px; font-size:14px; line-height:1.85; }
+.guide-steps li::marker { color:#14764b; font-weight:bold; }
+.guide-steps p { margin:5px 0 0; white-space:pre-wrap; color:#49564e; }
+.guide-phrase { margin:12px 0; padding:16px 20px; border-left:3px solid #b58138; background:#faf6ed; border-radius:0 8px 8px 0; }
+.guide-phrase p { margin:0 0 10px; font-size:13px; line-height:1.8; }
+.guide-phrase p[lang=en] { font-size:16px; color:#23352d; }
+.guide-figure { margin:22px 0; background:#f4f5f1; border-radius:10px; overflow:hidden; }
+.guide-figure img { display:block; width:100%; max-height:380px; object-fit:contain; }
+.guide-figure img[hidden] { display:none; }
+.guide-figure figcaption { padding:12px 16px; font-size:12px; line-height:1.8; color:#60715f; }
+.guide-figure figcaption a { text-decoration:underline; }
+.guide-links { display:flex; flex-wrap:wrap; gap:10px 20px; font-size:12px; margin-top:16px; }
+.guide-links a { color:#14764b; text-decoration:underline; }
+.guide-content .guide-source { margin-top:12px; }
+.guide-content,.guide-summary,.guide-links,.guide-phrase { overflow-wrap:anywhere; }
+.guide-card { scroll-margin-top:100px; }
+@media(max-width:700px) { .guide-content { padding:18px; } .guide-card summary { padding:20px; } .guide-section h4 { font-size:17px; } .guide-phrase { padding:14px; } .guide-figure img { max-height:240px; } }

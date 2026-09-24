@@ -1,4 +1,5 @@
-import { STORAGE_KEY, COLORS, CATEGORIES, MODES, GUIDE_CATEGORIES, blankState, validateState, routeSignature, dayForSave, activitySegments, mergeDayActivities, mergeRoutePlans } from './model.js';
+import { guideHTML } from './guides.js';
+import { STORAGE_KEY, COLORS, CATEGORIES, MODES, GUIDE_CATEGORIES, blankState, validateState, routeSignature, dayForSave, activitySegments, mergeDayActivities, mergeRoutePlans, mergeGuides } from './model.js';
 import { createMap, addBasemap } from './map.js';
 import { planPlaces, forgetEvent } from './journeys.js';
 import { COUNTRIES } from './countries.js';
@@ -177,8 +178,11 @@ function renderNotes() {
   $('#note-list').innerHTML = state.notes.length ? [...state.notes].reverse().map(n => '<article class="note-card"><div class="note-meta"><strong>' + esc(n.author || '旅行者') + '</strong><span>' + esc(formatTime(n.createdAt)) + '</span><button class="icon-button" data-delete-note="' + n.id + '" aria-label="删除留言">×</button></div><p class="note-body">' + esc(n.body) + '</p></article>').join('') : empty('留点空间，给路上的灵感', '提醒、想法和待办，都可以记在这里。');
 }
 function renderGuides() {
-  $('#guide-list').innerHTML = state.guides.length ? state.guides.map(g => '<article class="panel guide-card"><div class="guide-top"><span class="guide-category">' + esc(g.category) + '</span><div><button class="text-button" data-edit-guide="' + g.id + '">编辑</button> <button class="icon-button" data-delete-guide="' + g.id + '" aria-label="删除攻略">×</button></div></div><h3>' + esc(g.title) + '</h3><p class="guide-body">' + esc(g.body) + '</p><div class="guide-source">' + (g.url ? '<a href="' + esc(g.url) + '" target="_blank" rel="noopener noreferrer">查看信息来源 ↗</a>' : '<span>来源待补充</span>') + '<span>' + (g.checkedDate ? '核验于 ' + esc(g.checkedDate) : '尚未核验') + '</span></div></article>').join('') : empty('把有用的信息，收进旅行口袋', '收藏交通方式、餐厅、预约要求或当地提醒，记录来源与核验日期。');
+  const opened = new Set([...document.querySelectorAll('.guide-card[open]')].map(el => el.id));
+  $('#guide-list').innerHTML = state.guides.length ? state.guides.map(g => guideHTML(g, esc, opened.has('guide-' + g.id))).join('') : empty('把有用的信息，收进旅行口袋', '收藏步骤、沟通话术与参考图片，记录来源和核验日期。');
+  document.querySelectorAll('.guide-figure img').forEach(img => { img.onerror = () => { img.hidden = true; img.closest('figure').querySelector('.image-fallback').hidden = false; }; });
 }
+
 function render() {
   $('#trip-title').textContent = state.trip.title;
   document.title = state.trip.title + ' · Travelagent';
@@ -257,9 +261,16 @@ function editActivity(dayId, activityId) {
   renderStops();
 }
 function editGuide(id) {
-  const g = state.guides.find(g => g.id === id) || { id: uuid(), title: '', category: '交通出行', body: '', url: '', checkedDate: '' };
-  openEditor(id ? '编辑攻略' : '收下一条实用攻略', '<div class="form-grid">' + field('title', '标题', g.title, 'text', true, true, 120) + select('category', '分类', GUIDE_CATEGORIES, g.category) + field('checkedDate', '核验日期（未核验则留空）', g.checkedDate, 'date') + textArea('body', '攻略内容', g.body, 8000) + field('url', '信息来源链接（选填）', g.url, 'url', true, false, 2000) + '</div>', form => commit(s => { const record = { id: g.id, ...Object.fromEntries(form) }; const index = s.guides.findIndex(x => x.id === g.id); if (index < 0) s.guides.push(record); else s.guides[index] = record; }));
+  const g = state.guides.find(g => g.id === id) || { id: uuid(), title: '', category: '交通出行', body: '', summary: '', url: '', checkedDate: '', sections: [] };
+  const chapters = g.sections.map((s,i) => '<fieldset class="field full"><legend>章节 ' + (i+1) + '</legend>' + field('s'+i+'title', '章节标题', s.title, 'text', true, false, 160) + textArea('s'+i+'body','章节说明',s.body,6000) + s.steps.map((x,j) => field('s'+i+'t'+j,'步骤 '+(j+1)+' 标题',x.title,'text',true,false,160) + textArea('s'+i+'b'+j,'操作说明',x.body,6000)).join('') + s.phrases.map((x,j) => textArea('s'+i+'en'+j,'英文话术 '+(j+1),x.en,1500) + textArea('s'+i+'zh'+j,'中文含义',x.zh,1500)).join('') + '</fieldset>').join('');
+  openEditor(id ? '编辑攻略' : '收下一条实用攻略', '<div class="form-grid">' + field('title', '标题', g.title, 'text', true, true, 120) + select('category', '分类', GUIDE_CATEGORIES, g.category) + field('checkedDate', '核验日期（未核验则留空）', g.checkedDate, 'date') + textArea('summary','折叠时的摘要',g.summary,500) + textArea('body', '攻略内容 / 阅读前提示', g.body, 8000) + field('url', '信息来源链接（选填）', g.url, 'url', true, false, 2000) + chapters + '</div>', form => commit(s => {
+    const record = { ...g };
+    for (const key of ['title','category','checkedDate','summary','body','url']) record[key] = form.get(key);
+    record.sections = g.sections.map((x,i) => ({ ...x, title:form.get('s'+i+'title'), body:form.get('s'+i+'body'), steps:x.steps.map((step,j) => ({title:form.get('s'+i+'t'+j),body:form.get('s'+i+'b'+j)})), phrases:x.phrases.map((p,j) => ({en:form.get('s'+i+'en'+j),zh:form.get('s'+i+'zh'+j)})) }));
+    const index = s.guides.findIndex(x => x.id === g.id); if (index < 0) s.guides.push(record); else s.guides[index] = record;
+  }));
 }
+
 let routing = false, lastRouteTime = 0;
 async function calculateRoad(id) {
   const day = state.days.find(d => d.id === id);
@@ -374,6 +385,12 @@ $('#import-file').onchange = async event => {
   try {
     if (file.size > 8 * 1024 * 1024) throw new Error('备份文件不能超过 8 MB。');
     const raw = JSON.parse(await file.text());
+    if (raw.kind === 'guidesAppend') {
+      mergeGuides(state, raw);
+      if (!await confirmAction('新增 ' + raw.guides.length + ' 篇图文操作攻略？保留现有攻略、行程、清单和留言。')) return;
+      if (lastSaved !== baseline) throw Error('确认期间内容已变化，请重新导入。');
+      commit(s => Object.assign(s, mergeGuides(s, raw)), '图文攻略已补充'); return;
+    }
     if (raw.kind === 'routePlans') {
       mergeRoutePlans(state, raw);
       if (!await confirmAction('补充 ' + raw.updates.length + ' 天的具体点位与分段交通？现有事件、确认状态、物品勾选、留言和攻略将保留。')) return;
@@ -527,3 +544,14 @@ function eventTravel(day,event) {
   }
   return items.length?'<div class="event-travel"><span>关联交通 · 点击看路线</span>'+items.join('')+'</div>':'';
 }
+
+document.addEventListener('click', async event => {
+  const collapse = event.target.closest('[data-collapse-guide]');
+  if (collapse) { const card = document.getElementById('guide-' + collapse.dataset.collapseGuide); card.open = false; card.querySelector('summary').focus(); card.scrollIntoView({ block:'start' }); return; }
+  const button = event.target.closest('[data-copy-phrase]');
+  if (!button) return;
+  const phrase = state.guides.find(g => g.id === button.dataset.copyPhrase)?.sections[Number(button.dataset.section)]?.phrases[Number(button.dataset.phrase)];
+  if (!phrase) return;
+  try { await navigator.clipboard.writeText(phrase.en); toast('英文话术已复制'); }
+  catch { toast('复制暂不可用，请长按或选中英文手动复制。'); }
+});
