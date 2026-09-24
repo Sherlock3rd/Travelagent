@@ -195,6 +195,7 @@
 			this._zooming = true;
 		},
 		_zoomEnd: function() {
+			if (!this._map || !this._glMap) return; // Local lifecycle guard after mini-map removal.
 			var scale = this._map.getZoomScale(this._map.getZoom());
 			L.DomUtil.setTransform(this._glMap._actualCanvas, null, scale);
 			this._zooming = false;
@@ -202,6 +203,7 @@
 		},
 		_transitionEnd: function(e) {
 			L.Util.requestAnimFrame(function() {
+				if (!this._map || !this._glMap) return; // A queued resize can outlive its layer.
 				var zoom = this._map.getZoom();
 				var center = this._map.getCenter();
 				var offset = this._map.latLngToContainerPoint(this._map.getBounds().getNorthWest());

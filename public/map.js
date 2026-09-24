@@ -38,7 +38,7 @@ export function addBasemap(target) {
     try {
       runtime ||= (async () => {
         window.maplibregl = await import('./vendor/maplibre/maplibre-gl.mjs');
-        await import('./vendor/maplibre/leaflet-maplibre-gl.js');
+        await import('./vendor/maplibre/leaflet-maplibre-gl.js?lifecycle=1');
       })();
       await runtime;
       if (disposed || fallback) return;

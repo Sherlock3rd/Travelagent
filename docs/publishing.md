@@ -8,4 +8,6 @@ GitHub Pages 使用 Actions 发布 `dist/`，源文件只来自 `public/`；`pri
 
 线上与 localhost 属于不同来源，浏览器资料独立；当前应用尚无业务云同步，编辑仅保存当前浏览器，不会自动修改所有访客看到的发布版。后续内容更新需重新导出最新快照、核对后发布。页面提供 JSON 导入/导出；发布快照为公开数据，不是访问控制。
 
+入口、样式和应用模块使用提交号作为资源版本，避免老标签页复用旧脚本。地图 bridge 含本地生命周期保护：小地图移出视口被移除后，已排队的 resize / moveend 回调直接返回，升级依赖时保留或检查上游是否已修复。
+
 来源：[GitHub Pages 自定义工作流](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)。
