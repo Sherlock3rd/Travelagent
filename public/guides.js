@@ -1,3 +1,4 @@
+import { photoButton } from './lightbox.js';
 // Rich guides remain structured text: imported HTML is never executed.
 export const GUIDE_IMAGE_HOSTS = ['dohahamadairport.com', 'betamedia.experienceegypt.eg'];
 export function parseGuideDetails(g, { safeURL }) {
@@ -23,7 +24,7 @@ export function guideHTML(g, esc, open = false) {
     g.sections.map((s,i) => '<section class="guide-section" id="guide-' + g.id + '-s' + i + '"><h4><span>' + String(i+1).padStart(2,'0') + '</span>' + esc(s.title) + '</h4>' + (s.body ? '<p class="guide-body">' + esc(s.body) + '</p>' : '') +
       (s.steps.length ? '<ol class="guide-steps">' + s.steps.map(x => '<li><strong>' + esc(x.title) + '</strong><p>' + esc(x.body) + '</p></li>').join('') + '</ol>' : '') +
       s.phrases.map((x,j) => '<div class="guide-phrase"><p lang="en">' + esc(x.en) + '</p><p>' + esc(x.zh) + '</p><button class="text-button" data-copy-phrase="' + g.id + '" data-section="' + i + '" data-phrase="' + j + '">复制英文</button></div>').join('') +
-      s.images.map(x => '<figure class="guide-figure"><a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer"><img loading="lazy" referrerpolicy="no-referrer" src="' + esc(x.url) + '" alt="' + esc(x.alt) + '"></a><figcaption>' + esc(x.caption) + ' ' + link(x.sourceUrl || x.url, '图片来源 / 查看原图') + '<span class="image-fallback" hidden>图片暂不可用，可打开来源查看；步骤文字不受影响。</span></figcaption></figure>').join('') +
+      s.images.map(x => '<figure class="guide-figure" data-photo-gallery>' + photoButton(x,esc) + '<figcaption>' + esc(x.alt) + '<span class="image-fallback" hidden>图片暂不可用。</span></figcaption></figure>').join('') +
       (s.links.length ? '<div class="guide-links">' + s.links.map(x => link(x.url,x.label)).join('') + '</div>' : '') + '</section>').join('') +
     '<div class="guide-source">' + (g.url ? link(g.url,'主要信息来源') : '<span>来源待补充</span>') + '<a href="#guide-' + g.id + '">返回本篇顶部 ↑</a><button class="text-button" data-collapse-guide="' + g.id + '">收起本篇 ↑</button></div></div></details>';
 }

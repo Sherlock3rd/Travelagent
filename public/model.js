@@ -2,6 +2,12 @@ import { parsePhoto } from './day-media.js';
 import { parseGuideDetails } from './guides.js';
 import { COUNTRIES } from './countries.js';
 import { parsePlans } from './journeys.js';
+function parsePhotos(raw = []) {
+  if (!Array.isArray(raw) || raw.length > 8) throw Error('每项安排最多补充 8 张照片。');
+  const photos=raw.map(p=>parsePhoto(p,{safeURL,validDate}));
+  if(photos.some(p=>!p) || new Set(photos.map(p=>p.url)).size!==photos.length)throw Error('补充照片不能为空或重复。');
+  return photos;
+}
 export const STORAGE_KEY = 'travelagent.workspace.v1';
 export const COLORS = ['#c44522', '#14764b', '#087e9d', '#7946bd', '#b07800', '#285dc2', '#b12b79'];
 export const CATEGORIES = ['证件资料', '衣物洗护', '电子设备', '健康用品', '其他物品'];
@@ -61,7 +67,7 @@ export function validateState(raw) {
     const stops = d.stops.map(s => ({ name: str(s.name, 120), point: coordinates(s.point) }));
     if (stops.some(s => !s.name)) throw new Error('请填写每个站点名称。');
     const day = { id: id(d.id), date: validDate(d.date), stops, mode: choice(d.mode, MODES), departure: time(d.departure), arrival: time(d.arrival), duration: str(d.duration, 80), lodging: str(d.lodging, 200), lodgingStatus: choice(d.lodgingStatus, ['pending', 'confirmed']), status: choice(d.status, ['pending', 'confirmed']), note: str(d.note), source: str(d.source, 500), road: null };
-    day.activities = rows(d.activities ?? [], a => ({ id: id(a.id), name: str(a.name, 120), point: coordinates(a.point), time: str(a.time, 80), duration: str(a.duration, 80), transport: str(a.transport, 80), status: choice(a.status, ['pending', 'confirmed', 'optional']), note: str(a.note, 1500), url: safeURL(str(a.url, 2000)), photo: parsePhoto(a.photo, { safeURL, validDate }) }), 40);
+    day.activities = rows(d.activities ?? [], a => ({ id: id(a.id), name: str(a.name, 120), point: coordinates(a.point), time: str(a.time, 80), duration: str(a.duration, 80), transport: str(a.transport, 80), status: choice(a.status, ['pending', 'confirmed', 'optional']), note: str(a.note, 1500), url: safeURL(str(a.url, 2000)), photo: parsePhoto(a.photo, { safeURL, validDate }), photos: parsePhotos(a.photos) }), 40);
     if (day.activities.some(a => !a.name)) throw new Error('请填写当日安排的名称。');
     day.routePlans = parsePlans(d.routePlans, day.activities, { coordinates, safeURL, validDate });
     if (day.lodgingStatus === 'confirmed' && !day.lodging) throw new Error('确认住宿前请填写住宿地点。');
@@ -138,9 +144,16 @@ export function mergeActivityPhotos(current, patch) {
     for(const item of update.activities) {
       const activity=day.activities.find(a=>a.id===item.id && a.name===item.name);
       if(!activity || events.has(item.id)) throw Error('图片对应安排已变化或重复。');
-      if(activity.photo) throw Error('已有景观图片，不能覆盖。');
-      events.add(item.id);activity.photo=parsePhoto(item.photo,{safeURL,validDate});
-      if(!activity.photo)throw Error('补充图片不能为空。');
+      events.add(item.id);
+      if(item.photos !== undefined) {
+        const photos=parsePhotos(item.photos),urls=new Set([activity.photo,...activity.photos].filter(Boolean).map(p=>p.url));
+        if(!photos.length || photos.some(p=>urls.has(p.url)))throw Error('已有或重复景观图片，不能再次添加。');
+        activity.photos.push(...photos);
+      } else {
+        if(activity.photo) throw Error('已有景观图片，不能覆盖。');
+        activity.photo=parsePhoto(item.photo,{safeURL,validDate});
+        if(!activity.photo)throw Error('补充图片不能为空。');
+      }
     }
   }
   return validateState(next);

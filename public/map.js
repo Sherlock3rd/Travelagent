@@ -26,7 +26,7 @@ export function addBasemap(target) {
   });
   function useFallback() {
     if (disposed || fallback) return;
-    fallback = true; clearTimeout(timer);
+    fallback = true; status.hidden = false; clearTimeout(timer);
     if (vector && target.hasLayer(vector)) target.removeLayer(vector);
     raster.addTo(target);
     status.textContent = '中文底图暂不可用，已切换原文底图；缩放与行程标记仍可使用。';
@@ -51,10 +51,10 @@ export function addBasemap(target) {
       gl.once('load', () => {
         if (disposed || fallback) return;
         clearTimeout(timer);
-        status.textContent = '中文优先 · 无中文译名时显示原名';
+        status.hidden = true;
       });
       gl.on('error', () => {
-        if (!disposed && !fallback) status.textContent = '部分中文底图加载失败；可稍后刷新，站点与缩放仍可使用。';
+        if (!disposed && !fallback) { status.hidden = false; status.textContent = '部分中文底图加载失败；可稍后刷新，站点与缩放仍可使用。'; }
       });
     } catch { useFallback(); }
   })();

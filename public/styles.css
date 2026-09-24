@@ -372,3 +372,56 @@ details.guide-card { display:block; padding:0; overflow:hidden; }
 .day-card>.day-activities .activity-list{max-width:1000px}.day-media .basemap-status{font-size:9px;padding:4px 7px}
 @media(max-width:1000px){.day-media{grid-template-columns:1fr}.day-photo-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:700px){.day-card>.day-media,.day-card>.day-activities{grid-column:1/-1}.day-media{padding:12px;gap:18px}.daily-mini-map{height:260px}.day-photo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.scenery-image img{height:120px}.mini-tools button{min-height:36px}.day-card>.day-activities{margin-top:4px}.mini-plan-label{display:block}.mini-plan-label select{display:block;width:100%;margin-top:5px}.day-media-heading{align-items:baseline}.day-media-heading h3{font-size:13px}}
+
+/* Quiet daily cards: photographs lead, supporting detail opens on demand. */
+.day-card{padding-top:30px;padding-bottom:30px;row-gap:24px}
+.day-context{margin:12px 0;font-size:11px;color:var(--muted)}
+.day-context summary,.day-transport summary{cursor:pointer;padding:7px 0}
+.day-context[open]{color:var(--ink)}
+.day-media{padding:0;background:none;grid-template-columns:minmax(260px,.85fr) minmax(0,1.15fr);gap:24px;align-items:start}
+.day-media-heading{min-height:30px;margin-bottom:10px}.day-media-heading h3{margin:0;font-size:15px}
+.photo-total{font-size:10px;color:var(--muted)}
+.day-photo-grid{gap:10px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.day-photo-grid figure{position:relative;border:1px solid var(--line);background:var(--panel);border-radius:10px}
+.day-photo-grid figure[hidden]{display:none}
+.day-photo-grid.photos-1{grid-template-columns:1fr}
+.day-photo-grid.photos-3 figure:first-child{grid-column:1/-1}
+.scenery-image{padding:0;border:0;width:100%;cursor:zoom-in;overflow:hidden;text-align:left;border-radius:0}
+.scenery-image img{height:166px;transition:transform .25s}
+.scenery-image:hover img{transform:scale(1.035)}
+.scenery-image>span{font-size:18px;padding:2px 8px;border-radius:5px;right:10px;bottom:10px}
+.photos-1 .scenery-image img{height:330px}.photos-3 figure:first-child img{height:210px}
+.day-photo-grid figcaption{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;min-height:44px}
+.day-photo-grid figcaption>.text-button{font-size:12px}.photo-status{white-space:nowrap;font-size:9px}
+.gallery-more{position:absolute;top:12px;left:10px;background:#14281bd9;color:white;border-radius:6px;padding:5px 9px;font-size:11px;pointer-events:none}
+.image-unavailable{height:166px;background:linear-gradient(130deg,#e5eada,#d8e4da)}
+.image-unavailable>span{font-size:11px;position:static;display:block;background:none;color:#45604c;padding:24px}
+.mini-plan-label select{width:100%;background:var(--panel)}
+.mini-stop-list{margin-top:12px;gap:5px}.mini-stop-list span{background:#edf1e8;line-height:1.6}
+.mini-tools .mini-key{margin-left:auto;font-size:9px}
+.day-media.map-only{grid-template-columns:1fr}.map-only .daily-mini-map{height:230px}
+.day-card>.day-transport{grid-column:2/-1;min-width:0;border-top:1px solid var(--line);font-size:12px}
+.day-transport section{padding:16px 0}.day-transport h3{font-size:14px}
+.day-transport .leg-card{background:#f5f6f0}.day-transport .plan-stops{padding:12px;background:#f5f6f0}
+.itinerary-time-note{font-size:10px;color:var(--muted);margin:4px 0}
+.map-overview p{font-size:11px;color:var(--muted)}
+.overview-stops{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.overview-stops span{padding:4px 7px;background:#edf1e8;border-radius:5px;font-size:10px}
+.route-popup-summary strong{display:block}.route-popup-summary p{font-size:12px}
+.guide-figure .scenery-image{background:#e6ebdf}.guide-figure .scenery-image img{height:260px;width:100%;object-fit:cover}
+.guide-figure figcaption{font-size:11px;padding-top:8px}
+.photo-viewer{position:fixed;inset:0;width:min(1200px,96vw);max-width:96vw;height:94dvh;max-height:94dvh;padding:16px 22px;border:0;border-radius:14px;background:#17221e;color:#f8f6ed;overflow:auto}
+.photo-viewer[open]{display:flex;flex-direction:column;gap:12px}
+.photo-viewer::backdrop{background:#08120ee8;backdrop-filter:blur(6px)}
+.viewer-toolbar{display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+.viewer-count{font-size:12px;color:#c4cfc8}
+.photo-viewer button{border:1px solid #718076;background:#25372dcc;color:#fff;width:44px;height:44px;border-radius:50%;font-size:28px;line-height:1;cursor:pointer}
+.viewer-stage{position:relative;flex:1;min-height:100px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.viewer-stage img{width:100%;height:100%;min-height:0;object-fit:contain}
+.viewer-prev,.viewer-next{position:absolute;top:calc(50% - 22px);z-index:1}.viewer-prev{left:0}.viewer-next{right:0}
+.viewer-caption{flex-shrink:0;max-height:25%;overflow:auto;padding:0 48px;text-align:center}
+.viewer-caption h2{font-size:17px;margin:0 0 6px}.viewer-caption p{font-size:12px;line-height:1.7;margin:0;color:#c4cfc8}.viewer-caption a{display:inline-block;color:#a8c9b1;font-size:11px;margin-top:7px}
+.photo-viewer [hidden]{display:none}.viewer-error{color:#c4cfc8;font-size:14px}
+@media(max-width:1000px){.day-media{grid-template-columns:1fr}.daily-mini-map{height:260px}.day-photo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.photos-3 figure:first-child{grid-row:span 2}.photos-3 figure:first-child img{height:100%}.day-photo-grid.photos-3 figure:first-child{grid-column:auto}.photos-3 figure:first-child .scenery-image{height:calc(100% - 44px)}}
+@media(max-width:700px){.day-card{row-gap:18px}.day-card>.day-transport{grid-column:1/-1}.day-media{gap:24px}.scenery-image img{height:145px}.photos-1 .scenery-image img{height:230px}.day-photo-grid figcaption{display:block;padding:8px}.photo-status{margin-top:3px}.day-photo-grid.photos-3 figure:first-child{grid-column:1/-1;grid-row:auto}.photos-3 figure:first-child .scenery-image{height:auto}.photos-3 figure:first-child img{height:200px}.photo-viewer{width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;border-radius:0;padding:12px;gap:8px}.viewer-caption{padding:0 8px;max-height:30%}.viewer-caption h2{font-size:15px}.viewer-caption p{font-size:11px}.viewer-stage img{max-width:100%}}
+@media(prefers-reduced-motion:reduce){.scenery-image img{transition:none}}
