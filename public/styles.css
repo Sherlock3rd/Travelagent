@@ -447,3 +447,16 @@ details.guide-card { display:block; padding:0; overflow:hidden; }
   .map-expanded .route-row{flex:0 0 250px;scroll-snap-align:start}
   .map-expanded .route-row>.route-item{min-width:0;max-width:none}
 }
+
+/* Keep route-list controls reachable even when the sidebar is hidden. */
+.route-sidebar[hidden]{display:none}
+#route.routes-collapsed .map-layout{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr)}
+#toggle-routes{min-height:40px}
+.day-heading{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:4px}
+.day-heading .day-route{flex:1 1 180px}
+.day-map-button{flex-shrink:0;min-height:40px;padding:9px 13px;font-size:12px;box-shadow:0 2px 5px #263a3214}
+.day-map-button>span{font-size:19px;line-height:1}
+@media(max-width:700px){
+  .day-heading{gap:10px}
+  .day-map-button{min-height:44px}
+}
