@@ -4,11 +4,16 @@
   "private": true,
   "description": "旅游攻略项目基础工作环境",
   "type": "module",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "start": "node scripts/server.mjs",
-    "check": "node --check scripts/server.mjs && node --check scripts/check-supabase.mjs",
+    "check": "node --check scripts/server.mjs && node --check scripts/check-supabase.mjs && node --check public/app.js && node --check public/model.js",
     "check:cloud": "node scripts/check-supabase.mjs",
     "test": "node --test"
+  },
+  "dependencies": {
+    "leaflet": "1.9.4"
   }
 }

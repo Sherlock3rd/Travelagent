@@ -13,9 +13,9 @@
 
 ## 待补充
 
-- 用户选择此前项目使用的“base”，已定位为 Supabase；待确认组织与项目边界。
+- 用户确认在 Sherlock3rd's Org 新建免费 Travelagent，已创建并验证，详见 docs/supabase.md。
 - 本次旅行资料用户确认后续补充，无需阻塞环境搭建。
 
 ## 继承指引
 
-后续开发先阅读 `rules/rules.md` 和 `session/session.md`。当前 public/index.html 仅是环境检查页，不是已确认的产品设计。
+后续开发先阅读 `rules/rules.md` 和 `session/session.md`。当前 public/index.html 已扩展为用户确认的五模块工作台，见 travel-workspace.md。

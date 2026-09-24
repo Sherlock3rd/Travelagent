@@ -5,8 +5,8 @@
 - 目标：旅游攻略项目，逐步扩充；本次旅行作为首个样本。
 - 已确认 Git 远程：https://github.com/Sherlock3rd/Travelagent 。首次核验为空公开仓库。
 - 本次旅行信息：用户确认后续补充。
-- 云端：用户指向之前项目使用的 Supabase；已实时核验账号存在，独立项目的组织选择待回复。
-- 本地：规则与零第三方运行依赖的 Node.js 开发服务已创建；http://127.0.0.1:8788 已启动并核验。
+- 云端：用户已授权创建独立 Supabase Travelagent，新加坡区；当前 Free，创建报价 0 USD/月。数据库与 API 已验证，业务同步未接入。
+- 本地：http://127.0.0.1:8788 已运行五模块工作台；内容保存在本机浏览器。
 
 ## 2026-09-24 基础规范同步
 
@@ -23,14 +23,42 @@
 - `npm run check`、`npm test` 首次通过；测试涵盖首页、健康检查、私有路径屏蔽、非法路径和请求方法。
 - 本地服务的 Start → Status → Stop → Start → Status 已验证；PID 和脚本路径均匹配当前目录。
 - 初始提交已推送 main，本地与远程 SHA 一致；GitHub Actions run 35976392848 成功。
-- 已准备 `.env.example` 与 `npm run check:cloud`；未填写其他项目凭据，Supabase 后端尚未创建或连接。
-- 实时查询 Supabase：当前可访问组织 Sherlock3rd's Org，现有项目 Sherlock3rd's Project；已向用户询问新建/复用选择，工具要求创建前明确组织与费用理解。
+- 本机 .env 已填写独立 Travelagent 项目的 publishable key；npm run check:cloud 返回 HTTP 200，凭据不提交 Git。
+- 用户确认在 Sherlock3rd's Org 新建；get_cost 返回 0 USD/月，经成本确认后创建 xqardnobmoaxosjqwiwh，未复用已有业务项目。
 
 ## 提交总账
 
 - `5ba9906`：初始化规则、开发服务器、启动/停止脚本、自动检查；已推送并通过 CI。
-- 后续提交：记录验证结果并准备 Supabase 连通性检查；最终 SHA 以 Git 历史和远程 read-back 为准。
+- 3fdf3d4：准备 Supabase 连通检查并记录初始化验证，已推送，CI 35976466007 成功。
 
 ## 需求索引
 
 - [基础工作环境](requirements/environment-bootstrap.md)
+
+
+## 2026-09-24 五模块与云端环境
+
+- 用户书面确认地图、每日行程、物品清单、备注留言、附加攻略五模块。
+- 用户澄清意大利图片仅参考样式，实际行程后续补充；页面初始为空，附图未复制到公开仓库。
+- 实现本机编辑、已确认筛选、住宿独立确认、准备清单勾选、留言、攻略来源核验、本机存储和 JSON 备份。
+- 地图使用 Leaflet 1.9.4 / OpenStreetMap；按天配色和方向，单日/全程查看；OSRM driving 规划明确标为估算。
+- Supabase 独立项目创建成功，SQL SELECT 成功、API HTTP 200、security advisors 无告警；public schema 无业务表。
+- 明确尚未实现：登录、多人协作、跨设备同步与公网前端站点。
+
+### 验收证据
+
+- 自动检查：JavaScript 语法检查与 5 项测试通过（确认状态、数据导入校验、旧路线失效、备份状态、HTTP 访问边界）。
+- 浏览器测试使用独立端口 8789，不修改 8788 的正式旅行内容。
+- 实测日程时长/住宿/确认保存；已确认筛选排除待确认日程。
+- 清单勾选、留言和攻略刷新后恢复；留言代码文本只显示为文字。
+- JSON 备份导入成功；复制备份后读取剪贴板并解析 schemaVersion=1 成功。内置浏览器未返回下载成功事件，保留可见 JSON 与复制作为备用路径。
+- 官方示例坐标生成 1.9 km / 约 4 分钟估算；修改站点后旧估算清除。
+- 桌面视觉检查完成；390×844 无整页横向溢出，844×390 表单可滚动；浏览器无 error/warn 记录。
+- 在线地图曾有部分图块加载失败，已提供局部提示；后续地图路线实测正常。
+- 最新提交号及云端 CI 结果以 Git 历史和 GitHub Actions 为准。
+
+### 需求文档
+
+- [五模块工作台](requirements/travel-workspace.md)
+- [产品范围](../spec/travel-workspace-v1.md)
+- [Supabase 环境](../docs/supabase.md)

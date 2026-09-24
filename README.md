@@ -4,7 +4,7 @@
 
 ## 本地使用
 
-已验证 Node.js 22。基础服务无第三方运行依赖。
+已验证 Node.js 22。服务使用 Node.js 原生模块；地图使用固定版本 Leaflet 1.9.4，随应用提供。
 
 ```powershell
 cd D:\charlie\Travelagent
@@ -27,9 +27,11 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\dev.ps1 Stop
 ## 版本与云端
 
 - Git：https://github.com/Sherlock3rd/Travelagent
-- Supabase：已识别可用账号，项目选择/创建进行中，最终状态见 `session/session.md`。
+- Supabase：免费独立 Travelagent 项目已创建，数据库/API 验证通过，详见 [云端环境](docs/supabase.md)。
 - 本地修改可直接刷新预览；提交和推送负责版本同步，二者独立运行。
 - 每次推送 main 或提交 PR，GitHub Actions 执行环境检查。
-- 当前页面仅供检查环境；旅行内容、数据模型、登录方式和产品界面待后续确认。
+- 当前页面包含地图、每日行程、物品准备、备注留言和附加攻略，详见 [五模块范围](spec/travel-workspace-v1.md)。
+- 内容保存在当前浏览器，可导出/导入 JSON 备份。Supabase 尚未接入业务同步，没有多人留言或跨设备同步。
+- 实际旅行资料待用户提供，参考图只参考样式。
 
 更多信息见 [开发说明](docs/development.md)、[项目规则](rules/rules.md)、[会话记录](session/session.md)。
