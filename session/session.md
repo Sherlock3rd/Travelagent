@@ -6,7 +6,7 @@
 - 已确认 Git 远程：https://github.com/Sherlock3rd/Travelagent 。首次核验为空公开仓库。
 - 本次旅行信息：用户确认后续补充。
 - 云端：用户指向之前项目使用的 Supabase；已实时核验账号存在，独立项目的组织选择待回复。
-- 本地：规则与零第三方运行依赖的 Node.js 开发服务已创建，等待启动验收。
+- 本地：规则与零第三方运行依赖的 Node.js 开发服务已创建；http://127.0.0.1:8788 已启动并核验。
 
 ## 2026-09-24 基础规范同步
 
@@ -21,11 +21,15 @@
 
 - 本机 Node.js v22.17.1，npm 10.9.2；Windows Git 2.53.0，GitHub 当前身份 Sherlock3rd。
 - `npm run check`、`npm test` 首次通过；测试涵盖首页、健康检查、私有路径屏蔽、非法路径和请求方法。
-- Git 推送、本地服务实际运行、Supabase 后端：进行中。
+- 本地服务的 Start → Status → Stop → Start → Status 已验证；PID 和脚本路径均匹配当前目录。
+- 初始提交已推送 main，本地与远程 SHA 一致；GitHub Actions run 35976392848 成功。
+- 已准备 `.env.example` 与 `npm run check:cloud`；未填写其他项目凭据，Supabase 后端尚未创建或连接。
+- 实时查询 Supabase：当前可访问组织 Sherlock3rd's Org，现有项目 Sherlock3rd's Project；已向用户询问新建/复用选择，工具要求创建前明确组织与费用理解。
 
 ## 提交总账
 
-- 初始化提交：待执行；最终 SHA 以 Git 历史和远程 read-back 为准，避免在同一提交里自引用哈希。
+- `5ba9906`：初始化规则、开发服务器、启动/停止脚本、自动检查；已推送并通过 CI。
+- 后续提交：记录验证结果并准备 Supabase 连通性检查；最终 SHA 以 Git 历史和远程 read-back 为准。
 
 ## 需求索引
 

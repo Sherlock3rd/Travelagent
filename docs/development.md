@@ -40,3 +40,9 @@
 ## 后续旅行样本
 
 目的地、日期、出发地、同行人员数量及偏好由用户后续补充。收到资料后先整理需求，再确认攻略内容结构和交互；当前没有创建旅行数据表或虚构示例行程。
+
+## Supabase 接入
+
+项目选定后将 `.env.example` 复制为 `.env`，填写项目 URL 与 publishable key，再执行 `npm.cmd run check:cloud`。脚本仅检查 Auth settings API 连通性，不读写业务数据，不输出密钥，也不表示业务同步已实现。`.env` 不提交到 Git。
+
+参考 [Supabase API key 文档](https://supabase.com/docs/guides/getting-started/api-keys)。后续引入业务表时按确认的访问边界设置 RLS；当前尚未确认行程内容结构或登录方式。
