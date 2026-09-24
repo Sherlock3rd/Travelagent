@@ -1,10 +1,11 @@
+import { COUNTRIES } from './countries.js';
 export const STORAGE_KEY = 'travelagent.workspace.v1';
-export const COLORS = ['#a66d4c', '#728c55', '#558d92', '#866b9e', '#b89246', '#59789e', '#9c6479'];
+export const COLORS = ['#c44522', '#14764b', '#087e9d', '#7946bd', '#b07800', '#285dc2', '#b12b79'];
 export const CATEGORIES = ['证件资料', '衣物洗护', '电子设备', '健康用品', '其他物品'];
 export const MODES = ['待定', '自驾', '大巴', '火车', '飞机', '步行', '其他'];
 export const GUIDE_CATEGORIES = ['交通出行', '餐饮美食', '景点预约', '住宿信息', '当地提醒', '其他攻略'];
 export function blankState() {
-  return { schemaVersion: 1, revision: 0, trip: { title: '我的旅行计划', destination: '', startDate: '', endDate: '' }, days: [], packing: [], notes: [], guides: [] };
+  return { schemaVersion: 1, revision: 0, trip: { title: '我的旅行计划', destination: '', countryCode: '', startDate: '', endDate: '' }, days: [], packing: [], notes: [], guides: [] };
 }
 const str = (value, max = 4000) => {
   if (typeof value !== 'string' || value.length > max) throw new Error('文字字段缺失或超出长度限制。');
@@ -48,7 +49,8 @@ const rows = (value, parse, max = 500) => {
 export const routeSignature = day => JSON.stringify({ mode: day.mode, stops: day.stops });
 export function validateState(raw) {
   if (!raw || raw.schemaVersion !== 1 || !raw.trip) throw new Error('这不是受支持的 Travelagent 备份。');
-  const trip = { title: str(raw.trip.title, 80), destination: str(raw.trip.destination, 120), startDate: validDate(raw.trip.startDate), endDate: validDate(raw.trip.endDate) };
+  const trip = { title: str(raw.trip.title, 80), destination: str(raw.trip.destination, 120), countryCode: str(raw.trip.countryCode ?? '', 3), startDate: validDate(raw.trip.startDate), endDate: validDate(raw.trip.endDate) };
+  if (trip.countryCode && !COUNTRIES.some(c => c.code === trip.countryCode)) throw new Error('目标国家 / 地区无效。');
   if (!trip.title) throw new Error('请填写旅行名称。');
   if (trip.endDate && trip.startDate && trip.endDate < trip.startDate) throw new Error('结束日期不能早于出发日期。');
   const days = rows(raw.days, d => {
@@ -56,6 +58,8 @@ export function validateState(raw) {
     const stops = d.stops.map(s => ({ name: str(s.name, 120), point: coordinates(s.point) }));
     if (stops.some(s => !s.name)) throw new Error('请填写每个站点名称。');
     const day = { id: id(d.id), date: validDate(d.date), stops, mode: choice(d.mode, MODES), departure: time(d.departure), arrival: time(d.arrival), duration: str(d.duration, 80), lodging: str(d.lodging, 200), lodgingStatus: choice(d.lodgingStatus, ['pending', 'confirmed']), status: choice(d.status, ['pending', 'confirmed']), note: str(d.note), source: str(d.source, 500), road: null };
+    day.activities = rows(d.activities ?? [], a => ({ id: id(a.id), name: str(a.name, 120), point: coordinates(a.point), time: str(a.time, 80), duration: str(a.duration, 80), transport: str(a.transport, 80), status: choice(a.status, ['pending', 'confirmed', 'optional']), note: str(a.note, 1500), url: safeURL(str(a.url, 2000)) }), 40);
+    if (day.activities.some(a => !a.name)) throw new Error('请填写当日安排的名称。');
     if (day.lodgingStatus === 'confirmed' && !day.lodging) throw new Error('确认住宿前请填写住宿地点。');
     if (d.road) {
       const r = d.road;
@@ -71,6 +75,29 @@ export function validateState(raw) {
     notes: rows(raw.notes, n => ({ id: id(n.id), body: str(n.body), author: str(n.author, 40), createdAt: str(n.createdAt, 50) })),
     guides: rows(raw.guides, g => ({ id: id(g.id), title: str(g.title, 120), category: choice(g.category, GUIDE_CATEGORIES), body: str(g.body, 8000), url: safeURL(str(g.url, 2000)), checkedDate: validDate(g.checkedDate) }))
   };
+}
+// Missing locations and alternatives must not create an invented continuous route.
+export function activitySegments(activities) {
+  const segments = []; let segment = [];
+  for (const a of activities) {
+    if (a.point && a.status !== 'optional') segment.push(a.point);
+    else { if (segment.length > 1) segments.push(segment); segment = []; }
+  }
+  if (segment.length > 1) segments.push(segment);
+  return segments;
+}
+export function mergeDayActivities(current, patch) {
+  if (patch?.kind !== 'dayActivities' || patch.schemaVersion !== 1 || !Array.isArray(patch.updates) || !patch.updates.length || patch.updates.length > 120) throw new Error('当日安排补充文件无效。');
+  const next = validateState(current), seen = new Set();
+  for (const update of patch.updates) {
+    const day = next.days.find(d => d.id === update.id && d.date === update.date);
+    if (!day || seen.has(update.id)) throw new Error('补充日期不匹配或重复。');
+    if (day.activities.length) throw new Error('这一天已有当日安排，请在页面中编辑，避免覆盖。');
+    if (!Array.isArray(update.activities) || !update.activities.length) throw new Error('补充安排不能为空。');
+    seen.add(update.id); day.activities = update.activities;
+  }
+  if (patch.countryCode && !next.trip.countryCode) next.trip.countryCode = patch.countryCode;
+  return validateState(next);
 }
 export function dayForSave(original, updated) {
   const changed = original && JSON.stringify({ ...original, road: null, status: null }) !== JSON.stringify({ ...updated, road: null, status: null });

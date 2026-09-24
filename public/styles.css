@@ -257,3 +257,55 @@ dialog{padding:22px}
 
 .section-nav{overflow-y:hidden;scrollbar-width:none}
 .section-nav::-webkit-scrollbar{display:none}
+/* Map focus, day-by-day routes and expanded view. */
+.map-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+#route>.section-heading{flex-wrap:wrap}
+.map-view-switch{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:9px 12px;background:var(--panel);border-bottom:1px solid var(--line)}
+.map-view-switch[hidden]{display:none}
+.map-view-switch button{font-size:12px;padding:6px 12px;border-radius:6px;border:1px solid var(--line)}
+.map-view-switch button.selected{background:var(--green);color:white}
+#map-view-label{font-size:11px;color:var(--muted);margin-left:auto}
+#map{height:520px}
+.route-sidebar{max-height:650px;overflow:auto}
+#route-list{min-height:120px;max-height:190px;flex:0 0 auto}
+#day-map-detail{border-top:1px solid var(--line);padding-top:14px;margin-top:12px}
+#day-map-detail:has(.activity-list){min-height:180px;overflow:auto;flex:1}
+#day-map-detail h3{font-size:13px}
+#day-map-detail .form-hint{margin:5px 0 10px;font-size:10px}
+.map-legend{flex-shrink:0}
+.map-label{font-size:11px;font-weight:600;border:1px solid #a9b5a7;box-shadow:0 2px 6px #263a3233}
+.direction-marker span{font-size:25px;line-height:24px;filter:drop-shadow(0 1px 1px white) drop-shadow(0 -1px 1px white)}
+.route-number{background:transparent;border:0}
+.route-number span{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;border:3px solid white;background:var(--route-color);color:white;font-size:12px;font-weight:700;box-shadow:0 1px 5px #14292180}
+.route-number.optional span{background:white;color:var(--route-color);border:2px dashed var(--route-color)}
+.day-activities{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+.day-activities summary{font-size:13px;font-weight:650;cursor:pointer}
+.activity-list{list-style:none;padding:0;margin:12px 0}
+.activity-list>li{position:relative;display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;padding:0 0 18px}
+.activity-list>li:not(:last-child):before{content:"";position:absolute;top:25px;bottom:3px;left:11px;border-left:2px solid #d4ded0}
+.activity-number{width:24px;height:24px;display:grid;place-items:center;border-radius:50%;background:#e3eadf;color:var(--green);font-size:11px;font-weight:700}
+.activity-list strong{font-size:12px;overflow-wrap:anywhere}
+.activity-time{font-size:11px;color:var(--gold);margin-bottom:3px}
+.activity-meta,.activity-note{font-size:11px;margin-top:5px;overflow-wrap:anywhere;white-space:pre-wrap}
+.activity-meta{color:var(--muted)}
+.activity-controls{display:flex;gap:13px;flex-wrap:wrap;margin-top:4px}
+.activity-controls .text-button{font-size:10px}
+.activity-list.compact>li{padding-bottom:12px;gap:7px}
+.activity-list.compact strong{font-size:11px}
+.status.optional{background:#eee8f4;color:#775c97}
+body.map-is-expanded{overflow:hidden}
+#route.map-expanded{position:fixed;inset:0;z-index:1200;background:var(--paper);margin:0;padding:18px;display:flex;flex-direction:column;height:100dvh;overscroll-behavior:contain}
+.map-expanded>.section-heading{flex-shrink:0;margin-bottom:12px}
+.map-expanded .section-heading .eyebrow{display:none}
+.map-expanded .map-layout{flex:1;min-height:0;grid-template-columns:minmax(0,1fr) 310px}
+.map-expanded .map-wrap{display:flex;flex-direction:column;min-height:0}
+.map-expanded #map{height:auto;flex:1;min-height:120px}
+.map-expanded .route-sidebar{max-height:none;min-height:0}
+.map-expanded #route-list{max-height:25dvh}
+@media(max-width:700px){
+#route>.section-heading{display:block}.map-actions{justify-content:flex-start;margin-top:12px;gap:6px}.map-actions .button{padding:8px 10px;min-height:42px}
+#map{height:370px}.route-sidebar{max-height:650px}#day-map-detail:has(.activity-list){max-height:300px;flex:auto}
+#route.map-expanded{padding:10px}.map-expanded .section-heading h2{font-size:17px}.map-expanded .map-actions{margin-top:7px}.map-expanded .map-layout{display:grid;grid-template-columns:1fr;grid-template-rows:minmax(200px,1fr) minmax(120px,.65fr)}
+.map-expanded .route-sidebar{padding:12px;display:block;overflow:auto}.map-expanded #route-list{display:flex;min-height:0;max-height:none;overflow-x:auto;scroll-snap-type:x proximity}.map-expanded .route-item{min-width:200px;max-width:220px;scroll-snap-align:start}.map-expanded #day-map-detail{max-height:none;overflow:visible}.map-expanded .map-legend{display:none}.map-expanded .sidebar-title{margin-bottom:8px}.map-expanded .map-help,.map-expanded .basemap-status{font-size:9px;padding:3px 8px}
+}
+@media(max-height:500px) and (min-width:701px){#route.map-expanded{padding:8px}.map-expanded .section-heading h2{font-size:17px}.map-expanded .section-heading{margin-bottom:6px}.map-expanded .route-sidebar{padding:10px}.map-expanded #route-list{min-height:80px}.map-expanded .map-legend{display:none}}

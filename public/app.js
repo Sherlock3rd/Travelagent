@@ -1,5 +1,8 @@
-import { STORAGE_KEY, COLORS, CATEGORIES, MODES, GUIDE_CATEGORIES, blankState, validateState, routeSignature, dayForSave } from './model.js';
+import { STORAGE_KEY, COLORS, CATEGORIES, MODES, GUIDE_CATEGORIES, blankState, validateState, routeSignature, dayForSave, activitySegments, mergeDayActivities } from './model.js';
 import { createMap, addBasemap } from './map.js';
+import { COUNTRIES } from './countries.js';
+let mapView = 'transit', expanded = false, savedScroll = 0;
+const activityStatus = { pending: '计划 · 待确认', confirmed: '已确认', optional: '备选 · 未选定' };
 const $ = selector => document.querySelector(selector);
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const empty = (title, detail) => '<div class="empty-state"><strong>' + esc(title) + '</strong>' + esc(detail) + '</div>';
@@ -57,53 +60,79 @@ try {
   map = createMap('map').setView([27, 30], 2);
   addBasemap(map); layers = L.layerGroup().addTo(map);
 } catch { $('#map-network').hidden = false; $('#map-network').textContent = '地图暂时不可用，其余旅行内容仍可编辑。'; }
+function mapStops(day) { return selectedDay === day.id && mapView === 'activities' ? day.activities : day.stops; }
 function drawMap() {
   if (!map) return;
   layers.clearLayers();
   let pointsCount = 0;
   state.days.forEach((day, index) => {
-    const located = day.stops.filter(s => s.point);
-    pointsCount += located.length;
-    const points = day.road?.points || day.stops.map(s => s.point);
-    const routeColor = color(index);
-    const opacity = selectedDay && selectedDay !== day.id ? .25 : .9;
-    // Missing intermediate stops must break the line rather than connect across them.
-    let segment = [];
-    const segments = [];
-    points.forEach(point => { if (point) segment.push(point); else { if (segment.length > 1) segments.push(segment); segment = []; } });
-    if (segment.length > 1) segments.push(segment);
-    segments.forEach(path => {
-      L.polyline(path, { color: routeColor, weight: selectedDay === day.id ? 5 : 3, opacity, dashArray: day.road ? null : '7 8' }).addTo(layers).on('click', () => selectRoute(day.id));
-      const step = Math.max(1, Math.floor((path.length - 1) / 5));
+    // A selected day gets an uncluttered map; the full view keeps every day.
+    if (selectedDay && selectedDay !== day.id) return;
+    const daily = selectedDay === day.id && mapView === 'activities';
+    const stops = mapStops(day), routeColor = color(index);
+    pointsCount += stops.filter(s => s.point).length;
+    const paths = daily ? activitySegments(stops) : activitySegments((day.road?.points || stops.map(s => s.point)).map(point => ({ point })));
+    paths.forEach(path => {
+      L.polyline(path, { color: '#fff', weight: selectedDay ? 11 : 9, opacity: .98, interactive: false }).addTo(layers);
+      L.polyline(path, { color: routeColor, weight: selectedDay ? 7 : 5, opacity: 1, dashArray: !daily && day.road ? null : '14 6' }).addTo(layers).on('click', () => selectRoute(day.id));
+      const step = Math.max(1, Math.floor((path.length - 1) / 6));
       for (let i = step; i < path.length; i += step) {
         const a = map.project(path[i - 1]), b = map.project(path[i]);
-        if (a.distanceTo(b) < .1) continue;
+        if (a.distanceTo(b) < 24) continue;
         const angle = Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI;
-        L.marker(path[i], { interactive: false, icon: L.divIcon({ className: 'direction-marker', iconSize: [18, 18], iconAnchor: [9, 9], html: '<span style="color:' + routeColor + ';opacity:' + opacity + ';transform:rotate(' + angle + 'deg)">➤</span>' }) }).addTo(layers);
+        const midpoint = map.unproject(a.add(b).divideBy(2));
+        L.marker(midpoint, { interactive: false, keyboard: false, icon: L.divIcon({ className: 'direction-marker', iconSize: [24, 24], iconAnchor: [12, 12], html: '<span style="color:' + routeColor + ';transform:rotate(' + angle + 'deg)">➤</span>' }) }).addTo(layers);
       }
     });
-    day.stops.forEach((stop, si) => {
+    stops.forEach((stop, si) => {
       if (!stop.point) return;
-      L.circleMarker(stop.point, { radius: 5, color: routeColor, fillColor: '#fffefa', fillOpacity: 1, weight: 2, opacity }).addTo(layers)
-        .bindTooltip(esc('D' + (index + 1) + ' · ' + (si + 1) + ' ' + stop.name), { permanent: selectedDay === day.id, direction: 'top', className: 'map-label' });
+      const label = (selectedDay ? '' : 'D' + (index + 1) + ' · ') + (si + 1) + ' ' + stop.name;
+      const marker = selectedDay ? L.marker(stop.point, { title: label, icon: L.divIcon({ className: 'route-number ' + (stop.status === 'optional' ? 'optional' : ''), html: '<span style="--route-color:' + routeColor + '">' + (si + 1) + '</span>', iconSize: [28, 28], iconAnchor: [14, 14] }) }) : L.circleMarker(stop.point, { radius: 6, color: '#fff', fillColor: routeColor, fillOpacity: 1, weight: 2 });
+      marker.addTo(layers).bindTooltip(esc(label), { permanent: Boolean(selectedDay), direction: 'top', offset: [0, -12], className: 'map-label' });
     });
   });
   $('#map-empty').hidden = pointsCount > 0;
   const mapAction = $('#map-empty button');
-  if (state.days.length) { delete mapAction.dataset.addDay; mapAction.dataset.editDay = state.days[0].id; mapAction.textContent = '标记行程位置 →'; }
+  for (const key of ['addDay', 'editDay', 'addActivity', 'activity', 'activityDay']) delete mapAction.dataset[key];
+  const selected = state.days.find(d => d.id === selectedDay);
+  if (selected && mapView === 'activities') {
+    if (selected.activities.length) { mapAction.dataset.activity = selected.activities[0].id; mapAction.dataset.activityDay = selected.id; mapAction.textContent = '标记当日安排位置 →'; }
+    else { mapAction.dataset.addActivity = selected.id; mapAction.textContent = '添加当日安排 →'; }
+  } else if (state.days.length) { delete mapAction.dataset.addDay; mapAction.dataset.editDay = selectedDay || state.days[0].id; mapAction.textContent = '编辑行程位置 →'; }
   else { delete mapAction.dataset.editDay; mapAction.dataset.addDay = ''; mapAction.textContent = '添加第一天 →'; }
+  const title = $('#map-empty strong'), detail = $('#map-empty > span:not(.small-compass)');
+  title.textContent = selectedDay ? '这一天的位置待补充' : '下一站，由你决定';
+  detail.textContent = selectedDay ? '当日安排仍可在右侧查看；未知位置不会连线。' : '添加行程，在地图上标记出发地与目的地。';
 }
 function fitMap(day) {
   if (!map) return;
   const days = day ? [day] : state.days;
-  const points = days.flatMap(d => d.road?.points || d.stops.map(s => s.point).filter(Boolean));
-  if (points.length) map.fitBounds(L.latLngBounds(points), { padding: [40, 40], maxZoom: 13 });
-  else if (day) toast('这一天还未标记地图位置。编辑行程后可逐站定位。');
+  const points = days.flatMap(d => day && mapView === 'activities' ? d.activities.map(s => s.point).filter(Boolean) : d.road?.points || d.stops.map(s => s.point).filter(Boolean));
+  if (points.length) map.fitBounds(L.latLngBounds(points), { padding: [50, 50], maxZoom: 14 });
+  else if (day) toast('这一天还未标记位置，可先查看文字安排。');
 }
-function selectRoute(id) { selectedDay = id; renderRoutes(); drawMap(); fitMap(state.days.find(d => d.id === id)); }
+function selectRoute(id) {
+  selectedDay = id;
+  mapView = state.days.find(d => d.id === id)?.activities.length ? 'activities' : 'transit';
+  renderRoutes(); drawMap(); fitMap(state.days.find(d => d.id === id));
+}
+function activityList(day, compact = false) {
+  if (!day.activities.length) return '<p class="form-hint">还没有当日安排，可以添加景点、用餐、接送和入住。</p>';
+  return '<ol class="activity-list' + (compact ? ' compact' : '') + '">' + day.activities.map((a, i) => '<li><span class="activity-number">' + (i + 1) + '</span><div><div class="activity-time">' + esc(a.time || '时间待定') + '</div><strong>' + esc(a.name) + '</strong> <span class="status ' + a.status + '">' + activityStatus[a.status] + '</span><p class="activity-meta">' + esc([a.duration && '停留 / 用时：' + a.duration, a.transport && '前往：' + a.transport, !a.point && '位置待补充'].filter(Boolean).join(' · ')) + '</p>' + (!compact ? (a.note ? '<p class="activity-note">' + esc(a.note) + '</p>' : '') + (a.url ? '<a class="text-button" href="' + esc(a.url) + '" target="_blank" rel="noopener noreferrer">位置 / 信息来源 ↗</a>' : '') + '<div class="activity-controls"><button class="text-button" data-activity="' + a.id + '" data-activity-day="' + day.id + '">编辑安排</button><button class="text-button" data-move-activity="' + a.id + '" data-activity-day="' + day.id + '" data-direction="-1"' + (!i ? ' disabled' : '') + '>上移</button><button class="text-button" data-move-activity="' + a.id + '" data-activity-day="' + day.id + '" data-direction="1"' + (i === day.activities.length - 1 ? ' disabled' : '') + '>下移</button><button class="text-button" data-delete-activity="' + a.id + '" data-activity-day="' + day.id + '">删除</button></div>' : '') + '</div></li>').join('') + '</ol>';
+}
+function renderMapDetails() {
+  const day = state.days.find(d => d.id === selectedDay);
+  $('#map-view-switch').hidden = !day;
+  document.querySelectorAll('[data-map-view]').forEach(b => { b.classList.toggle('selected', b.dataset.mapView === mapView); b.setAttribute('aria-pressed', b.dataset.mapView === mapView); });
+  $('#map-view-label').textContent = day ? 'D' + (state.days.indexOf(day) + 1) + ' · ' + (day.date || '日期待定') : '';
+  $('#day-map-detail').innerHTML = day ? '<h3>当日顺序</h3><p class="form-hint">编号与地图对应。备选不连线；路线仅示意顺序，不是道路导航。</p>' + activityList(day, true) : '<p class="form-hint">选择一天，查看景点与接送顺序。</p>';
+  const country = COUNTRIES.find(c => c.code === state.trip.countryCode);
+  $('#country-map').textContent = country ? '聚焦' + country.name : '设置目标国';
+}
 function renderRoutes() {
+  renderMapDetails();
   $('#route-count').textContent = state.days.length + ' DAYS';
-  $('#route-list').innerHTML = state.days.length ? state.days.map((d, i) => '<button class="route-item ' + (selectedDay === d.id ? 'selected' : '') + '" data-route="' + d.id + '" aria-pressed="' + (selectedDay === d.id) + '"><span class="day-badge" style="--day-color:' + color(i) + '">D' + (i + 1) + '</span><span><strong>' + esc(routeName(d)) + '</strong><small>' + (d.road ? (d.road.distance / 1000).toFixed(1) + ' km · 公路估算' : d.stops.every(s => s.point) ? '站点连线 · 待规划道路' : '地图位置待补充') + '</small></span></button>').join('') : '<div class="route-empty">从一份日程开始，<br>慢慢描绘旅行的轮廓。</div>';
+  $('#route-list').innerHTML = state.days.length ? state.days.map((d, i) => '<button class="route-item ' + (selectedDay === d.id ? 'selected' : '') + '" data-route="' + d.id + '" aria-pressed="' + (selectedDay === d.id) + '"><span class="day-badge" style="--day-color:' + color(i) + '">D' + (i + 1) + '</span><span><strong>' + esc(routeName(d)) + '</strong><small>' + (d.activities.length ? d.activities.length + ' 项当日安排 · ' + (d.date || '日期待定') : d.road ? (d.road.distance / 1000).toFixed(1) + ' km · 公路估算' : d.stops.every(s => s.point) ? '站点连线 · 待规划道路' : '地图位置待补充') + '</small></span></button>').join('') : '<div class="route-empty">从一份日程开始，<br>慢慢描绘旅行的轮廓。</div>';
 }
 function renderDays() {
   const visible = state.days.filter(d => filter === 'all' || d.status === 'confirmed');
@@ -111,7 +140,7 @@ function renderDays() {
   $('#days').innerHTML = visible.length ? visible.map(d => {
     const index = state.days.indexOf(d);
     const roadHint = d.road ? '<div class="day-detail">公路估算 ' + (d.road.distance / 1000).toFixed(1) + ' km · ' + Math.round(d.road.duration / 60) + ' 分钟（不含停留）</div>' : '';
-    return '<article class="day-card ' + d.status + '" style="--day-color:' + color(index) + '"><div><div class="day-number">D' + (index + 1) + '</div><div class="day-date">' + esc(d.date || '日期待定') + '</div></div><div><div class="day-route">' + esc(routeName(d)) + '</div><div class="day-detail"><span>' + esc(d.mode) + '</span><span>' + esc(d.departure || '出发待定') + ' — ' + esc(d.arrival || '到达待定') + '</span><span>时长：' + esc(d.duration || '待补充') + '</span></div>' + roadHint + (d.note ? '<p class="day-description">' + esc(d.note) + '</p>' : '') + (d.source ? '<div class="day-detail">确认依据：' + esc(d.source) + '</div>' : '') + '<button class="text-button route-action" data-show-map="' + d.id + '">在地图上查看 ↗</button>' + (['自驾', '大巴'].includes(d.mode) ? ' <button class="text-button route-action" data-road="' + d.id + '">' + (d.road ? '更新公路估算' : '计算公路路线') + '</button>' : '') + '</div><div class="day-lodging"><span class="label">当晚住在</span><strong>' + esc(d.lodging || '住宿待补充') + '</strong><div class="day-detail"><span class="status ' + d.lodgingStatus + '">' + (d.lodgingStatus === 'confirmed' ? '住宿已确认' : '住宿待确认') + '</span></div></div><div class="day-controls"><span class="status ' + d.status + '">' + (d.status === 'confirmed' ? '✓ 行程已确认' : '行程待确认') + '</span><div class="day-buttons"><button class="text-button" data-edit-day="' + d.id + '">编辑</button><button class="text-button" data-delete-day="' + d.id + '">删除</button></div><div class="day-buttons"><button class="text-button" aria-label="提前 D' + (index + 1) + '" data-move-day="' + d.id + '" data-direction="-1"' + (index === 0 ? ' disabled' : '') + '>↑</button><button class="text-button" aria-label="后移 D' + (index + 1) + '" data-move-day="' + d.id + '" data-direction="1"' + (index === state.days.length - 1 ? ' disabled' : '') + '>↓</button></div></div></article>';
+    return '<article class="day-card ' + d.status + '" style="--day-color:' + color(index) + '"><div><div class="day-number">D' + (index + 1) + '</div><div class="day-date">' + esc(d.date || '日期待定') + '</div></div><div><div class="day-route">' + esc(routeName(d)) + '</div><div class="day-detail"><span>' + esc(d.mode) + '</span><span>' + esc(d.departure || '出发待定') + ' — ' + esc(d.arrival || '到达待定') + '</span><span>时长：' + esc(d.duration || '待补充') + '</span></div>' + roadHint + (d.note ? '<p class="day-description">' + esc(d.note) + '</p>' : '') + (d.source ? '<div class="day-detail">确认依据：' + esc(d.source) + '</div>' : '') + '<button class="text-button route-action" data-show-map="' + d.id + '">在地图上查看 ↗</button>' + (['自驾', '大巴'].includes(d.mode) ? ' <button class="text-button route-action" data-road="' + d.id + '">' + (d.road ? '更新公路估算' : '计算公路路线') + '</button>' : '') + '<details class="day-activities" open><summary>当日安排 · ' + d.activities.length + ' 项</summary><p class="form-hint">时间均为当地时间；建议时段不代表预订或营业时间。</p>' + activityList(d) + '<button class="text-button" data-add-activity="' + d.id + '">＋ 添加当日安排</button></details></div><div class="day-lodging"><span class="label">当晚住在</span><strong>' + esc(d.lodging || '住宿待补充') + '</strong><div class="day-detail"><span class="status ' + d.lodgingStatus + '">' + (d.lodgingStatus === 'confirmed' ? '住宿已确认' : '住宿待确认') + '</span></div></div><div class="day-controls"><span class="status ' + d.status + '">' + (d.status === 'confirmed' ? '✓ 行程已确认' : '行程待确认') + '</span><div class="day-buttons"><button class="text-button" data-edit-day="' + d.id + '">编辑</button><button class="text-button" data-delete-day="' + d.id + '">删除</button></div><div class="day-buttons"><button class="text-button" aria-label="提前 D' + (index + 1) + '" data-move-day="' + d.id + '" data-direction="-1"' + (index === 0 ? ' disabled' : '') + '>↑</button><button class="text-button" aria-label="后移 D' + (index + 1) + '" data-move-day="' + d.id + '" data-direction="1"' + (index === state.days.length - 1 ? ' disabled' : '') + '>↓</button></div></div></article>';
   }).join('') : empty(filter === 'confirmed' ? '把确定的安排，留在这里' : '旅行还没有开始，计划可以先走一步', filter === 'confirmed' ? '编辑日程并明确选择“已确认”后，将在这里显示。' : '添加第一天，记录出发地、目的地、住宿和大致时长。');
 }
 function renderPacking() {
@@ -159,7 +188,7 @@ $('#editor-form').addEventListener('submit', event => {
 });
 $('#close-editor').onclick = closeEditor; $('#cancel-editor').onclick = closeEditor;
 $('#editor').addEventListener('close', () => { if (picker) { picker.remove(); picker = null; } });
-$('#edit-trip').onclick = () => openEditor('这次旅行', '<div class="form-grid">' + field('title', '旅行名称', state.trip.title, 'text', true, true, 80) + field('destination', '目的地', state.trip.destination, 'text', true, false, 120) + field('startDate', '出发日期', state.trip.startDate, 'date') + field('endDate', '结束日期', state.trip.endDate, 'date') + '</div>', form => commit(s => { s.trip = Object.fromEntries(form); }));
+$('#edit-trip').onclick = () => openEditor('这次旅行', '<div class="form-grid">' + field('title', '旅行名称', state.trip.title, 'text', true, true, 80) + field('destination', '目的地', state.trip.destination, 'text', true, false, 120) + select('countryCode', '地图目标国家 / 地区', [['', '请选择（可稍后补充）'], ...COUNTRIES.map(c => [c.code, c.name]).sort((a, b) => a[1].localeCompare(b[1], 'zh'))], state.trip.countryCode) + field('startDate', '出发日期', state.trip.startDate, 'date') + field('endDate', '结束日期', state.trip.endDate, 'date') + '</div>', form => commit(s => { s.trip = Object.fromEntries(form); }));
 function renderStops() {
   $('#stop-list').innerHTML = draftStops.map((s, i) => '<div class="stop-row"><span>' + (i + 1) + '</span><input data-stop-name="' + i + '" aria-label="站点 ' + (i + 1) + ' 名称" placeholder="' + (i === 0 ? '出发地' : i === draftStops.length - 1 ? '目的地' : '途经地') + '" value="' + esc(s.name) + '" required maxlength="120"><button type="button" class="pin-button ' + (s.point ? 'located' : '') + '" data-pin="' + i + '">' + (s.point ? '✓ 已定位' : '地图定位') + '</button><button type="button" class="icon-button" data-remove-stop="' + i + '" aria-label="移除站点 ' + (i + 1) + '"' + (draftStops.length <= 2 ? ' disabled' : '') + '>×</button></div>').join('');
 }
@@ -168,7 +197,7 @@ function editDay(id) {
   const d = original || { id: uuid(), date: '', stops: [{ name: '', point: null }, { name: '', point: null }], mode: '待定', departure: '', arrival: '', duration: '', lodging: '', lodgingStatus: 'pending', status: 'pending', note: '', source: '', road: null };
   draftStops = structuredClone(d.stops);
   openEditor(original ? '编辑 D' + (state.days.indexOf(original) + 1) + ' 行程' : '添加第 ' + (state.days.length + 1) + ' 天', (original?.status === 'confirmed' || original?.lodgingStatus === 'confirmed' ? '<p class="warning-note">这天已有确认记录。保存前请重新核实行程与住宿的确认状态，避免沿用旧安排的确认结果。</p>' : '') + '<div class="form-grid">' + field('date', '行程日期（可稍后补充）', d.date, 'date') + select('status', '行程确认状态', statusOptions, 'pending') + '</div><p class="form-hint">按出行顺序添加站点；地图定位可稍后补充，不影响保存日程。</p><div id="stop-list" class="stop-list"></div><button type="button" id="add-stop" class="text-button">＋ 增加途经地</button><div id="picker-container" hidden><p class="picker-instruction" id="picker-instruction"></p><div id="picker-map"></div><button type="button" id="clear-pin" class="text-button">清除此站地图位置</button></div><div class="form-grid" style="margin-top:20px">' + select('mode', '主要交通方式', MODES, d.mode) + field('duration', '大致时长（如车程 2 小时）', d.duration, 'text', false, false, 80) + field('departure', '出发时间（当地时间）', d.departure, 'time') + field('arrival', '到达时间（当地时间）', d.arrival, 'time') + field('lodging', '当晚住宿地点 / 酒店', d.lodging, 'text', true) + select('lodgingStatus', '住宿确认状态', statusOptions, 'pending') + field('source', '确认依据（订单/资料说明，选填）', d.source, 'text', true, false, 500) + textArea('note', '当天安排与备注', d.note) + '</div>', form => {
-    const updated = dayForSave(original, { id: d.id, ...Object.fromEntries(form), stops: structuredClone(draftStops), road: null });
+    const updated = dayForSave(original, { id: d.id, ...Object.fromEntries(form), stops: structuredClone(draftStops), activities: d.activities || [], road: null });
     return commit(s => { const index = s.days.findIndex(x => x.id === d.id); if (index < 0) s.days.push(updated); else s.days[index] = updated; });
   });
   renderStops();
@@ -192,6 +221,20 @@ function pinStop(index) {
     });
   }
   setTimeout(() => { picker?.invalidateSize(); if (draftStops[index]?.point) { picker?.setView(draftStops[index].point, 12); if (pickerMarker) picker?.removeLayer(pickerMarker); pickerMarker = L.circleMarker(draftStops[index].point, { color: '#365443', radius: 7 }).addTo(picker); } }, 50);
+}
+function editActivity(dayId, activityId) {
+  const day = state.days.find(d => d.id === dayId);
+  if (!day) return;
+  if (!activityId && day.activities.length >= 40) return toast('一天最多记录 40 项安排。');
+  const a = day.activities.find(a => a.id === activityId) || { id: uuid(), name: '', point: null, time: '', duration: '', transport: '', status: 'pending', note: '', url: '' };
+  draftStops = [{ name: a.name, point: a.point }];
+  openEditor(activityId ? '编辑当日安排' : '添加当日安排', '<p class="form-hint">按一天内的先后顺序记录；备选安排单独显示，不接入路线。</p><div id="stop-list"></div><div id="picker-container" hidden><p class="picker-instruction" id="picker-instruction"></p><div id="picker-map"></div><button type="button" id="clear-pin" class="text-button">清除此站地图位置</button></div><div class="form-grid">' + field('time', '当地时间 / 建议时段', a.time, 'text', false, false, 80) + select('status', '本项确认状态', [...statusOptions, ['optional', '备选（未选定）']], a.status) + field('duration', '停留 / 用时（建议需注明）', a.duration, 'text', false, false, 80) + field('transport', '前往这一站的交通 / 耗时', a.transport, 'text', false, false, 80) + textArea('note', '安排说明、预约依据与待确认事项', a.note, 1500) + field('url', '位置 / 信息来源（选填）', a.url, 'url', true, false, 2000) + '</div>', form => commit(s => {
+    const current = s.days.find(d => d.id === dayId);
+    const record = { id: a.id, ...Object.fromEntries(form), ...draftStops[0] };
+    const index = current.activities.findIndex(x => x.id === a.id);
+    if (index < 0) current.activities.push(record); else current.activities[index] = record;
+  }));
+  renderStops();
 }
 function editGuide(id) {
   const g = state.guides.find(g => g.id === id) || { id: uuid(), title: '', category: '交通出行', body: '', url: '', checkedDate: '' };
@@ -225,6 +268,11 @@ document.addEventListener('click', async event => {
   if (!target) return;
   const d = target.dataset;
   if ('addDay' in d) editDay();
+  if (d.addActivity) editActivity(d.addActivity);
+  if (d.activity) editActivity(d.activityDay, d.activity);
+  if (d.mapView) { mapView = d.mapView; renderMapDetails(); drawMap(); fitMap(state.days.find(x => x.id === selectedDay)); }
+  if (d.moveActivity) commit(s => { const list = s.days.find(x => x.id === d.activityDay).activities; const i = list.findIndex(a => a.id === d.moveActivity), j = i + Number(d.direction); if (i >= 0 && j >= 0 && j < list.length) [list[i], list[j]] = [list[j], list[i]]; });
+  if (d.deleteActivity && await confirmAction('删除这项当日安排？当天其他安排不变。')) commit(s => { const day = s.days.find(x => x.id === d.activityDay); day.activities = day.activities.filter(a => a.id !== d.deleteActivity); });
   if (d.editDay) editDay(d.editDay);
   if (d.route) selectRoute(d.route);
   if (d.showMap) { selectRoute(d.showMap); $('#route').scrollIntoView({ behavior: 'smooth' }); }
@@ -246,7 +294,46 @@ document.addEventListener('change', event => { if (event.target.dataset.check) {
 $('#packing-form').onsubmit = event => { event.preventDefault(); const form = new FormData(event.currentTarget); const name = String(form.get('name')).trim(); if (!name) return; if (commit(s => s.packing.push({ id: uuid(), name, category: form.get('category'), done: false }))) $('#packing-name').value = ''; };
 $('#note-form').onsubmit = event => { event.preventDefault(); const form = new FormData(event.currentTarget), body = String(form.get('body')).trim(); if (!body) return; if (commit(s => s.notes.push({ id: uuid(), body, author: String(form.get('author')).trim(), createdAt: stamp() }))) $('#note-body').value = ''; };
 $('#add-guide').onclick = () => editGuide();
+map?.on('zoomend', drawMap);
 $('#fit-map').onclick = () => { selectedDay = null; renderRoutes(); drawMap(); fitMap(); };
+$('#country-map').onclick = () => {
+  const country = COUNTRIES.find(c => c.code === state.trip.countryCode);
+  if (!country) { $('#edit-trip').click(); return; }
+  selectedDay = null; mapView = 'transit'; renderRoutes(); drawMap();
+  map?.fitBounds(country.bounds, { padding: [30, 30], maxZoom: 8 });
+};
+let inertBefore = [];
+function expandMap(value) {
+  expanded = value;
+  const section = $('#route');
+  if (value) {
+    savedScroll = window.scrollY;
+    inertBefore = [...document.querySelectorAll('main > :not(#route), body > header, body > .skip')].map(el => [el, el.inert]);
+    inertBefore.forEach(([el]) => el.inert = true);
+    section.setAttribute('role', 'dialog'); section.setAttribute('aria-modal', 'true');
+  } else {
+    inertBefore.forEach(([el, prior]) => el.inert = prior); inertBefore = [];
+    section.removeAttribute('role'); section.removeAttribute('aria-modal');
+  }
+  document.body.classList.toggle('map-is-expanded', value);
+  section.classList.toggle('map-expanded', value);
+  $('#expand-map').textContent = value ? '收起地图 ⤡' : '全屏展开 ⛶';
+  $('#expand-map').setAttribute('aria-expanded', value);
+  $('#expand-map').title = value ? '收起地图（也可按 Esc）' : '展开至整个页面';
+  requestAnimationFrame(() => { map?.invalidateSize({ animate: false }); if (!value) window.scrollTo({ top: savedScroll, behavior: 'instant' }); $('#expand-map').focus({ preventScroll: true }); });
+}
+$('#expand-map').onclick = () => expandMap(!expanded);
+document.addEventListener('keydown', event => {
+  if (!expanded || document.querySelector('dialog[open]')) return;
+  if (event.key === 'Escape') { event.preventDefault(); expandMap(false); }
+  if (event.key === 'Tab') {
+    const nodes = [...$('#route').querySelectorAll('button:not(:disabled), a[href], [tabindex="0"]')].filter(el => el.getClientRects().length);
+    const first = nodes[0], last = nodes.at(-1);
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+  }
+});
+new ResizeObserver(() => map?.invalidateSize({ animate: false })).observe($('#map'));
 function download(text, filename) { const url = URL.createObjectURL(new Blob([text], { type: 'application/json' })); const a = document.createElement('a'); a.href = url; a.download = filename; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 3000); }
 $('#export').onclick = () => { const text = writable ? JSON.stringify(state, null, 2) : lastSaved; if (!text) return toast('未能读取原数据，请保留当前浏览器。'); $('#backup-text').value = text; $('#backup-feedback').textContent = ''; $('#backup-dialog').showModal(); };
 $('#backup-close').onclick = () => $('#backup-dialog').close();
@@ -259,7 +346,14 @@ $('#import-file').onchange = async event => {
   const baseline = lastSaved;
   try {
     if (file.size > 8 * 1024 * 1024) throw new Error('备份文件不能超过 8 MB。');
-    const incoming = validateState(JSON.parse(await file.text()));
+    const raw = JSON.parse(await file.text());
+    if (raw.kind === 'dayActivities') {
+      mergeDayActivities(state, raw);
+      if (!await confirmAction('补充 ' + raw.updates.length + ' 天的当日安排？现有行程、物品勾选、留言和攻略将保留。已有当日安排不会被覆盖。')) return;
+      if (lastSaved !== baseline) throw new Error('确认期间内容已变化，请重新导入。');
+      commit(s => Object.assign(s, mergeDayActivities(s, raw)), '当日安排已补充'); return;
+    }
+    const incoming = validateState(raw);
     if (!await confirmAction('用「' + incoming.trip.title + '」的备份替换当前旅行？建议先导出当前内容。')) return;
     if (lastSaved !== baseline) throw new Error('确认期间内容已变化，请重新导入。');
     commit(s => { Object.assign(s, incoming); selectedDay = null; }, '备份已导入');
