@@ -27,7 +27,7 @@ await writeFile(new URL('release.json', output), JSON.stringify({
 const html = await readFile(new URL('index.html', output), 'utf8');
 if (!html.includes('app.js')) throw new Error('Missing application entry point');
 // Pages cannot use the local server headers; carry the supported CSP into HTML.
-const csp = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://tile.openstreetmap.org https://dohahamadairport.com https://betamedia.experienceegypt.eg https://egymonuments.gov.eg https://1442038683.rsc.cdn77.org https://upload.wikimedia.org https://thumb.wikimedia.org https://orange-bay.tours; connect-src 'self' https://router.project-osrm.org https://tiles.openfreemap.org; worker-src 'self'; base-uri 'none'; form-action 'self'";
+const csp = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://tile.openstreetmap.org https://dohahamadairport.com https://betamedia.experienceegypt.eg https://egymonuments.gov.eg https://1442038683.rsc.cdn77.org https://upload.wikimedia.org https://thumb.wikimedia.org https://orange-bay.tours; connect-src 'self' https://router.project-osrm.org https://tiles.openfreemap.org https://xqardnobmoaxosjqwiwh.supabase.co; worker-src 'self'; base-uri 'none'; form-action 'self'";
 const versioned = html.replace(/((?:src|href)=")([^"?]+\.(?:js|css))(")/g, `$1$2?v=${revision}$3`);
 await writeFile(new URL('index.html', output), versioned.replace('<head>', `<head>\n<meta http-equiv="Content-Security-Policy" content="${csp}"><meta name="referrer" content="strict-origin-when-cross-origin">`));
 console.log(`Website built: ${fileURLToPath(output)}`);

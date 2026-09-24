@@ -10,7 +10,7 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "start": "node scripts/server.mjs",
-    "check": "node --check scripts/server.mjs && node --check scripts/check-supabase.mjs && node --check public/app.js && node --check public/model.js && node --check public/map.js && node --check public/journeys.js && node --check public/guides.js && node --check public/day-media.js && node --check public/lightbox.js",
+    "check": "node --check scripts/server.mjs && node --check scripts/check-supabase.mjs && node --check public/app.js && node --check public/model.js && node --check public/map.js && node --check public/journeys.js && node --check public/guides.js && node --check public/day-media.js && node --check public/lightbox.js && node --check public/cloud-sync.js && node --check public/initial-trip.js && node --check scripts/build.mjs",
     "check:cloud": "node scripts/check-supabase.mjs",
     "test": "node --test"
   },

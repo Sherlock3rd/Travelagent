@@ -6,6 +6,7 @@ import { createMap, addBasemap } from './map.js';
 import { planPlaces, forgetEvent } from './journeys.js';
 import { COUNTRIES } from './countries.js';
 import { loadInitialTrip } from './initial-trip.js';
+import { cloudClient, RECOVERY_KEY } from './cloud-sync.js';
 mountLightbox();
 let mapView = 'transit', expanded = false, savedScroll = 0;
 const selectedPlans = new Map(), placeMarkers = new Map();
@@ -37,26 +38,76 @@ try {
   $('#main').prepend(warning);
 }
 function toast(message) { clearTimeout(toastTimer); $('#toast').textContent = message; $('#toast').hidden = false; toastTimer = setTimeout(() => $('#toast').hidden = true, 4200); }
-function commit(mutate, message = '已保存到此浏览器') {
-  if (!writable) { toast('当前无法保存，请先导出备份。'); return false; }
+const sameTrip = (a,b) => JSON.stringify({...a,revision:0}) === JSON.stringify({...b,revision:0});
+const cloud = cloudClient();
+let cloudVersion = null, cloudReady = false, cloudBusy = false, pullRunning = false;
+function cloudStatus(message, mode = '') {
+  $('#cloud-status').textContent = message;
+  $('#cloud-bar').dataset.mode = mode;
+  $('#cloud-refresh').textContent = mode === 'offline' ? '重试同步 ↻' : '刷新同步 ↻';
+  $('#save-state').textContent = cloudBusy ? '正在保存…' : cloudReady ? '已连接云端' : '离线缓存';
+}
+function preserveDraft(document) {
+  try { localStorage.setItem(RECOVERY_KEY, JSON.stringify(document)); $('#cloud-recovery').hidden = false; }
+  catch { toast('本机备份空间不足，请复制当前编辑内容后重试。'); }
+}
+function acceptCloud(snapshot, repaint = true) {
+  if (cloudVersion !== null && snapshot.version < cloudVersion) return;
+  const valid = validateState(snapshot.document), serialized = JSON.stringify(valid);
+  if (writable) {
+    try { localStorage.setItem(STORAGE_KEY, serialized); } catch { toast('内容已在服务器保存，但本机缓存空间不足。'); }
+    lastSaved = serialized;
+  }
+  state = valid; cloudVersion = snapshot.version; cloudReady = true;
+  if (selectedDay && !state.days.some(d => d.id === selectedDay)) selectedDay = null;
+  if (repaint) render();
+}
+try {
+  const snapshot = await cloud.read();
+  if (lastSaved && !sameTrip(state,snapshot.document)) preserveDraft(state);
+  acceptCloud(snapshot, false);
+  cloudStatus('已同步到云端 · 所有设备共享');
+} catch { cloudStatus('暂未连接服务器 · 当前为缓存，编辑前请重试同步', 'offline'); }
+try { const backup=localStorage.getItem(RECOVERY_KEY); $('#cloud-recovery').hidden = !backup || sameTrip(JSON.parse(backup),state); } catch {}
+async function refreshCloud(manual = false) {
+  if (cloudBusy || pullRunning || document.querySelector('dialog[open]')) return;
+  if (!manual && document.hidden) return;
+  pullRunning = true;
   try {
-    if (localStorage.getItem(STORAGE_KEY) !== lastSaved) throw new Error('另一个页面已修改内容，请刷新后重试，避免覆盖。');
-    const next = structuredClone(state);
-    mutate(next);
-    next.revision = state.revision + 1;
-    const valid = validateState(next);
-    const serialized = JSON.stringify(valid);
-    localStorage.setItem(STORAGE_KEY, serialized);
-    state = valid; lastSaved = serialized;
-    render();
-    $('#save-state').textContent = '已保存到此浏览器';
+    const snapshot = await cloud.read(cloudVersion);
+    if (cloudBusy) return;
+    const newest = snapshot && (cloudVersion === null || snapshot.version >= cloudVersion) ? snapshot : {version:cloudVersion,document:state};
+    const cached=localStorage.getItem(STORAGE_KEY), authoritative=JSON.stringify(newest.document);
+    if(cached && cached!==lastSaved && cached!==authoritative) { try { preserveDraft(validateState(JSON.parse(cached))); } catch {} }
+    if(snapshot || cached!==lastSaved) acceptCloud(newest);
+    cloudReady = true; cloudStatus('已同步到云端 · 所有设备共享');
+    if (manual) toast('已获取服务器最新内容');
+  } catch { cloudReady = false; cloudStatus('连接中断 · 缓存可查看，重新连接后再保存', 'offline'); }
+  finally { pullRunning = false; }
+}
+async function commit(mutate, message = '已保存到云端') {
+  if (!writable) { toast('当前无法保存，请先导出备份。'); return false; }
+  if (cloudBusy) { toast('上一项正在保存，请稍候。'); return false; }
+  let next;
+  try {
+    if (!cloudReady || cloudVersion === null) throw new Error('尚未连接服务器，请点击“重试同步”后再保存。');
+    if (localStorage.getItem(STORAGE_KEY) !== lastSaved) throw new Error('另一页面已有更新，请先刷新同步，避免覆盖。');
+    next = structuredClone(state); mutate(next); next.revision = state.revision + 1;
+    next = validateState(next);
+    cloudBusy = true; cloudStatus('正在保存到服务器…', 'saving');
+    const saved = await cloud.save(state, next, cloudVersion);
+    acceptCloud(saved); cloudStatus('已同步到云端 · 所有设备共享');
     if (message) toast(message);
     return true;
   } catch (error) {
-    const message = error.name === 'QuotaExceededError' ? '浏览器空间不足，保存失败；请导出备份。' : error.message;
-    if ($('#editor').open) $('#editor-error').textContent = message;
-    toast(message); return false;
-  }
+    if (next) preserveDraft(next);
+    if (error.snapshot) {
+      acceptCloud(error.snapshot);
+      cloudStatus('检测到编辑冲突 · 未保存草稿已保留', 'error');
+    } else cloudStatus(error.message || '云端保存未确认，请重试', 'error');
+    if ($('#editor').open) $('#editor-error').textContent = error.message;
+    toast(error.message || '保存失败'); return false;
+  } finally { cloudBusy = false; $('#save-state').textContent = cloudReady ? '已连接云端' : '离线缓存'; }
 }
 function confirmAction(message) {
   $('#confirm-message').textContent = message;
@@ -216,11 +267,12 @@ function openEditor(title, html, save) {
   editorSave = save; $('#editor').showModal();
 }
 function closeEditor() { $('#editor').close(); if (picker) { picker.remove(); picker = null; } }
-$('#editor-form').addEventListener('submit', event => {
+$('#editor-form').addEventListener('submit', async event => {
   event.preventDefault();
   try {
     if (lastSaved !== editorBaseline) throw new Error('编辑期间内容已在其他页面更新，请关闭后重新编辑。');
-    if (editorSave(new FormData(event.currentTarget))) closeEditor();
+    const savingEditor = editorSave;
+    if (await savingEditor(new FormData(event.currentTarget)) && editorSave === savingEditor) closeEditor();
   } catch (error) { $('#editor-error').textContent = error.message; }
 });
 $('#close-editor').onclick = closeEditor; $('#cancel-editor').onclick = closeEditor;
@@ -299,7 +351,7 @@ async function calculateRoad(id) {
     const result = await response.json();
     if (result.code !== 'Ok' || !result.routes?.length) throw new Error('未找到可用道路');
     const r = result.routes[0];
-    if (commit(s => {
+    if (await commit(s => {
       const current = s.days.find(d => d.id === id);
       if (!current || routeSignature(current) !== signature) throw new Error('计算期间站点已改变，请重新计算。');
       current.road = { signature, points: r.geometry.coordinates.map(p => [p[1], p[0]]), distance: r.distance, duration: r.duration, checkedAt: stamp() };
@@ -341,9 +393,9 @@ document.addEventListener('click', async event => {
   if (target.id === 'clear-pin' && pinIndex !== null) { draftStops[pinIndex].point = null; if (pickerMarker) picker.removeLayer(pickerMarker); renderStops(); }
 });
 document.addEventListener('input', event => { if ('stopName' in event.target.dataset) draftStops[Number(event.target.dataset.stopName)].name = event.target.value; });
-document.addEventListener('change', event => { if (event.target.dataset.check) { const checked = event.target.checked; if (!commit(s => { const item = s.packing.find(x => x.id === event.target.dataset.check); if (item) item.done = checked; }, '')) renderPacking(); } });
-$('#packing-form').onsubmit = event => { event.preventDefault(); const form = new FormData(event.currentTarget); const name = String(form.get('name')).trim(); if (!name) return; if (commit(s => s.packing.push({ id: uuid(), name, category: form.get('category'), done: false }))) $('#packing-name').value = ''; };
-$('#note-form').onsubmit = event => { event.preventDefault(); const form = new FormData(event.currentTarget), body = String(form.get('body')).trim(); if (!body) return; if (commit(s => s.notes.push({ id: uuid(), body, author: String(form.get('author')).trim(), createdAt: stamp() }))) $('#note-body').value = ''; };
+document.addEventListener('change', async event => { if (event.target.dataset.check) { const checked = event.target.checked; if (!await commit(s => { const item = s.packing.find(x => x.id === event.target.dataset.check); if (item) item.done = checked; }, '')) renderPacking(); } });
+$('#packing-form').onsubmit = async event => { event.preventDefault(); const form = new FormData(event.currentTarget); const name = String(form.get('name')).trim(); if (!name) return; if (await commit(s => s.packing.push({ id: uuid(), name, category: form.get('category'), done: false }))) { if ($('#packing-name').value.trim() === name) $('#packing-name').value = ''; } };
+$('#note-form').onsubmit = async event => { event.preventDefault(); const form = new FormData(event.currentTarget), body = String(form.get('body')).trim(); if (!body) return; if (await commit(s => s.notes.push({ id: uuid(), body, author: String(form.get('author')).trim(), createdAt: stamp() }))) { if ($('#note-body').value.trim() === body) $('#note-body').value = ''; } };
 $('#add-guide').onclick = () => editGuide();
 map?.on('zoomend', drawMap);
 $('#fit-map').onclick = () => { selectedDay = null; renderRoutes(); drawMap(); fitMap(); };
@@ -410,37 +462,51 @@ $('#import-file').onchange = async event => {
       mergeActivityPhotos(state, raw);
       if (!await confirmAction('为 ' + raw.updates.length + ' 天补充景观参考照片？保留现有行程、确认状态、路线和准备清单。')) return;
       if (lastSaved !== baseline) throw Error('确认期间内容已变化，请重新导入。');
-      commit(s => Object.assign(s, mergeActivityPhotos(s, raw)), '景观参考照片已补充'); return;
+      await commit(s => Object.assign(s, mergeActivityPhotos(s, raw)), '景观参考照片已补充'); return;
     }
     if (raw.kind === 'guidesAppend') {
       mergeGuides(state, raw);
       if (!await confirmAction('新增 ' + raw.guides.length + ' 篇图文操作攻略？保留现有攻略、行程、清单和留言。')) return;
       if (lastSaved !== baseline) throw Error('确认期间内容已变化，请重新导入。');
-      commit(s => Object.assign(s, mergeGuides(s, raw)), '图文攻略已补充'); return;
+      await commit(s => Object.assign(s, mergeGuides(s, raw)), '图文攻略已补充'); return;
     }
     if (raw.kind === 'routePlans') {
       mergeRoutePlans(state, raw);
       if (!await confirmAction('补充 ' + raw.updates.length + ' 天的具体点位与分段交通？现有事件、确认状态、物品勾选、留言和攻略将保留。')) return;
       if (lastSaved !== baseline) throw new Error('确认期间内容已变化，请重新导入。');
-      commit(s => Object.assign(s, mergeRoutePlans(s, raw)), '具体点位与分段交通已补充'); return;
+      await commit(s => Object.assign(s, mergeRoutePlans(s, raw)), '具体点位与分段交通已补充'); return;
     }
     if (raw.kind === 'dayActivities') {
       mergeDayActivities(state, raw);
       if (!await confirmAction('补充 ' + raw.updates.length + ' 天的当日安排？现有行程、物品勾选、留言和攻略将保留。已有当日安排不会被覆盖。')) return;
       if (lastSaved !== baseline) throw new Error('确认期间内容已变化，请重新导入。');
-      commit(s => Object.assign(s, mergeDayActivities(s, raw)), '当日安排已补充'); return;
+      await commit(s => Object.assign(s, mergeDayActivities(s, raw)), '当日安排已补充'); return;
     }
     const incoming = validateState(raw);
-    if (!await confirmAction('用「' + incoming.trip.title + '」的备份替换当前旅行？建议先导出当前内容。')) return;
+    if (!await confirmAction('用「' + incoming.trip.title + '」的备份替换云端旅行并同步所有设备？建议先导出当前内容。')) return;
     if (lastSaved !== baseline) throw new Error('确认期间内容已变化，请重新导入。');
-    commit(s => { Object.assign(s, incoming); selectedDay = null; }, '备份已导入');
+    await commit(s => { Object.assign(s, incoming); selectedDay = null; }, '备份已导入');
   } catch (error) { toast('未导入：' + error.message); }
 };
 window.addEventListener('storage', event => {
-  if (event.key !== STORAGE_KEY || !writable) return;
-  try { const next = event.newValue ? validateState(JSON.parse(event.newValue)) : blankState(); state = next; lastSaved = event.newValue; render(); toast('已更新为另一页面保存的内容。'); }
-  catch { toast('另一页面的数据格式无法读取；当前内容未覆盖。'); }
+  if (event.key !== STORAGE_KEY || event.newValue === lastSaved || !writable) return;
+  // A legacy tab may still save only locally. Preserve its data before fetching
+  // the canonical server copy; never broadcast that stale cache to the server.
+  refreshCloud(true);
 });
+$('#cloud-refresh').onclick = () => refreshCloud(true);
+$('#cloud-recovery').onclick = () => {
+  const saved = localStorage.getItem(RECOVERY_KEY);
+  if (!saved) return;
+  $('#backup-text').value = JSON.stringify(JSON.parse(saved), null, 2);
+  $('#backup-feedback').textContent = '这是迁移前内容或未保存草稿；导入前请先与云端版本核对。';
+  $('#backup-dialog').showModal();
+};
+setInterval(() => refreshCloud(), 10000);
+window.addEventListener('online', () => refreshCloud(true));
+window.addEventListener('focus', () => refreshCloud());
+document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshCloud(); });
+
 document.querySelectorAll('.section-nav a').forEach(a => a.onclick = () => { document.querySelectorAll('.section-nav a').forEach(link => link.classList.toggle('active', link === a)); });
 render(); const initialCountry = COUNTRIES.find(c => c.code === state.trip.countryCode); if (initialCountry && planPlaces(state.days).length) map?.fitBounds(initialCountry.bounds, {padding:[30,30],maxZoom:8,animate:false}); else fitMap();
 function activePlan(day) { return day.routePlans.find(p => p.id === selectedPlans.get(day.id)) || day.routePlans[0]; }

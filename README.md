@@ -32,7 +32,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\dev.ps1 Stop
 - 本地修改可直接刷新预览；提交和推送负责版本同步，二者独立运行。
 - 每次推送 main 或提交 PR，GitHub Actions 执行环境检查。
 - 当前页面包含地图、每日行程、物品准备、备注留言和附加攻略，详见 [五模块范围](spec/travel-workspace-v1.md)。
-- 内容保存在当前浏览器，可导出/导入 JSON 备份。Supabase 尚未接入业务同步，没有多人留言或跨设备同步。
-- 用户已授权当前旅行内容公开，新访客自动载入已发布快照；已有浏览器内容保留，不自动覆盖。后续本机编辑仍需重新发布才能供其他设备查看。
+- 全部旅行内容保存在 Supabase，清单、留言、行程与攻略跨设备自动同步；浏览器保留缓存，可导出/导入备份。详见 [云同步说明](docs/cloud-sync.md)。
+- 用户已授权公开且暂不验证，访问链接即可共同编辑；保存到服务器后各设备自动更新，不需要重新发布网页。离线缓存只供查看，保存失败的草稿保留供恢复。
 
 更多信息见 [开发说明](docs/development.md)、[项目规则](rules/rules.md)、[会话记录](session/session.md)。

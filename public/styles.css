@@ -456,7 +456,11 @@ details.guide-card { display:block; padding:0; overflow:hidden; }
 .day-heading .day-route{flex:1 1 180px}
 .day-map-button{flex-shrink:0;min-height:40px;padding:9px 13px;font-size:12px;box-shadow:0 2px 5px #263a3214}
 .day-map-button>span{font-size:19px;line-height:1}
+.cloud-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:12px;color:var(--green)}
+.cloud-bar>div{display:flex;gap:16px;flex-wrap:wrap}.cloud-bar[data-mode=error],.cloud-bar[data-mode=offline]{color:#a04825}.cloud-bar[data-mode=saving]{color:var(--muted)}
+.cloud-bar [hidden]{display:none}
 @media(max-width:700px){
+  .cloud-bar{align-items:flex-start;flex-direction:column;font-size:11px}.cloud-bar button{min-height:32px}
   .day-heading{gap:10px}
   .day-map-button{min-height:44px}
 }
