@@ -19,6 +19,8 @@ for (const name of await readdir(output)) {
   const source = await readFile(file, 'utf8');
   await writeFile(file, source.replace(/(from\s+['"])(\.\/[^'"?]+\.js)(['"])/g, `$1$2?v=${revision}$3`));
 }
+const serviceWorker = new URL('sw.js', output);
+await writeFile(serviceWorker, (await readFile(serviceWorker, 'utf8')).replaceAll('__BUILD_REVISION__', revision));
 await writeFile(new URL('.nojekyll', output), '');
 await writeFile(new URL('release.json', output), JSON.stringify({
   revision,
@@ -31,3 +33,4 @@ const csp = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inl
 const versioned = html.replace(/((?:src|href)=")([^"?]+\.(?:js|css))(")/g, `$1$2?v=${revision}$3`);
 await writeFile(new URL('index.html', output), versioned.replace('<head>', `<head>\n<meta http-equiv="Content-Security-Policy" content="${csp}"><meta name="referrer" content="strict-origin-when-cross-origin">`));
 console.log(`Website built: ${fileURLToPath(output)}`);
+
