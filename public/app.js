@@ -8,6 +8,10 @@ import { COUNTRIES } from './countries.js';
 import { loadInitialTrip } from './initial-trip.js';
 import { cloudClient, RECOVERY_KEY } from './cloud-sync.js';
 mountLightbox();
+// Cache the application shell after a successful online visit so the itinerary can reopen offline.
+if ('serviceWorker' in navigator) window.addEventListener('load', () => {
+  navigator.serviceWorker.register(new URL('./sw.js', import.meta.url), { scope: './' }).catch(() => {});
+});
 let mapView = 'transit', expanded = false, savedScroll = 0;
 const selectedPlans = new Map(), placeMarkers = new Map();
 let highlightedLeg = null;
@@ -63,6 +67,7 @@ function acceptCloud(snapshot, repaint = true) {
   if (repaint) render();
 }
 try {
+  if (!navigator.onLine) throw new Error('Offline');
   const snapshot = await cloud.read();
   if (lastSaved && !sameTrip(state,snapshot.document)) preserveDraft(state);
   acceptCloud(snapshot, false);
@@ -504,6 +509,7 @@ $('#cloud-recovery').onclick = () => {
 };
 setInterval(() => refreshCloud(), 10000);
 window.addEventListener('online', () => refreshCloud(true));
+window.addEventListener('offline', () => { cloudReady = false; cloudStatus('离线 · 本机行程可查看，联网后再同步', 'offline'); });
 window.addEventListener('focus', () => refreshCloud());
 document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshCloud(); });
 
@@ -644,3 +650,4 @@ document.addEventListener('click', async event => {
   try { await navigator.clipboard.writeText(phrase.en); toast('英文话术已复制'); }
   catch { toast('复制暂不可用，请长按或选中英文手动复制。'); }
 });
+
