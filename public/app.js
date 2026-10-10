@@ -8,10 +8,6 @@ import { COUNTRIES } from './countries.js';
 import { loadInitialTrip } from './initial-trip.js';
 import { cloudClient, RECOVERY_KEY } from './cloud-sync.js';
 mountLightbox();
-// Cache the application shell after a successful online visit so the itinerary can reopen offline.
-if ('serviceWorker' in navigator) window.addEventListener('load', () => {
-  navigator.serviceWorker.register(new URL('./sw.js', import.meta.url), { scope: './' }).catch(() => {});
-});
 let mapView = 'transit', expanded = false, savedScroll = 0;
 const selectedPlans = new Map(), placeMarkers = new Map();
 let highlightedLeg = null;
@@ -66,15 +62,9 @@ function acceptCloud(snapshot, repaint = true) {
   if (selectedDay && !state.days.some(d => d.id === selectedDay)) selectedDay = null;
   if (repaint) render();
 }
-try {
-  if (!navigator.onLine) throw new Error('Offline');
-  const snapshot = await cloud.read();
-  if (lastSaved && !sameTrip(state,snapshot.document)) preserveDraft(state);
-  acceptCloud(snapshot, false);
-  cloudStatus('已同步到云端 · 所有设备共享');
-} catch { cloudStatus('暂未连接服务器 · 当前为缓存，编辑前请重试同步', 'offline'); }
 try { const backup=localStorage.getItem(RECOVERY_KEY); $('#cloud-recovery').hidden = !backup || sameTrip(JSON.parse(backup),state); } catch {}
 async function refreshCloud(manual = false) {
+  if (!navigator.onLine) { cloudReady = false; cloudStatus('离线 · 本机行程可查看，联网后再同步', 'offline'); return; }
   if (cloudBusy || pullRunning || document.querySelector('dialog[open]')) return;
   if (!manual && document.hidden) return;
   pullRunning = true;
@@ -84,6 +74,7 @@ async function refreshCloud(manual = false) {
     const newest = snapshot && (cloudVersion === null || snapshot.version >= cloudVersion) ? snapshot : {version:cloudVersion,document:state};
     const cached=localStorage.getItem(STORAGE_KEY), authoritative=JSON.stringify(newest.document);
     if(cached && cached!==lastSaved && cached!==authoritative) { try { preserveDraft(validateState(JSON.parse(cached))); } catch {} }
+    if (cloudVersion === null && lastSaved && !sameTrip(state,newest.document)) preserveDraft(state);
     if(snapshot || cached!==lastSaved) acceptCloud(newest);
     cloudReady = true; cloudStatus('已同步到云端 · 所有设备共享');
     if (manual) toast('已获取服务器最新内容');
@@ -514,6 +505,8 @@ window.addEventListener('focus', () => refreshCloud());
 document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshCloud(); });
 
 document.querySelectorAll('.section-nav a').forEach(a => a.onclick = () => { document.querySelectorAll('.section-nav a').forEach(link => link.classList.toggle('active', link === a)); });
+// Paint cached content before any cloud request, including on slow networks.
+refreshCloud();
 render(); const initialCountry = COUNTRIES.find(c => c.code === state.trip.countryCode); if (initialCountry && planPlaces(state.days).length) map?.fitBounds(initialCountry.bounds, {padding:[30,30],maxZoom:8,animate:false}); else fitMap();
 function activePlan(day) { return day.routePlans.find(p => p.id === selectedPlans.get(day.id)) || day.routePlans[0]; }
 function placeKey(point) { return point?.map(n => n.toFixed(5)).join(','); }
@@ -650,4 +643,3 @@ document.addEventListener('click', async event => {
   try { await navigator.clipboard.writeText(phrase.en); toast('英文话术已复制'); }
   catch { toast('复制暂不可用，请长按或选中英文手动复制。'); }
 });
-

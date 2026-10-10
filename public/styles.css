@@ -1,4 +1,5 @@
 :root{--paper:#f6f5ef;--panel:#fffefa;--ink:#263a32;--muted:#778078;--line:#e2e4da;--green:#365443;--light:#e9eee5;--gold:#a87739;--radius:14px;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;color:var(--ink);background:var(--paper);font-synthesis:none}
+.offline-strip{display:flex;align-items:center;gap:18px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding:10px 0;font-size:11px;color:var(--muted)}.offline-strip>span{flex:1;min-width:190px}
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:88px}

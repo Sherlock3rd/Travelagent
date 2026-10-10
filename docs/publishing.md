@@ -11,3 +11,7 @@ GitHub Pages 使用 Actions 发布 `dist/`，源文件只来自 `public/`；`pri
 入口、样式和应用模块使用提交号作为资源版本，避免老标签页复用旧脚本。地图 bridge 含本地生命周期保护：小地图移出视口被移除后，已排队的 resize / moveend 回调直接返回，升级依赖时保留或检查上游是否已修复。
 
 来源：[GitHub Pages 自定义工作流](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)。
+
+## 2026-10-10 多旅行入口
+
+默认入口为旅行主页；原工作台位于 trip.html，意大利阅读指南位于 italy.html。构建为三个 HTML 分别注入 CSP 和资源版本，并生成完整离线清单。原始 PDF 保留 private/，只发布整理后的旅行安排与公开景点参考。完整正文发布于静态页面，意大利清单勾选仅在本机；原工作台的云同步保持不变。
