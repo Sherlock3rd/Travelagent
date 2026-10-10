@@ -183,4 +183,11 @@
 - 发布前检查发现远程 6 个开罗/离线更新，读取新增错题后合并；保留原远程快照 revision 96。当前云端 GET 验证 HTTP 200、version 96、11 天，未进行云端写入。
 - 缓存采用完整版本资源图、就绪核验与手动启用更新；先显示本机旧行程，再后台同步。离线下载失败不删除旧缓存或本机数据。
 - 停止测试服务后实测刷新、未访问页签、跨旅行打开和勾选恢复成功；390×844、844×390 无整页横向溢出。仅断开应用源，未关闭外部互联网，不代表手机飞行模式或离线地图验收。
-- 详见 [需求与验收](requirements/italy-home-offline.md)、[离线使用](../docs/offline.md)。最终自动测试及发布结果在完成后补记。
+- 详见 [需求与验收](requirements/italy-home-offline.md)、[离线使用](../docs/offline.md)。最终自动测试与发布结果如下。
+
+### 本次发布证据
+
+- npm run check 与全部 29 项测试通过；GitHub Pages run 38047531773 构建及发布成功。
+- 实现提交 a4e6feb1aabd19536af6d2d97fb1a3cf09998dda 已推送，线上 release.json 与 sw.js VERSION 回读一致。后续验收文档提交不改变已发布应用资源。
+- 线上 index.html、italy.html、trip.html、sw.js 均 HTTP 200；private/italy-source.txt、rules/rules.md 均 404。
+- 线上真实浏览器显示“离线内容已就绪”，意大利 7 条建议可见，主页往返成功，控制台无 error/warn。交付截图在被忽略的 .runtime/home-published.jpg。
