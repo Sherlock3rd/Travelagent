@@ -198,3 +198,10 @@
 - 共用原组件，补充 10 天 51 项安排、13 张本地参考照片和独立备选路线；新增离线地理轮廓，旧勾选迁移，埃及存储与云端接口保持隔离。
 - 31 项测试与构建通过；浏览器图文、跳转、移动端以及应用源停止后的重开检查通过。未关闭整机互联网，离线街道细节不承诺。
 - 详见 [修正需求](requirements/italy-workbench-correction.md)、[错误复盘](../mistakes/trip-workbench-consistency.md)。
+
+### 修正版发布验收
+
+- 应用提交 007a0588528ec68416b03c816b1a64382ec5fe93；GitHub Pages run 38048718567 与环境检查 run 38048718572 均成功。线上 release.json 回读匹配应用提交。
+- 线上 italy.html、italy-trip.json、italy-geography.json、米兰照片 HTTP 200；原材料与规则路径 HTTP 404。
+- 通过用户现有页面的“检查离线内容 / 更新页面”启用新版，无未保存表单；旧 overview hash 自动映射 route。页面显示 10 天、13 张相册图片及离线就绪，无 console error/warn。实际打开 D7 并选择城堡备选，地图底图与照片成功显示。
+- 交付截图 .runtime/italy-workbench-published.png（不提交）。旧飞书发送请求仍因用户未完成会话/消息权限授权而未发送，不冒报完成。
