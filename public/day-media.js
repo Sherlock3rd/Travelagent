@@ -5,8 +5,10 @@ export const PHOTO_HOSTS = ['egymonuments.gov.eg', '1442038683.rsc.cdn77.org', '
 export function parsePhoto(raw, { safeURL, validDate }) {
   if (raw == null) return null;
   const text = (s,max) => { if (typeof s !== 'string' || s.length > max) throw Error('景观图片文字无效。'); return s.trim(); };
-  const url = safeURL(text(raw.url,2500)), parsed = new URL(url);
-  if (parsed.protocol !== 'https:' || parsed.port || !PHOTO_HOSTS.includes(parsed.hostname)) throw Error('景观图片须使用支持的 HTTPS 图片来源。');
+  const supplied = text(raw.url,2500);
+  const local = /^media\/italy\/[a-z-]+\.jpg$/.test(supplied);
+  const url = local ? supplied : safeURL(supplied), parsed = local ? null : new URL(url);
+  if (!local && (parsed.protocol !== 'https:' || parsed.port || !PHOTO_HOSTS.includes(parsed.hostname))) throw Error('景观图片须使用支持的 HTTPS 图片来源。');
   return { url, title:text(raw.title,160), caption:text(raw.caption,600), sourceUrl:safeURL(text(raw.sourceUrl,2500)), credit:text(raw.credit,200), checkedDate:validDate(raw.checkedDate) };
 }
 export function previewGeometry(day, planId) {

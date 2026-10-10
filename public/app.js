@@ -1,12 +1,13 @@
 import { mountLightbox } from './lightbox.js';
 import { dayMediaHTML, mountDayMedia } from './day-media.js';
 import { guideHTML } from './guides.js';
-import { STORAGE_KEY, COLORS, CATEGORIES, MODES, GUIDE_CATEGORIES, blankState, validateState, routeSignature, dayForSave, activitySegments, mergeDayActivities, mergeRoutePlans, mergeGuides, mergeActivityPhotos } from './model.js';
+import { COLORS, CATEGORIES, MODES, GUIDE_CATEGORIES, blankState, validateState, routeSignature, dayForSave, activitySegments, mergeDayActivities, mergeRoutePlans, mergeGuides, mergeActivityPhotos } from './model.js';
 import { createMap, addBasemap } from './map.js';
 import { planPlaces, forgetEvent } from './journeys.js';
 import { COUNTRIES } from './countries.js';
 import { loadInitialTrip } from './initial-trip.js';
-import { cloudClient, RECOVERY_KEY } from './cloud-sync.js';
+import { cloudClient } from './cloud-sync.js';
+import { isItaly, STORAGE_KEY, RECOVERY_KEY, publishedPath, dateLabel, localTripClient, migrateItalyChecklist } from './trip-context.js';
 mountLightbox();
 let mapView = 'transit', expanded = false, savedScroll = 0;
 const selectedPlans = new Map(), placeMarkers = new Map();
@@ -23,11 +24,13 @@ const formatTime = date => { const d = new Date(date); return Number.isFinite(d.
 let state = blankState(), lastSaved = null, writable = true, filter = 'all', selectedDay = null, toastTimer, editorSave, picker = null, pickerMarker = null, draftStops = [], pinIndex = null, editorBaseline = null;
 try {
   const initial = await loadInitialTrip(localStorage, async () => {
-    const response = await fetch(new URL('./published-trip.json', import.meta.url), { cache: 'no-store', signal: AbortSignal.timeout(15000) });
+    const response = await fetch(new URL(publishedPath, import.meta.url), { cache: 'no-store', signal: AbortSignal.timeout(15000) });
     if (response.status === 404) return null;
     if (!response.ok) throw new Error('Published trip unavailable');
-    return response.json();
-  });
+    const published = await response.json();
+    if (isItaly) { let checked; try { checked=JSON.parse(localStorage.getItem('travelagent.italy.checklist.v1')||'{}'); } catch {} migrateItalyChecklist(published, checked); }
+    return published;
+  }, STORAGE_KEY);
   state = initial.state; lastSaved = initial.serialized;
 } catch {
   writable = false;
@@ -39,13 +42,16 @@ try {
 }
 function toast(message) { clearTimeout(toastTimer); $('#toast').textContent = message; $('#toast').hidden = false; toastTimer = setTimeout(() => $('#toast').hidden = true, 4200); }
 const sameTrip = (a,b) => JSON.stringify({...a,revision:0}) === JSON.stringify({...b,revision:0});
-const cloud = cloudClient();
+const cloud = isItaly ? localTripClient(localStorage, STORAGE_KEY) : cloudClient();
 let cloudVersion = null, cloudReady = false, cloudBusy = false, pullRunning = false;
 function cloudStatus(message, mode = '') {
+  if(isItaly && !['error','saving'].includes(mode)) message='已保存本机 · 意大利内容可离线编辑，尚未开启跨设备同步';
+  if(isItaly && mode==='saving') message='正在保存到本机…';
   $('#cloud-status').textContent = message;
   $('#cloud-bar').dataset.mode = mode;
   $('#cloud-refresh').textContent = mode === 'offline' ? '重试同步 ↻' : '刷新同步 ↻';
-  $('#save-state').textContent = cloudBusy ? '正在保存…' : cloudReady ? '已连接云端' : '离线缓存';
+  $('#save-state').textContent = cloudBusy ? '正在保存…' : isItaly ? '本机保存' : cloudReady ? '已连接云端' : '离线缓存';
+  if(isItaly) $('#cloud-refresh').textContent='刷新本机内容 ↻';
 }
 function preserveDraft(document) {
   try { localStorage.setItem(RECOVERY_KEY, JSON.stringify(document)); $('#cloud-recovery').hidden = false; }
@@ -64,7 +70,7 @@ function acceptCloud(snapshot, repaint = true) {
 }
 try { const backup=localStorage.getItem(RECOVERY_KEY); $('#cloud-recovery').hidden = !backup || sameTrip(JSON.parse(backup),state); } catch {}
 async function refreshCloud(manual = false) {
-  if (!navigator.onLine) { cloudReady = false; cloudStatus('离线 · 本机行程可查看，联网后再同步', 'offline'); return; }
+  if (!isItaly && !navigator.onLine) { cloudReady = false; cloudStatus('离线 · 本机行程可查看，联网后再同步', 'offline'); return; }
   if (cloudBusy || pullRunning || document.querySelector('dialog[open]')) return;
   if (!manual && document.hidden) return;
   pullRunning = true;
@@ -77,7 +83,7 @@ async function refreshCloud(manual = false) {
     if (cloudVersion === null && lastSaved && !sameTrip(state,newest.document)) preserveDraft(state);
     if(snapshot || cached!==lastSaved) acceptCloud(newest);
     cloudReady = true; cloudStatus('已同步到云端 · 所有设备共享');
-    if (manual) toast('已获取服务器最新内容');
+    if (manual) toast(isItaly ? '已读取本机最新内容' : '已获取服务器最新内容');
   } catch { cloudReady = false; cloudStatus('连接中断 · 缓存可查看，重新连接后再保存', 'offline'); }
   finally { pullRunning = false; }
 }
@@ -93,7 +99,7 @@ async function commit(mutate, message = '已保存到云端') {
     cloudBusy = true; cloudStatus('正在保存到服务器…', 'saving');
     const saved = await cloud.save(state, next, cloudVersion);
     acceptCloud(saved); cloudStatus('已同步到云端 · 所有设备共享');
-    if (message) toast(message);
+    if (message) toast(isItaly ? message.replace('云端','本机') : message);
     return true;
   } catch (error) {
     if (next) preserveDraft(next);
@@ -103,7 +109,7 @@ async function commit(mutate, message = '已保存到云端') {
     } else cloudStatus(error.message || '云端保存未确认，请重试', 'error');
     if ($('#editor').open) $('#editor-error').textContent = error.message;
     toast(error.message || '保存失败'); return false;
-  } finally { cloudBusy = false; $('#save-state').textContent = cloudReady ? '已连接云端' : '离线缓存'; }
+  } finally { cloudBusy = false; $('#save-state').textContent = isItaly ? '本机保存' : cloudReady ? '已连接云端' : '离线缓存'; }
 }
 function confirmAction(message) {
   $('#confirm-message').textContent = message;
@@ -202,7 +208,7 @@ function renderMapDetails() {
   const day = state.days.find(d => d.id === selectedDay);
   $('#map-view-switch').hidden = !day;
   document.querySelectorAll('[data-map-view]').forEach(b => { b.classList.toggle('selected', b.dataset.mapView === mapView); b.setAttribute('aria-pressed', b.dataset.mapView === mapView); });
-  $('#map-view-label').textContent = day ? 'D' + (state.days.indexOf(day) + 1) + ' · ' + (day.date || '日期待定') : '';
+  $('#map-view-label').textContent = day ? 'D' + (state.days.indexOf(day) + 1) + ' · ' + dateLabel(day) : '';
   $('#map-plan-switch').innerHTML = day && mapView === 'activities' && day.routePlans.length > 1 ? day.routePlans.map(p=>'<button class="'+(p.id===activePlan(day).id?'selected':'')+'" data-plan="'+p.id+'" data-day="'+day.id+'" aria-pressed="'+(p.id===activePlan(day).id)+'">'+esc(p.name)+'</button>').join('') : '';
   const country = COUNTRIES.find(c => c.code === state.trip.countryCode);
   $('#country-map').textContent = country ? '聚焦' + country.name : '设置目标国';
@@ -210,7 +216,7 @@ function renderMapDetails() {
 function renderRoutes() {
   renderMapDetails();
   $('#route-count').textContent = state.days.length + ' DAYS';
-  $('#route-list').innerHTML = state.days.length ? state.days.map((d, i) => '<div class="route-row"><button class="route-item ' + (selectedDay === d.id ? 'selected' : '') + '" data-route="' + d.id + '" aria-pressed="' + (selectedDay === d.id) + '"><span class="day-badge" style="--day-color:' + color(i) + '">D' + (i + 1) + '</span><span><strong>' + esc(routeName(d)) + '</strong><small>' + (d.activities.length ? d.activities.length + ' 项当日安排 · ' + (d.date || '日期待定') : d.road ? (d.road.distance / 1000).toFixed(1) + ' km · 公路估算' : d.stops.every(s => s.point) ? '站点连线 · 待规划道路' : '地图位置待补充') + '</small></span></button><button class="text-button route-day-link" data-go-day="'+d.id+'" aria-label="打开 D'+(i+1)+' 完整行程">行程 ↗</button></div>').join('') : '<div class="route-empty">从一份日程开始，<br>慢慢描绘旅行的轮廓。</div>';
+  $('#route-list').innerHTML = state.days.length ? state.days.map((d, i) => '<div class="route-row"><button class="route-item ' + (selectedDay === d.id ? 'selected' : '') + '" data-route="' + d.id + '" aria-pressed="' + (selectedDay === d.id) + '"><span class="day-badge" style="--day-color:' + color(i) + '">D' + (i + 1) + '</span><span><strong>' + esc(routeName(d)) + '</strong><small>' + (d.activities.length ? d.activities.length + ' 项当日安排 · ' + dateLabel(d) : d.road ? (d.road.distance / 1000).toFixed(1) + ' km · 公路估算' : d.stops.every(s => s.point) ? '站点连线 · 待规划道路' : '地图位置待补充') + '</small></span></button><button class="text-button route-day-link" data-go-day="'+d.id+'" aria-label="打开 D'+(i+1)+' 完整行程">行程 ↗</button></div>').join('') : '<div class="route-empty">从一份日程开始，<br>慢慢描绘旅行的轮廓。</div>';
 }
 let disposeDayMedia;
 function renderDays() {
@@ -220,7 +226,7 @@ function renderDays() {
   $('#days').innerHTML = visible.length ? visible.map(d => {
     const index = state.days.indexOf(d);
     const roadHint = d.road ? '<div class="day-detail">公路估算 ' + (d.road.distance / 1000).toFixed(1) + ' km · ' + Math.round(d.road.duration / 60) + ' 分钟（不含停留）</div>' : '';
-    return '<article id="day-' + d.id + '" tabindex="-1" class="day-card ' + d.status + '" style="--day-color:' + color(index) + '"><div><div class="day-number">D' + (index + 1) + '</div><div class="day-date">' + esc(d.date || '日期待定') + '</div></div><div><div class="day-heading"><div class="day-route">' + esc(routeName(d)) + '</div><button class="button primary day-map-button" data-show-map="' + d.id + '" aria-label="查看 D' + (index + 1) + ' 路线地图"><span aria-hidden="true">⌖</span> 查看路线地图</button></div><div class="day-detail"><span>' + esc(d.mode) + '</span><span>' + esc(d.departure || '出发待定') + ' — ' + esc(d.arrival || '到达待定') + '</span><span>时长：' + esc(d.duration || '待补充') + '</span></div>' + roadHint + ((d.note || d.source) ? '<details class="day-context"><summary>行程备注与来源</summary><p class="day-description">' + esc(d.note) + '</p><div class="day-detail">' + esc(d.source) + '</div></details>' : '') + (['自驾', '大巴'].includes(d.mode) ? ' <button class="text-button route-action" data-road="' + d.id + '">' + (d.road ? '更新公路估算' : '计算公路路线') + '</button>' : '') + '</div><div class="day-lodging"><span class="label">当晚住在</span><strong>' + esc(d.lodging || '住宿待补充') + '</strong><div class="day-detail"><span class="status ' + d.lodgingStatus + '">' + (d.lodgingStatus === 'confirmed' ? '住宿已确认' : '住宿待确认') + '</span></div></div><div class="day-controls"><span class="status ' + d.status + '">' + (d.status === 'confirmed' ? '✓ 行程已确认' : '行程待确认') + '</span><div class="day-buttons"><button class="text-button" data-edit-day="' + d.id + '">编辑</button><button class="text-button" data-delete-day="' + d.id + '">删除</button></div><div class="day-buttons"><button class="text-button" aria-label="提前 D' + (index + 1) + '" data-move-day="' + d.id + '" data-direction="-1"' + (index === 0 ? ' disabled' : '') + '>↑</button><button class="text-button" aria-label="后移 D' + (index + 1) + '" data-move-day="' + d.id + '" data-direction="1"' + (index === state.days.length - 1 ? ' disabled' : '') + '>↓</button></div></div>' + dayMediaHTML(d, esc) + itineraryTransport(d) + '<details class="day-activities" open><summary>当日安排 · ' + d.activities.length + ' 项</summary><p class="itinerary-time-note">当地时间</p>' + activityList(d) + '<button class="text-button" data-add-activity="' + d.id + '">＋ 添加当日安排</button></details>' + '</article>';
+    return '<article id="day-' + d.id + '" tabindex="-1" class="day-card ' + d.status + '" style="--day-color:' + color(index) + '"><div><div class="day-number">D' + (index + 1) + '</div><div class="day-date">' + esc(dateLabel(d)) + '</div></div><div><div class="day-heading"><div class="day-route">' + esc(routeName(d)) + '</div><button class="button primary day-map-button" data-show-map="' + d.id + '" aria-label="查看 D' + (index + 1) + ' 路线地图"><span aria-hidden="true">⌖</span> 查看路线地图</button></div><div class="day-detail"><span>' + esc(d.mode) + '</span><span>' + esc(d.departure || '出发待定') + ' — ' + esc(d.arrival || '到达待定') + '</span><span>时长：' + esc(d.duration || '待补充') + '</span></div>' + roadHint + ((d.note || d.source) ? '<details class="day-context"><summary>行程备注与来源</summary><p class="day-description">' + esc(d.note) + '</p><div class="day-detail">' + esc(d.source) + '</div></details>' : '') + (['自驾', '大巴'].includes(d.mode) ? ' <button class="text-button route-action" data-road="' + d.id + '">' + (d.road ? '更新公路估算' : '计算公路路线') + '</button>' : '') + '</div><div class="day-lodging"><span class="label">当晚住在</span><strong>' + esc(d.lodging || '住宿待补充') + '</strong><div class="day-detail"><span class="status ' + d.lodgingStatus + '">' + (d.lodgingStatus === 'confirmed' ? '住宿已确认' : '住宿待确认') + '</span></div></div><div class="day-controls"><span class="status ' + d.status + '">' + (d.status === 'confirmed' ? '✓ 行程已确认' : '行程待确认') + '</span><div class="day-buttons"><button class="text-button" data-edit-day="' + d.id + '">编辑</button><button class="text-button" data-delete-day="' + d.id + '">删除</button></div><div class="day-buttons"><button class="text-button" aria-label="提前 D' + (index + 1) + '" data-move-day="' + d.id + '" data-direction="-1"' + (index === 0 ? ' disabled' : '') + '>↑</button><button class="text-button" aria-label="后移 D' + (index + 1) + '" data-move-day="' + d.id + '" data-direction="1"' + (index === state.days.length - 1 ? ' disabled' : '') + '>↓</button></div></div>' + dayMediaHTML(d, esc) + itineraryTransport(d) + '<details class="day-activities" open><summary>当日安排 · ' + d.activities.length + ' 项</summary><p class="itinerary-time-note">当地时间</p>' + activityList(d) + '<button class="text-button" data-add-activity="' + d.id + '">＋ 添加当日安排</button></details>' + '</article>';
   }).join('') : empty(filter === 'confirmed' ? '把确定的安排，留在这里' : '旅行还没有开始，计划可以先走一步', filter === 'confirmed' ? '编辑日程并明确选择“已确认”后，将在这里显示。' : '添加第一天，记录出发地、目的地、住宿和大致时长。');
   disposeDayMedia = mountDayMedia($('#days'), visible, esc, showEvent, (id, planId) => { if(planId) selectedPlans.set(id,planId); selectRoute(id); scrollMap(); });
 }
@@ -374,7 +380,7 @@ document.addEventListener('click', async event => {
   if (d.deleteActivity && await confirmAction('删除这项当日安排？当天其他安排不变。')) commit(s => { const day = s.days.find(x => x.id === d.activityDay); day.activities = day.activities.filter(a => a.id !== d.deleteActivity); forgetEvent(day.routePlans, d.deleteActivity); });
   if (d.editDay) editDay(d.editDay);
   if (d.route) selectRoute(d.route);
-  if (d.showMap) { selectRoute(d.showMap); $('#route').scrollIntoView({ behavior: 'smooth' }); }
+  if (d.showMap) { selectRoute(d.showMap); scrollMap(); }
   if (d.road) calculateRoad(d.road);
   if (d.filter) { filter = d.filter; document.querySelectorAll('[data-filter]').forEach(b => { b.classList.toggle('selected', b.dataset.filter === filter); b.setAttribute('aria-pressed', b.dataset.filter === filter); }); renderDays(); }
   if (d.deleteDay && await confirmAction('删除这一天的行程和地图路线？其他日期不会改变。')) commit(s => { s.days = s.days.filter(x => x.id !== d.deleteDay); if (selectedDay === d.deleteDay) selectedDay = null; });
@@ -479,7 +485,7 @@ $('#import-file').onchange = async event => {
       await commit(s => Object.assign(s, mergeDayActivities(s, raw)), '当日安排已补充'); return;
     }
     const incoming = validateState(raw);
-    if (!await confirmAction('用「' + incoming.trip.title + '」的备份替换云端旅行并同步所有设备？建议先导出当前内容。')) return;
+    if (!await confirmAction('用「' + incoming.trip.title + (isItaly ? '」的备份替换本机意大利旅行？建议先导出当前内容。' : '」的备份替换云端旅行并同步所有设备？建议先导出当前内容。'))) return;
     if (lastSaved !== baseline) throw new Error('确认期间内容已变化，请重新导入。');
     await commit(s => { Object.assign(s, incoming); selectedDay = null; }, '备份已导入');
   } catch (error) { toast('未导入：' + error.message); }
@@ -500,14 +506,35 @@ $('#cloud-recovery').onclick = () => {
 };
 setInterval(() => refreshCloud(), 10000);
 window.addEventListener('online', () => refreshCloud(true));
-window.addEventListener('offline', () => { cloudReady = false; cloudStatus('离线 · 本机行程可查看，联网后再同步', 'offline'); });
+window.addEventListener('offline', () => { if(!isItaly) cloudReady = false; cloudStatus('离线 · 本机行程可查看，联网后再同步', 'offline'); });
 window.addEventListener('focus', () => refreshCloud());
 document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshCloud(); });
 
-document.querySelectorAll('.section-nav a').forEach(a => a.onclick = () => { document.querySelectorAll('.section-nav a').forEach(link => link.classList.toggle('active', link === a)); });
+function markSection(id) {
+  document.querySelectorAll('.section-nav a').forEach(link=>{
+    const active=link.hash==='#'+id;link.classList.toggle('active',active);
+    if(active)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current');
+  });
+}
+document.querySelectorAll('.section-nav a').forEach(a => a.onclick = () => markSection(a.hash.slice(1)));
+function restoreAnchor() {
+  let hash=location.hash.slice(1);
+  if(isItaly){
+    const aliases={overview:'route',days:'itinerary',explore:'guides',prepare:'packing',sources:'guide-italy-guide-sources'};
+    const oldDay=/^(?:day|explore)-(\d+)$/.exec(hash);
+    const mapped=aliases[hash] || (oldDay?'day-italy-d'+oldDay[1]:hash);
+    if(mapped!==hash){hash=mapped;history.replaceState(null,'','#'+hash);}
+  }
+  const section=/^(day-|event-)/.test(hash)?'itinerary':hash.startsWith('guide-')?'guides':hash;
+  markSection(section||'route');
+  const target=document.getElementById(hash);
+  if(target){if(target.matches('details'))target.open=true;target.closest('details')?.setAttribute('open','');requestAnimationFrame(()=>target.scrollIntoView({block:'start',behavior:'instant'}));}
+}
+window.addEventListener('hashchange',restoreAnchor);
 // Paint cached content before any cloud request, including on slow networks.
 refreshCloud();
 render(); const initialCountry = COUNTRIES.find(c => c.code === state.trip.countryCode); if (initialCountry && planPlaces(state.days).length) map?.fitBounds(initialCountry.bounds, {padding:[30,30],maxZoom:8,animate:false}); else fitMap();
+restoreAnchor();
 function activePlan(day) { return day.routePlans.find(p => p.id === selectedPlans.get(day.id)) || day.routePlans[0]; }
 function placeKey(point) { return point?.map(n => n.toFixed(5)).join(','); }
 function pointButton(stop, day, plan, label = stop.name) {
@@ -572,7 +599,7 @@ function itineraryTransport(day) {
   if(!day.routePlans.length)return '';
   return '<details class="day-transport"><summary>交通与点位详情</summary>'+day.routePlans.map(plan=>'<section><h3>'+esc(plan.name)+'</h3>'+(plan.note?'<p class="plan-note">'+esc(plan.note)+'</p>':'')+'<div class="plan-stops">'+plan.stops.map(stop=>'<div>'+pointButton(stop,day,plan)+'<button class="text-button edit-point" data-edit-point="'+stop.id+'" data-day="'+day.id+'" data-plan-id="'+plan.id+'" aria-label="编辑点位 '+esc(stop.name)+'">编辑点位</button>'+(stop.note?'<p class="form-hint">'+esc(stop.note)+'</p>':'')+'</div>').join('')+'</div>'+plan.legs.map(leg=>legCard(day,plan,leg)).join('')+'</section>').join('')+'</details>';
 }
-function scrollMap() { if (!expanded) $('#route').scrollIntoView({behavior:'instant',block:'start'}); }
+function scrollMap() { markSection('route');history.replaceState(null,'','#route');if (!expanded) $('#route').scrollIntoView({behavior:'instant',block:'start'}); }
 function showPlace(key, dayId, planId) {
   const place = planPlaces(state.days).find(p => p.key === key);
   if (!place || !map) return toast('该地点暂未定位。');
@@ -601,8 +628,9 @@ function revealItinerary(id) {
     if (!target) return;
     target.closest('details')?.setAttribute('open','');
     document.querySelectorAll('.jump-highlight').forEach(el=>el.classList.remove('jump-highlight'));
-    target.classList.add('jump-highlight'); target.focus({preventScroll:true}); target.scrollIntoView({behavior:'instant',block:'center'});
+    target.classList.add('jump-highlight'); target.focus({preventScroll:true}); target.scrollIntoView({behavior:'instant',block:id.startsWith('day-')?'start':'center'});
     history.replaceState(null,'','#'+id);
+    markSection('itinerary');
   };
   if (expanded) { expandMap(false); requestAnimationFrame(jump); } else jump();
 }

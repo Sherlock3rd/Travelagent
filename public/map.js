@@ -1,3 +1,4 @@
+import { addOfflineMap } from './offline-map.js';
 // Keep Leaflet interactions/route overlays; use vector tiles only for the basemap.
 let runtime;
 const attribution = '<a href="https://openfreemap.org/">OpenFreeMap</a> · &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> · &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
@@ -13,6 +14,8 @@ export function createMap(id) {
   return map;
 }
 export function addBasemap(target) {
+  const offlineBase = document.body.dataset.trip === 'italy';
+  if(offlineBase) addOfflineMap(target);
   let vector, timer, disposed = false, fallback = false;
   const container = target.getContainer();
   const status = document.createElement('div');
@@ -28,11 +31,15 @@ export function addBasemap(target) {
     if (disposed || fallback) return;
     fallback = true; status.hidden = false; clearTimeout(timer);
     if (vector && target.hasLayer(vector)) target.removeLayer(vector);
+    if(offlineBase){ status.textContent='离线路线图 · 点位可点击；街道细节需联网';return; }
     raster.addTo(target);
     status.textContent = '中文底图暂不可用，已切换原文底图；缩放与行程标记仍可使用。';
   }
   raster.on('tileerror', () => { status.textContent = '部分底图未加载；可继续缩放、查看站点和行程。'; });
-  target.once('unload', () => { disposed = true; clearTimeout(timer); status.remove(); });
+  const offline=()=>{if(!offlineBase)return;clearTimeout(timer);if(vector&&target.hasLayer(vector))target.removeLayer(vector);status.hidden=false;status.textContent='离线路线图 · 点位可点击；街道细节需联网';};
+  window.addEventListener('offline',offline);
+  target.once('unload', () => { disposed = true; clearTimeout(timer); status.remove();window.removeEventListener('offline',offline); });
+  if(offlineBase && !navigator.onLine){offline();return;}
   timer = setTimeout(useFallback, 20000);
   (async () => {
     try {

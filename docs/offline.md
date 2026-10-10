@@ -17,3 +17,7 @@
 - 保留旧缓存给仍打开的标签页使用，不以“修复缓存”为理由删除 localStorage。状态检查逐项确认资源仍在缓存。
 - 修改源码后需新版本安装；本机 `public/sw.js` 的开发版本需随修改提升，正式构建自动以提交号/内容指纹区分。
 - 技术依据：[MDN Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers)、[Cache.addAll](https://developer.mozilla.org/en-US/docs/Web/API/Cache/addAll)。
+
+## 意大利工作台修正（2026-10-10）
+
+意大利与原工作台共用地图、每日图文、清单、留言和攻略。13 张参考照片、全部模块及 Natural Earth 地理轮廓随整版缓存保存。离线地理图可缩放、点击点位和路线，但不包含街道细节，不替代离线导航地图。意大利独立本机保存，旧清单迁移且不删除；埃及仍使用原云端工作区。看到更新按钮时先保存编辑，再启用新版本；不清理网站数据。

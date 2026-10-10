@@ -34,8 +34,12 @@ test('发布资源图覆盖三个页面和精确版本依赖；子目录离线�
   for(const path of ['index.html','italy.html','trip.html']){
     const html=await h.get(path);for(const match of html.matchAll(/(?:src|href)="([^"]+\.(?:js|css)\?v=[^"]+)"/g))assert.ok(await h.get(match[1]),match[1]);
   }
-  const italy=await h.get(manifest.find(x=>x.startsWith('italy.js?v=')));
-  const dependency=/from '([^']+)'/.exec(italy)[1];assert.match(await h.get(dependency),/10.27/);
+  const italy=await h.get('italy.html');assert.match(italy,/app.js\?v=/);
+  const entry=await h.get(manifest.find(x=>x.startsWith('app.js?v=')));
+  for(const match of entry.matchAll(/from '([^']+)'/g))assert.ok(await h.get(match[1]),match[1]);
+  assert.match(await h.get('italy-trip.json'),/10.27/);
+  assert.ok(await h.get('italy-geography.json'));
+  for(const key of ['rome','milan','civita','pompeii','venice','pisa','florence'])assert.ok(await h.get('media/italy/'+key+'.jpg'));
   assert.equal((await h.status()).ready,true);
 });
 test('不接管云同步、私有路径或写操作；缓存缺项不误报就绪',async()=>{

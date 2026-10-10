@@ -1,0 +1,3130 @@
+{
+  "schemaVersion": 1,
+  "revision": 0,
+  "trip": {
+    "title": "意大利 · 十日之间",
+    "destination": "10.21—10.30 · 跟团游 · 年份待确认",
+    "countryCode": "ITA",
+    "startDate": "",
+    "endDate": ""
+  },
+  "days": [
+    {
+      "id": "italy-d1",
+      "date": "",
+      "stops": [
+        {
+          "name": "成都天府机场",
+          "point": [
+            30.319,
+            104.445
+          ]
+        },
+        {
+          "name": "夜宿飞机",
+          "point": null
+        }
+      ],
+      "mode": "飞机",
+      "departure": "",
+      "arrival": "",
+      "duration": "10.21 · 见当日安排",
+      "lodging": "飞机上",
+      "lodgingStatus": "pending",
+      "status": "pending",
+      "note": "团队安排：指定时间到成都天府机场集合，夜宿飞机。\n自己的时间：没有游览窗口。01:40 航班在次日凌晨，集合日期不要看错。\n待确认：机场集合时间待通知；行程年份未注明。",
+      "source": "用户提供的 10 月 9 日版意大利 10 天行程单，第 1–4 页；参考安排，未代替最终通知。",
+      "road": null,
+      "activities": [
+        {
+          "id": "italy-d1-a1",
+          "name": "天府机场 T1 集合",
+          "point": [
+            30.319,
+            104.445
+          ],
+          "time": "指定时间",
+          "duration": "",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "航班在次日凌晨；集合时间以领队通知为准。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        }
+      ],
+      "routePlans": [
+        {
+          "id": "italy-d1-tour",
+          "name": "团队行程 · 参考路线",
+          "note": "参考资料中的先后顺序；未知小镇与酒店保留缺口，不虚构道路或集合点。",
+          "stops": [
+            {
+              "id": "italy-d1-s0",
+              "name": "成都天府机场",
+              "point": [
+                30.319,
+                104.445
+              ],
+              "eventIds": [
+                "italy-d1-a1"
+              ],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            },
+            {
+              "id": "italy-d1-s1",
+              "name": "夜宿飞机",
+              "point": null,
+              "eventIds": [],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            }
+          ],
+          "legs": []
+        }
+      ]
+    },
+    {
+      "id": "italy-d2",
+      "date": "",
+      "stops": [
+        {
+          "name": "罗马菲乌米奇诺机场",
+          "point": [
+            41.80027778,
+            12.23888889
+          ]
+        },
+        {
+          "name": "罗马",
+          "point": [
+            41.9028,
+            12.4964
+          ]
+        },
+        {
+          "name": "那不勒斯",
+          "point": [
+            40.8358,
+            14.2486
+          ]
+        }
+      ],
+      "mode": "大巴",
+      "departure": "",
+      "arrival": "",
+      "duration": "10.22 · 见当日安排",
+      "lodging": "四星级酒店 · 名称与地址待定",
+      "lodgingStatus": "pending",
+      "status": "pending",
+      "note": "团队安排：参考 3U3895：成都 01:40 → 罗马 07:00。10:00 斗兽场入内 ≥60 分钟、君士坦丁凯旋门 ≥10 分钟；12:00 午餐；14:00 罗马深度游 ≥120 分钟：许愿池、万神殿外观、西班牙广场；18:00 晚餐。\n自己的时间：只有领队明确放行才考虑万神殿附近的圣依纳爵堂；建议至少留出 60 分钟独立窗口。长途飞行后优先跟稳团队。\n待确认：标题含罗马至那不勒斯 229 km，但正文未写转场时刻；四星酒店名称和位置待定。",
+      "source": "用户提供的 10 月 9 日版意大利 10 天行程单，第 1–4 页；参考安排，未代替最终通知。",
+      "road": null,
+      "activities": [
+        {
+          "id": "italy-d2-a1",
+          "name": "成都 → 罗马 · 3U3895",
+          "point": [
+            41.80027778,
+            12.23888889
+          ],
+          "time": "01:40 → 07:00",
+          "duration": "约 12 小时",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "参考航班 TFU T1 → FCO T3；实际以出票为准。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-d2-a2",
+          "name": "斗兽场（入内）",
+          "point": [
+            41.8903,
+            12.4922
+          ],
+          "time": "10:00",
+          "duration": "不少于 60 分钟",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "团队安排。",
+          "url": "https://commons.wikimedia.org/wiki/File:Colosseo_2020.jpg",
+          "photo": {
+            "url": "media/italy/rome.jpg",
+            "title": "斗兽场",
+            "caption": "景观参考照片，非本次实拍；不代表已预约或自由活动获准。原作者许可：CC BY-SA 4.0；https://creativecommons.org/licenses/by-sa/4.0。保留 Commons 提供的缩略图，未另作修改。",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Colosseo_2020.jpg",
+            "credit": "FeaturedPics · CC BY-SA 4.0",
+            "checkedDate": "2026-10-10"
+          },
+          "photos": []
+        },
+        {
+          "id": "italy-d2-a3",
+          "name": "君士坦丁凯旋门",
+          "point": [
+            41.88972222,
+            12.49083333
+          ],
+          "time": "随后",
+          "duration": "不少于 10 分钟",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "团队安排。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-d2-a4",
+          "name": "团队午餐",
+          "point": null,
+          "time": "12:00",
+          "duration": "",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "餐厅待定。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-d2-a5",
+          "name": "许愿池",
+          "point": [
+            41.90083333,
+            12.48305556
+          ],
+          "time": "14:00 起",
+          "duration": "深度游合计不少于 120 分钟",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "与万神殿、西班牙广场合为罗马深度游，并非独立自由活动。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-d2-a6",
+          "name": "万神殿（外观）",
+          "point": [
+            41.8986,
+            12.4768
+          ],
+          "time": "深度游期间",
+          "duration": "",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "不含入内承诺。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-d2-a7",
+          "name": "西班牙广场",
+          "point": [
+            41.9061,
+            12.4828
+          ],
+          "time": "深度游期间",
+          "duration": "",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "按导游实际步行顺序。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-d2-a8",
+          "name": "团队晚餐与入住",
+          "point": null,
+          "time": "18:00",
+          "duration": "",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "那不勒斯转场时刻及酒店地址待定。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-option-rome",
+          "name": "自由探索建议 · 圣依纳爵堂的错视穹顶",
+          "point": [
+            41.899,
+            12.47977778
+          ],
+          "time": "仅在领队确认窗口后",
+          "duration": "至少 60 分钟（含往返）",
+          "transport": "步行 · 预算非实测",
+          "status": "optional",
+          "note": "适合关注空间与视觉叙事：站在地面看透视绘画如何创造建筑纵深。不是中世纪，但很贴近游戏场景里的视觉引导。\n路线：万神殿附近 → 圣依纳爵堂 → 万神殿附近集合点\n时间：步行单程约 5–8 分钟；观看 15–20 分钟；其余留给入场和返团。\n条件：罗马深度游本身不是自由时间；若领队只给拍照时间就不离队。宗教活动或排队时取消，不影响转场。",
+          "url": "https://www.turismoroma.it/en/places/church-st-ignatius-loyola",
+          "photo": {
+            "url": "media/italy/ignazio.jpg",
+            "title": "圣依纳爵堂 · 外观",
+            "caption": "景观参考照片，非本次实拍；不代表已预约或自由活动获准。原作者许可：CC BY 4.0；https://creativecommons.org/licenses/by/4.0。保留 Commons 提供的缩略图，未另作修改。",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Church_of_Sant%27Ignazio_di_Loyola.jpg",
+            "credit": "Fiat 500e · CC BY 4.0",
+            "checkedDate": "2026-10-10"
+          },
+          "photos": []
+        }
+      ],
+      "routePlans": [
+        {
+          "id": "italy-d2-tour",
+          "name": "团队行程 · 参考路线",
+          "note": "参考资料中的先后顺序；未知小镇与酒店保留缺口，不虚构道路或集合点。",
+          "stops": [
+            {
+              "id": "italy-d2-s0",
+              "name": "罗马菲乌米奇诺机场",
+              "point": [
+                41.80027778,
+                12.23888889
+              ],
+              "eventIds": [
+                "italy-d2-a1"
+              ],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            },
+            {
+              "id": "italy-d2-s1",
+              "name": "罗马（城市参考点）",
+              "point": [
+                41.9028,
+                12.4964
+              ],
+              "eventIds": [],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            },
+            {
+              "id": "italy-d2-s2",
+              "name": "那不勒斯（城市参考点）",
+              "point": [
+                40.8358,
+                14.2486
+              ],
+              "eventIds": [],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            },
+            {
+              "id": "italy-d2-a2-point",
+              "name": "斗兽场（入内）",
+              "point": [
+                41.8903,
+                12.4922
+              ],
+              "eventIds": [
+                "italy-d2-a2"
+              ],
+              "note": "团队安排。",
+              "url": "https://commons.wikimedia.org/wiki/File:Colosseo_2020.jpg"
+            },
+            {
+              "id": "italy-d2-a3-point",
+              "name": "君士坦丁凯旋门",
+              "point": [
+                41.88972222,
+                12.49083333
+              ],
+              "eventIds": [
+                "italy-d2-a3"
+              ],
+              "note": "团队安排。",
+              "url": ""
+            },
+            {
+              "id": "italy-d2-a5-point",
+              "name": "许愿池",
+              "point": [
+                41.90083333,
+                12.48305556
+              ],
+              "eventIds": [
+                "italy-d2-a5"
+              ],
+              "note": "与万神殿、西班牙广场合为罗马深度游，并非独立自由活动。",
+              "url": ""
+            },
+            {
+              "id": "italy-d2-a6-point",
+              "name": "万神殿（外观）",
+              "point": [
+                41.8986,
+                12.4768
+              ],
+              "eventIds": [
+                "italy-d2-a6"
+              ],
+              "note": "不含入内承诺。",
+              "url": ""
+            },
+            {
+              "id": "italy-d2-a7-point",
+              "name": "西班牙广场",
+              "point": [
+                41.9061,
+                12.4828
+              ],
+              "eventIds": [
+                "italy-d2-a7"
+              ],
+              "note": "按导游实际步行顺序。",
+              "url": ""
+            }
+          ],
+          "legs": [
+            {
+              "id": "italy-d2-leg1",
+              "from": "italy-d2-s0",
+              "to": "italy-d2-s1",
+              "mode": "团队交通",
+              "duration": "以领队安排为准",
+              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "url": "",
+              "checkedDate": "",
+              "road": null
+            },
+            {
+              "id": "italy-d2-leg2",
+              "from": "italy-d2-s1",
+              "to": "italy-d2-s2",
+              "mode": "团队交通",
+              "duration": "以领队安排为准",
+              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "url": "",
+              "checkedDate": "",
+              "road": null
+            }
+          ]
+        },
+        {
+          "id": "italy-plan-rome",
+          "name": "备选 · 圣依纳爵堂的错视穹顶",
+          "note": "罗马深度游本身不是自由时间；若领队只给拍照时间就不离队。宗教活动或排队时取消，不影响转场。\n步行单程约 5–8 分钟；观看 15–20 分钟；其余留给入场和返团。",
+          "stops": [
+            {
+              "id": "start",
+              "name": "万神殿（参考起点）",
+              "point": [
+                41.8986,
+                12.4768
+              ],
+              "eventIds": [],
+              "note": "实际集合点待确认。",
+              "url": ""
+            },
+            {
+              "id": "visit",
+              "name": "圣依纳爵堂的错视穹顶",
+              "point": [
+                41.899,
+                12.47977778
+              ],
+              "eventIds": [
+                "italy-option-rome"
+              ],
+              "note": "罗马深度游本身不是自由时间；若领队只给拍照时间就不离队。宗教活动或排队时取消，不影响转场。",
+              "url": "https://www.turismoroma.it/en/places/church-st-ignatius-loyola"
+            },
+            {
+              "id": "return",
+              "name": "返回参考起点 · 实际集合点待确认",
+              "point": [
+                41.8986,
+                12.4768
+              ],
+              "eventIds": [],
+              "note": "必须核实集合位置，按领队通知返团。",
+              "url": ""
+            }
+          ],
+          "legs": [
+            {
+              "id": "walk-0",
+              "from": "start",
+              "to": "visit",
+              "mode": "步行 · 示意",
+              "duration": "总窗口至少 60 分钟",
+              "note": "步行单程约 5–8 分钟；观看 15–20 分钟；其余留给入场和返团。 直线仅为位置关系，不是可步行路径；路线与入口须现场核对。",
+              "url": "https://www.turismoroma.it/en/places/church-st-ignatius-loyola",
+              "checkedDate": "2026-10-10",
+              "road": null
+            },
+            {
+              "id": "walk-1",
+              "from": "visit",
+              "to": "return",
+              "mode": "步行 · 示意",
+              "duration": "总窗口至少 60 分钟",
+              "note": "步行单程约 5–8 分钟；观看 15–20 分钟；其余留给入场和返团。 直线仅为位置关系，不是可步行路径；路线与入口须现场核对。",
+              "url": "https://www.turismoroma.it/en/places/church-st-ignatius-loyola",
+              "checkedDate": "2026-10-10",
+              "road": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "italy-d3",
+      "date": "",
+      "stops": [
+        {
+          "name": "那不勒斯",
+          "point": [
+            40.8358,
+            14.2486
+          ]
+        },
+        {
+          "name": "波西塔诺",
+          "point": [
+            40.63333333,
+            14.48333333
+          ]
+        },
+        {
+          "name": "阿马尔菲",
+          "point": [
+            40.63444444,
+            14.60305556
+          ]
+        },
+        {
+          "name": "萨勒诺",
+          "point": [
+            40.6806,
+            14.7594
+          ]
+        }
+      ],
+      "mode": "大巴",
+      "departure": "",
+      "arrival": "",
+      "duration": "10.23 · 见当日安排",
+      "lodging": "四星级酒店 · 名称与地址待定",
+      "lodgingStatus": "pending",
+      "status": "pending",
+      "note": "团队安排：08:30 早餐后出发；10:00 波西塔诺 ≥30 分钟；14:00 阿马尔菲海岸 ≥30 分钟；18:00 入住。午餐、晚餐自理。\n自己的时间：自理餐不等于可离团。确认至少 75 分钟且集合在阿马尔菲镇中心，才考虑天堂回廊；只有 30 分钟就留在主教堂广场。\n待确认：海岸船票列在包含项目中，船班、码头与当天运行情况未列。四星酒店待定。",
+      "source": "用户提供的 10 月 9 日版意大利 10 天行程单，第 1–4 页；参考安排，未代替最终通知。",
+      "road": null,
+      "activities": [
+        {
+          "id": "italy-d3-a1",
+          "name": "酒店早餐后出发",
+          "point": null,
+          "time": "08:30",
+          "duration": "",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "随团赴波西塔诺。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-d3-a2",
+          "name": "波西塔诺",
+          "point": [
+            40.63333333,
+            14.48333333
+          ],
+          "time": "10:00",
+          "duration": "不少于 30 分钟",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "团队短停，非完整自由活动窗口。",
+          "url": "https://commons.wikimedia.org/wiki/File:Positano_Sunset.JPG",
+          "photo": {
+            "url": "media/italy/positano.jpg",
+            "title": "波西塔诺",
+            "caption": "景观参考照片，非本次实拍；不代表已预约或自由活动获准。原作者许可：CC BY 4.0；https://creativecommons.org/licenses/by/4.0。保留 Commons 提供的缩略图，未另作修改。",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Positano_Sunset.JPG",
+            "credit": "JeCCo · CC BY 4.0",
+            "checkedDate": "2026-10-10"
+          },
+          "photos": []
+        },
+        {
+          "id": "italy-d3-a3",
+          "name": "午餐",
+          "point": null,
+          "time": "自理",
+          "duration": "",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "自理餐不等于可以离团。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-d3-a4",
+          "name": "阿马尔菲海岸",
+          "point": [
+            40.63444444,
+            14.60305556
+          ],
+          "time": "14:00",
+          "duration": "不少于 30 分钟",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "地图以阿马尔菲镇中心为区域参考；具体停靠点、船班待确认。",
+          "url": "https://commons.wikimedia.org/wiki/File:Amalfi_BW_2013-05-15_10-09-21.jpg",
+          "photo": {
+            "url": "media/italy/amalfi.jpg",
+            "title": "阿马尔菲主教堂广场",
+            "caption": "景观参考照片，非本次实拍；不代表已预约或自由活动获准。原作者许可：CC BY-SA 3.0；https://creativecommons.org/licenses/by-sa/3.0。保留 Commons 提供的缩略图，未另作修改。",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Amalfi_BW_2013-05-15_10-09-21.jpg",
+            "credit": "Berthold Werner · CC BY-SA 3.0",
+            "checkedDate": "2026-10-10"
+          },
+          "photos": []
+        },
+        {
+          "id": "italy-d3-a5",
+          "name": "萨勒诺方向入住",
+          "point": null,
+          "time": "18:00",
+          "duration": "",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "晚餐自理，四星酒店名称与位置待定。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-option-amalfi",
+          "name": "自由探索建议 · 天堂回廊与主教堂广场",
+          "point": [
+            40.63444444,
+            14.60305556
+          ],
+          "time": "仅在领队确认窗口后",
+          "duration": "至少 75 分钟（含往返）",
+          "transport": "步行 · 预算非实测",
+          "status": "optional",
+          "note": "小尺度回廊、交错拱券与教堂建筑群，比另坐车去远处景点更适合短停。只有半小时就看广场与立面。\n路线：阿马尔菲主教堂广场 → 天堂回廊 → 原路返回\n时间：广场附近步行及入场约 15 分钟；回廊 25–30 分钟；返回与集合约 25–30 分钟。\n条件：须确认船停靠阿马尔菲镇且集合位置合适。票务、台阶与实际开放安排待复核；不加拉韦洛或跨镇公交。",
+          "url": "https://www.visitamalfi.info/punti-di-interesse-ad-amalfi/complesso-monumentale-della-cattedrale-di-amalfi/",
+          "photo": {
+            "url": "media/italy/amalfi.jpg",
+            "title": "天堂回廊与主教堂广场",
+            "caption": "景观参考照片，非本次实拍；不代表已预约或自由活动获准。原作者许可：CC BY-SA 3.0；https://creativecommons.org/licenses/by-sa/3.0。保留 Commons 提供的缩略图，未另作修改。",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Amalfi_BW_2013-05-15_10-09-21.jpg",
+            "credit": "Berthold Werner · CC BY-SA 3.0",
+            "checkedDate": "2026-10-10"
+          },
+          "photos": []
+        }
+      ],
+      "routePlans": [
+        {
+          "id": "italy-d3-tour",
+          "name": "团队行程 · 参考路线",
+          "note": "参考资料中的先后顺序；未知小镇与酒店保留缺口，不虚构道路或集合点。",
+          "stops": [
+            {
+              "id": "italy-d3-s0",
+              "name": "那不勒斯（城市参考点）",
+              "point": [
+                40.8358,
+                14.2486
+              ],
+              "eventIds": [],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            },
+            {
+              "id": "italy-d3-s1",
+              "name": "波西塔诺",
+              "point": [
+                40.63333333,
+                14.48333333
+              ],
+              "eventIds": [
+                "italy-d3-a2"
+              ],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            },
+            {
+              "id": "italy-d3-s2",
+              "name": "阿马尔菲主教堂广场",
+              "point": [
+                40.63444444,
+                14.60305556
+              ],
+              "eventIds": [
+                "italy-d3-a4"
+              ],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            },
+            {
+              "id": "italy-d3-s3",
+              "name": "萨勒诺（城市参考点）",
+              "point": [
+                40.6806,
+                14.7594
+              ],
+              "eventIds": [],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            }
+          ],
+          "legs": [
+            {
+              "id": "italy-d3-leg1",
+              "from": "italy-d3-s0",
+              "to": "italy-d3-s1",
+              "mode": "团队交通（车船待确认）",
+              "duration": "以领队安排为准",
+              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "url": "",
+              "checkedDate": "",
+              "road": null
+            },
+            {
+              "id": "italy-d3-leg2",
+              "from": "italy-d3-s1",
+              "to": "italy-d3-s2",
+              "mode": "团队交通（车船待确认）",
+              "duration": "以领队安排为准",
+              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "url": "",
+              "checkedDate": "",
+              "road": null
+            },
+            {
+              "id": "italy-d3-leg3",
+              "from": "italy-d3-s2",
+              "to": "italy-d3-s3",
+              "mode": "团队交通（车船待确认）",
+              "duration": "以领队安排为准",
+              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "url": "",
+              "checkedDate": "",
+              "road": null
+            }
+          ]
+        },
+        {
+          "id": "italy-plan-amalfi",
+          "name": "备选 · 天堂回廊与主教堂广场",
+          "note": "须确认船停靠阿马尔菲镇且集合位置合适。票务、台阶与实际开放安排待复核；不加拉韦洛或跨镇公交。\n广场附近步行及入场约 15 分钟；回廊 25–30 分钟；返回与集合约 25–30 分钟。",
+          "stops": [
+            {
+              "id": "start",
+              "name": "阿马尔菲主教堂广场（参考起点）",
+              "point": [
+                40.63444444,
+                14.60305556
+              ],
+              "eventIds": [],
+              "note": "实际集合点待确认。",
+              "url": ""
+            },
+            {
+              "id": "visit",
+              "name": "天堂回廊与主教堂广场",
+              "point": [
+                40.63444444,
+                14.60305556
+              ],
+              "eventIds": [
+                "italy-option-amalfi"
+              ],
+              "note": "须确认船停靠阿马尔菲镇且集合位置合适。票务、台阶与实际开放安排待复核；不加拉韦洛或跨镇公交。",
+              "url": "https://www.visitamalfi.info/punti-di-interesse-ad-amalfi/complesso-monumentale-della-cattedrale-di-amalfi/"
+            },
+            {
+              "id": "return",
+              "name": "返回参考起点 · 实际集合点待确认",
+              "point": [
+                40.63444444,
+                14.60305556
+              ],
+              "eventIds": [],
+              "note": "必须核实集合位置，按领队通知返团。",
+              "url": ""
+            }
+          ],
+          "legs": [
+            {
+              "id": "walk-0",
+              "from": "start",
+              "to": "visit",
+              "mode": "步行 · 示意",
+              "duration": "总窗口至少 75 分钟",
+              "note": "广场附近步行及入场约 15 分钟；回廊 25–30 分钟；返回与集合约 25–30 分钟。 直线仅为位置关系，不是可步行路径；路线与入口须现场核对。",
+              "url": "https://www.visitamalfi.info/punti-di-interesse-ad-amalfi/complesso-monumentale-della-cattedrale-di-amalfi/",
+              "checkedDate": "2026-10-10",
+              "road": null
+            },
+            {
+              "id": "walk-1",
+              "from": "visit",
+              "to": "return",
+              "mode": "步行 · 示意",
+              "duration": "总窗口至少 75 分钟",
+              "note": "广场附近步行及入场约 15 分钟；回廊 25–30 分钟；返回与集合约 25–30 分钟。 直线仅为位置关系，不是可步行路径；路线与入口须现场核对。",
+              "url": "https://www.visitamalfi.info/punti-di-interesse-ad-amalfi/complesso-monumentale-della-cattedrale-di-amalfi/",
+              "checkedDate": "2026-10-10",
+              "road": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "italy-d4",
+      "date": "",
+      "stops": [
+        {
+          "name": "萨勒诺",
+          "point": [
+            40.6806,
+            14.7594
+          ]
+        },
+        {
+          "name": "庞贝考古遗址",
+          "point": [
+            40.75,
+            14.48611111
+          ]
+        },
+        {
+          "name": "罗马",
+          "point": [
+            41.9028,
+            12.4964
+          ]
+        }
+      ],
+      "mode": "大巴",
+      "departure": "",
+      "arrival": "",
+      "duration": "10.24 · 见当日安排",
+      "lodging": "四星级酒店 · 名称与地址待定",
+      "lodgingStatus": "pending",
+      "status": "pending",
+      "note": "团队安排：08:30 早餐后出发；10:00 庞贝考古遗址，含人工讲解，≥1 小时；午餐自理；18:00 团队晚餐。\n自己的时间：把兴趣放进既有参观：请讲解员重点讲街道、民居与商铺。只有明确延长参观才加看其他街区，避免另跑远处遗址。\n待确认：萨勒诺至庞贝 34 km、庞贝至罗马 240 km（行程单标注）；实际出入口及四星酒店待定。",
+      "source": "用户提供的 10 月 9 日版意大利 10 天行程单，第 1–4 页；参考安排，未代替最终通知。",
+      "road": null,
+      "activities": [
+        {
+          "id": "italy-d4-a1",
+          "name": "酒店早餐后出发",
+          "point": null,
+          "time": "08:30",
+          "duration": "",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "萨勒诺前往庞贝。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-d4-a2",
+          "name": "庞贝考古遗址（含人工讲解）",
+          "point": [
+            40.75,
+            14.48611111
+          ],
+          "time": "10:00",
+          "duration": "不少于 1 小时",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "跟团深看：街道、民居、商铺与剧场的空间关系。参观出入口及开放街区以当天为准。",
+          "url": "https://commons.wikimedia.org/wiki/File:Aerial_image_of_Pompeii_and_Mount_Vesuvius_(view_from_the_southeast).jpg",
+          "photo": {
+            "url": "media/italy/pompeii.jpg",
+            "title": "庞贝考古遗址",
+            "caption": "景观参考照片，非本次实拍；不代表已预约或自由活动获准。原作者许可：CC BY-SA 4.0；https://creativecommons.org/licenses/by-sa/4.0。保留 Commons 提供的缩略图，未另作修改。",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aerial_image_of_Pompeii_and_Mount_Vesuvius_(view_from_the_southeast).jpg",
+            "credit": "Carsten Steger · CC BY-SA 4.0",
+            "checkedDate": "2026-10-10"
+          },
+          "photos": []
+        },
+        {
+          "id": "italy-d4-a3",
+          "name": "午餐",
+          "point": null,
+          "time": "自理",
+          "duration": "",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "午餐后赴罗马，转场时刻待定。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-d4-a4",
+          "name": "团队晚餐与入住",
+          "point": null,
+          "time": "18:00",
+          "duration": "",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "罗马方向，酒店待定。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        }
+      ],
+      "routePlans": [
+        {
+          "id": "italy-d4-tour",
+          "name": "团队行程 · 参考路线",
+          "note": "参考资料中的先后顺序；未知小镇与酒店保留缺口，不虚构道路或集合点。",
+          "stops": [
+            {
+              "id": "italy-d4-s0",
+              "name": "萨勒诺（城市参考点）",
+              "point": [
+                40.6806,
+                14.7594
+              ],
+              "eventIds": [],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            },
+            {
+              "id": "italy-d4-s1",
+              "name": "庞贝考古遗址",
+              "point": [
+                40.75,
+                14.48611111
+              ],
+              "eventIds": [
+                "italy-d4-a2"
+              ],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            },
+            {
+              "id": "italy-d4-s2",
+              "name": "罗马（城市参考点）",
+              "point": [
+                41.9028,
+                12.4964
+              ],
+              "eventIds": [],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            }
+          ],
+          "legs": [
+            {
+              "id": "italy-d4-leg1",
+              "from": "italy-d4-s0",
+              "to": "italy-d4-s1",
+              "mode": "团队交通",
+              "duration": "以领队安排为准",
+              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "url": "",
+              "checkedDate": "",
+              "road": null
+            },
+            {
+              "id": "italy-d4-leg2",
+              "from": "italy-d4-s1",
+              "to": "italy-d4-s2",
+              "mode": "团队交通",
+              "duration": "以领队安排为准",
+              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "url": "",
+              "checkedDate": "",
+              "road": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "italy-d5",
+      "date": "",
+      "stops": [
+        {
+          "name": "罗马",
+          "point": [
+            41.9028,
+            12.4964
+          ]
+        },
+        {
+          "name": "白露里治奥",
+          "point": [
+            42.62777778,
+            12.11388889
+          ]
+        },
+        {
+          "name": "意大利小镇（名称待定）",
+          "point": null
+        }
+      ],
+      "mode": "大巴",
+      "departure": "",
+      "arrival": "",
+      "duration": "10.25 · 见当日安排",
+      "lodging": "四星级酒店 · 名称与地址待定",
+      "lodgingStatus": "pending",
+      "status": "pending",
+      "note": "团队安排：08:00 早餐后出发；14:00 天空之城 ≥30 分钟；午餐自理；18:00 团队晚餐。\n自己的时间：中世纪石巷、城门与聚落空间本身就值得看。先确认 30 分钟是否包括长桥往返；有余量再走广场附近，不另开跨城支线。\n待确认：后续“意小镇”未给名称。原文的《天空之城》原型说法缺少创作者证据，页面不当成已证实事实。",
+      "source": "用户提供的 10 月 9 日版意大利 10 天行程单，第 1–4 页；参考安排，未代替最终通知。",
+      "road": null,
+      "activities": [
+        {
+          "id": "italy-d5-a1",
+          "name": "酒店早餐后出发",
+          "point": null,
+          "time": "08:00",
+          "duration": "",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "前往白露里治奥。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-d5-a2",
+          "name": "白露里治奥古镇",
+          "point": [
+            42.62777778,
+            12.11388889
+          ],
+          "time": "14:00",
+          "duration": "不少于 30 分钟",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "先问是否含长桥往返。观察城门、石巷与山顶聚落；不把动画灵感宣传说法当作史实。",
+          "url": "https://commons.wikimedia.org/wiki/File:Civita_(Bagnoregio)_-_Panorama.jpg",
+          "photo": {
+            "url": "media/italy/civita.jpg",
+            "title": "白露里治奥",
+            "caption": "景观参考照片，非本次实拍；不代表已预约或自由活动获准。原作者许可：CC BY-SA 4.0；https://creativecommons.org/licenses/by-sa/4.0。保留 Commons 提供的缩略图，未另作修改。",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Civita_(Bagnoregio)_-_Panorama.jpg",
+            "credit": "Orlando Paride · CC BY-SA 4.0",
+            "checkedDate": "2026-10-10"
+          },
+          "photos": []
+        },
+        {
+          "id": "italy-d5-a3",
+          "name": "团队晚餐与入住",
+          "point": null,
+          "time": "18:00",
+          "duration": "",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "“意小镇”未给名称，地图不虚构其位置；午餐自理。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        }
+      ],
+      "routePlans": [
+        {
+          "id": "italy-d5-tour",
+          "name": "团队行程 · 参考路线",
+          "note": "参考资料中的先后顺序；未知小镇与酒店保留缺口，不虚构道路或集合点。",
+          "stops": [
+            {
+              "id": "italy-d5-s0",
+              "name": "罗马（城市参考点）",
+              "point": [
+                41.9028,
+                12.4964
+              ],
+              "eventIds": [],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            },
+            {
+              "id": "italy-d5-s1",
+              "name": "白露里治奥",
+              "point": [
+                42.62777778,
+                12.11388889
+              ],
+              "eventIds": [
+                "italy-d5-a2"
+              ],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            },
+            {
+              "id": "italy-d5-s2",
+              "name": "意大利小镇（名称待定）",
+              "point": null,
+              "eventIds": [],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            }
+          ],
+          "legs": [
+            {
+              "id": "italy-d5-leg1",
+              "from": "italy-d5-s0",
+              "to": "italy-d5-s1",
+              "mode": "团队交通",
+              "duration": "以领队安排为准",
+              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "url": "",
+              "checkedDate": "",
+              "road": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "italy-d6",
+      "date": "",
+      "stops": [
+        {
+          "name": "意大利小镇（名称待定）",
+          "point": null
+        },
+        {
+          "name": "威尼斯",
+          "point": [
+            45.43388889,
+            12.33805556
+          ]
+        },
+        {
+          "name": "米兰",
+          "point": [
+            45.46416667,
+            9.19138889
+          ]
+        }
+      ],
+      "mode": "大巴",
+      "departure": "",
+      "arrival": "",
+      "duration": "10.26 · 见当日安排",
+      "lodging": "四星级酒店 · 名称与地址待定",
+      "lodgingStatus": "pending",
+      "status": "pending",
+      "note": "团队安排：08:00 早餐后出发；10:30 贡多拉 ≥25 分钟，叹息桥外观 ≥15 分钟，圣马可广场 ≥20 分钟；12:00 午餐；15:30 前往米兰；团队晚餐。\n自己的时间：12:00—15:30 不是已确认自由时间。至少 90 分钟可选圣马可—里亚托步行往返；总督府建议至少 150 分钟独立窗口，且有合适入场时段。\n待确认：必须确认 15:30 指哪里出发，是否还需乘船返回大巴；米兰四星酒店待定。",
+      "source": "用户提供的 10 月 9 日版意大利 10 天行程单，第 1–4 页；参考安排，未代替最终通知。",
+      "road": null,
+      "activities": [
+        {
+          "id": "italy-d6-a1",
+          "name": "酒店早餐后前往威尼斯",
+          "point": null,
+          "time": "08:00",
+          "duration": "",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "出发小镇、乘船码头未知。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-d6-a2",
+          "name": "贡多拉游船",
+          "point": null,
+          "time": "10:30",
+          "duration": "不少于 25 分钟",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "登船点未知，不把圣马可广场当作码头。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-d6-a3",
+          "name": "叹息桥（外观）",
+          "point": [
+            45.43405556,
+            12.34086111
+          ],
+          "time": "随后",
+          "duration": "不少于 15 分钟",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "随团安排，实际观景点待领队通知。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-d6-a4",
+          "name": "圣马可广场",
+          "point": [
+            45.43388889,
+            12.33805556
+          ],
+          "time": "随后",
+          "duration": "不少于 20 分钟",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "水城公共空间与建筑观察；照片为夜景参考，行程为白天。",
+          "url": "https://commons.wikimedia.org/wiki/File:Piazza_San_Marco_(Venice)_at_night-msu-2021-6449-.jpg",
+          "photo": {
+            "url": "media/italy/venice.jpg",
+            "title": "圣马可广场",
+            "caption": "景观参考照片，非本次实拍；不代表已预约或自由活动获准。原作者许可：CC BY-SA 4.0；https://creativecommons.org/licenses/by-sa/4.0。保留 Commons 提供的缩略图，未另作修改。",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Piazza_San_Marco_(Venice)_at_night-msu-2021-6449-.jpg",
+            "credit": "Matthias Süßen · CC BY-SA 4.0",
+            "checkedDate": "2026-10-10"
+          },
+          "photos": []
+        },
+        {
+          "id": "italy-d6-a5",
+          "name": "团队午餐",
+          "point": null,
+          "time": "12:00",
+          "duration": "",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "12:00—15:30 不自动视为自由时间。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-d6-a6",
+          "name": "前往米兰",
+          "point": null,
+          "time": "15:30",
+          "duration": "",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "确认这是船班还是大巴发车时间；团队晚餐后入住。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-option-venice-walk",
+          "name": "自由探索建议 · 圣马可到里亚托的水城散步",
+          "point": [
+            45.438,
+            12.336
+          ],
+          "time": "仅在领队确认窗口后",
+          "duration": "至少 90 分钟（含往返）",
+          "transport": "步行 · 预算非实测",
+          "status": "optional",
+          "note": "《刺客信条 II》的威尼斯城市背景适合用脚步感受：桥梁把街巷分段，狭窄通道忽然打开成广场。只体验街道，不攀爬建筑。\n路线：圣马可广场 → 沿 Rialto 路标到里亚托桥 → 原路回圣马可\n时间：单程步行约 15–25 分钟；桥边与街巷停留 15–20 分钟；至少 20 分钟返团余量。拥堵时提前折返。\n条件：未确认自由活动。餐厅、码头、集合点可能不在广场；15:30 可能是大巴发车时间，返船时间必须另算。",
+          "url": "https://www.ubisoft.com/en-ca/games/assassins-creed-ii",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-option-ducal",
+          "name": "自由探索建议 · 总督府",
+          "point": [
+            45.4337,
+            12.3405
+          ],
+          "time": "仅在领队确认窗口后",
+          "duration": "至少 150 分钟（含往返）",
+          "transport": "步行 · 预算非实测",
+          "status": "optional",
+          "note": "适合看共和国的权力空间、宫殿与装饰艺术。就在团队经过的圣马可一带，但进馆需要连续时间。\n路线：圣马可广场 → 总督府 Porta del Frumento 入口 → 领队指定集合点\n时间：近距离步行及入场预算约 30 分钟；馆内约 90 分钟；返团至少 30 分钟。这里只是简略参观预算。\n条件：只有领队确认完整窗口、入场票合适且返船有余量时才选；不与里亚托路线叠加，排队超预算就取消。",
+          "url": "https://palazzoducale.visitmuve.it/en/visitor-information/",
+          "photo": {
+            "url": "media/italy/ducal.jpg",
+            "title": "总督府",
+            "caption": "景观参考照片，非本次实拍；不代表已预约或自由活动获准。原作者许可：CC BY-SA 4.0；https://creativecommons.org/licenses/by-sa/4.0。保留 Commons 提供的缩略图，未另作修改。",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:(Venice)_Doge%27s_Palace_and_campanile_of_St._Mark%27s_Basilica_facing_the_sea.jpg",
+            "credit": "Didier Descouens · CC BY-SA 4.0",
+            "checkedDate": "2026-10-10"
+          },
+          "photos": []
+        }
+      ],
+      "routePlans": [
+        {
+          "id": "italy-d6-tour",
+          "name": "团队行程 · 参考路线",
+          "note": "参考资料中的先后顺序；未知小镇与酒店保留缺口，不虚构道路或集合点。",
+          "stops": [
+            {
+              "id": "italy-d6-s0",
+              "name": "意大利小镇（名称待定）",
+              "point": null,
+              "eventIds": [],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            },
+            {
+              "id": "italy-d6-s1",
+              "name": "圣马可广场",
+              "point": [
+                45.43388889,
+                12.33805556
+              ],
+              "eventIds": [
+                "italy-d6-a4"
+              ],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            },
+            {
+              "id": "italy-d6-s2",
+              "name": "米兰大教堂",
+              "point": [
+                45.46416667,
+                9.19138889
+              ],
+              "eventIds": [],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            },
+            {
+              "id": "italy-d6-a3-point",
+              "name": "叹息桥（外观）",
+              "point": [
+                45.43405556,
+                12.34086111
+              ],
+              "eventIds": [
+                "italy-d6-a3"
+              ],
+              "note": "随团安排，实际观景点待领队通知。",
+              "url": ""
+            }
+          ],
+          "legs": [
+            {
+              "id": "italy-d6-leg2",
+              "from": "italy-d6-s1",
+              "to": "italy-d6-s2",
+              "mode": "团队交通",
+              "duration": "以领队安排为准",
+              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "url": "",
+              "checkedDate": "",
+              "road": null
+            }
+          ]
+        },
+        {
+          "id": "italy-plan-venice-walk",
+          "name": "备选 · 圣马可到里亚托的水城散步",
+          "note": "未确认自由活动。餐厅、码头、集合点可能不在广场；15:30 可能是大巴发车时间，返船时间必须另算。\n单程步行约 15–25 分钟；桥边与街巷停留 15–20 分钟；至少 20 分钟返团余量。拥堵时提前折返。",
+          "stops": [
+            {
+              "id": "start",
+              "name": "圣马可广场（参考起点）",
+              "point": [
+                45.43388889,
+                12.33805556
+              ],
+              "eventIds": [],
+              "note": "实际集合点待确认。",
+              "url": ""
+            },
+            {
+              "id": "visit",
+              "name": "圣马可到里亚托的水城散步",
+              "point": [
+                45.438,
+                12.336
+              ],
+              "eventIds": [
+                "italy-option-venice-walk"
+              ],
+              "note": "未确认自由活动。餐厅、码头、集合点可能不在广场；15:30 可能是大巴发车时间，返船时间必须另算。",
+              "url": "https://www.ubisoft.com/en-ca/games/assassins-creed-ii"
+            },
+            {
+              "id": "return",
+              "name": "返回参考起点 · 实际集合点待确认",
+              "point": [
+                45.43388889,
+                12.33805556
+              ],
+              "eventIds": [],
+              "note": "必须核实集合位置，按领队通知返团。",
+              "url": ""
+            }
+          ],
+          "legs": [
+            {
+              "id": "walk-0",
+              "from": "start",
+              "to": "visit",
+              "mode": "步行 · 示意",
+              "duration": "总窗口至少 90 分钟",
+              "note": "单程步行约 15–25 分钟；桥边与街巷停留 15–20 分钟；至少 20 分钟返团余量。拥堵时提前折返。 直线仅为位置关系，不是可步行路径；路线与入口须现场核对。",
+              "url": "https://www.ubisoft.com/en-ca/games/assassins-creed-ii",
+              "checkedDate": "2026-10-10",
+              "road": null
+            },
+            {
+              "id": "walk-1",
+              "from": "visit",
+              "to": "return",
+              "mode": "步行 · 示意",
+              "duration": "总窗口至少 90 分钟",
+              "note": "单程步行约 15–25 分钟；桥边与街巷停留 15–20 分钟；至少 20 分钟返团余量。拥堵时提前折返。 直线仅为位置关系，不是可步行路径；路线与入口须现场核对。",
+              "url": "https://www.ubisoft.com/en-ca/games/assassins-creed-ii",
+              "checkedDate": "2026-10-10",
+              "road": null
+            }
+          ]
+        },
+        {
+          "id": "italy-plan-ducal",
+          "name": "备选 · 总督府",
+          "note": "只有领队确认完整窗口、入场票合适且返船有余量时才选；不与里亚托路线叠加，排队超预算就取消。\n近距离步行及入场预算约 30 分钟；馆内约 90 分钟；返团至少 30 分钟。这里只是简略参观预算。",
+          "stops": [
+            {
+              "id": "start",
+              "name": "圣马可广场（参考起点）",
+              "point": [
+                45.43388889,
+                12.33805556
+              ],
+              "eventIds": [],
+              "note": "实际集合点待确认。",
+              "url": ""
+            },
+            {
+              "id": "visit",
+              "name": "总督府",
+              "point": [
+                45.4337,
+                12.3405
+              ],
+              "eventIds": [
+                "italy-option-ducal"
+              ],
+              "note": "只有领队确认完整窗口、入场票合适且返船有余量时才选；不与里亚托路线叠加，排队超预算就取消。",
+              "url": "https://palazzoducale.visitmuve.it/en/visitor-information/"
+            },
+            {
+              "id": "return",
+              "name": "返回参考起点 · 实际集合点待确认",
+              "point": [
+                45.43388889,
+                12.33805556
+              ],
+              "eventIds": [],
+              "note": "必须核实集合位置，按领队通知返团。",
+              "url": ""
+            }
+          ],
+          "legs": [
+            {
+              "id": "walk-0",
+              "from": "start",
+              "to": "visit",
+              "mode": "步行 · 示意",
+              "duration": "总窗口至少 150 分钟",
+              "note": "近距离步行及入场预算约 30 分钟；馆内约 90 分钟；返团至少 30 分钟。这里只是简略参观预算。 直线仅为位置关系，不是可步行路径；路线与入口须现场核对。",
+              "url": "https://palazzoducale.visitmuve.it/en/visitor-information/",
+              "checkedDate": "2026-10-10",
+              "road": null
+            },
+            {
+              "id": "walk-1",
+              "from": "visit",
+              "to": "return",
+              "mode": "步行 · 示意",
+              "duration": "总窗口至少 150 分钟",
+              "note": "近距离步行及入场预算约 30 分钟；馆内约 90 分钟；返团至少 30 分钟。这里只是简略参观预算。 直线仅为位置关系，不是可步行路径；路线与入口须现场核对。",
+              "url": "https://palazzoducale.visitmuve.it/en/visitor-information/",
+              "checkedDate": "2026-10-10",
+              "road": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "italy-d7",
+      "date": "",
+      "stops": [
+        {
+          "name": "米兰",
+          "point": [
+            45.46416667,
+            9.19138889
+          ]
+        },
+        {
+          "name": "蒙特卡蒂尼",
+          "point": [
+            43.88277778,
+            10.77111111
+          ]
+        }
+      ],
+      "mode": "大巴",
+      "departure": "",
+      "arrival": "",
+      "duration": "10.27 · 见当日安排",
+      "lodging": "四星级酒店 · 名称与地址待定",
+      "lodgingStatus": "pending",
+      "status": "pending",
+      "note": "团队安排：08:00 早餐后游米兰；10:00 米兰大教堂入内及登顶 ≥60 分钟；12:00 午餐；参观完教堂后自由活动，指定时间集合；18:00 晚餐。\n自己的时间：全程最值得争取的一段。90 分钟选城堡庭院；120 分钟可选安布罗修美术馆。只选一条，不把多个博物馆硬拼。\n待确认：结束时刻未写，随后还有标注 310 km 转场。集合位置和实际可用时长必须先问清；四星酒店待定。",
+      "source": "用户提供的 10 月 9 日版意大利 10 天行程单，第 1–4 页；参考安排，未代替最终通知。",
+      "road": null,
+      "activities": [
+        {
+          "id": "italy-d7-a1",
+          "name": "酒店早餐后游米兰",
+          "point": null,
+          "time": "08:00",
+          "duration": "",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "酒店未知。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-d7-a2",
+          "name": "米兰大教堂（入内 + 登顶）",
+          "point": [
+            45.46416667,
+            9.19138889
+          ],
+          "time": "10:00",
+          "duration": "不少于 60 分钟",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "实际入场以团队票为准。",
+          "url": "https://commons.wikimedia.org/wiki/File:Milan_Cathedral_from_Piazza_del_Duomo.jpg",
+          "photo": {
+            "url": "media/italy/milan.jpg",
+            "title": "米兰大教堂",
+            "caption": "景观参考照片，非本次实拍；不代表已预约或自由活动获准。原作者许可：CC BY-SA 3.0；https://creativecommons.org/licenses/by-sa/3.0。保留 Commons 提供的缩略图，未另作修改。",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Milan_Cathedral_from_Piazza_del_Duomo.jpg",
+            "credit": "Jiuguang Wang · CC BY-SA 3.0",
+            "checkedDate": "2026-10-10"
+          },
+          "photos": []
+        },
+        {
+          "id": "italy-d7-a3",
+          "name": "团队午餐",
+          "point": null,
+          "time": "12:00",
+          "duration": "",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "餐厅与自由活动起止关系待确认。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-d7-a4",
+          "name": "自由活动 · 指定时间集合",
+          "point": [
+            45.46416667,
+            9.19138889
+          ],
+          "time": "教堂参观后",
+          "duration": "结束时间待通知",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "原行程唯一明确的自由活动。地图以教堂广场作起点参考，真实集合点另核实。城堡与美术馆二选一。",
+          "url": "https://commons.wikimedia.org/wiki/File:Milan_Cathedral_from_Piazza_del_Duomo.jpg",
+          "photo": {
+            "url": "media/italy/milan.jpg",
+            "title": "米兰大教堂",
+            "caption": "景观参考照片，非本次实拍；不代表已预约或自由活动获准。原作者许可：CC BY-SA 3.0；https://creativecommons.org/licenses/by-sa/3.0。保留 Commons 提供的缩略图，未另作修改。",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Milan_Cathedral_from_Piazza_del_Duomo.jpg",
+            "credit": "Jiuguang Wang · CC BY-SA 3.0",
+            "checkedDate": "2026-10-10"
+          },
+          "photos": []
+        },
+        {
+          "id": "italy-d7-a5",
+          "name": "晚餐后入住",
+          "point": null,
+          "time": "18:00",
+          "duration": "",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "随后蒙特卡蒂尼方向转场；酒店名称、具体时间待定。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-option-castle",
+          "name": "自由探索建议 · 斯福尔扎城堡庭院",
+          "point": [
+            45.47,
+            9.17861111
+          ],
+          "time": "仅在领队确认窗口后",
+          "duration": "至少 90 分钟（含往返）",
+          "transport": "步行 · 预算非实测",
+          "status": "optional",
+          "note": "从城门、塔楼和庭院看一座防御设施如何变成统治者的宫廷。很适合观察游戏关卡里的入口、视线与空间层次。\n路线：米兰大教堂广场 → Via Dante → 城堡庭院 → 原路回集合点\n时间：步行单程约 20–25 分钟；庭院 20–25 分钟；另留 20 分钟集合余量。若放行不足 90 分钟，就缩短为 Via Dante 街区散步。\n条件：起终点按大教堂广场估算。庭院与馆内是两种方案；150–180 分钟以上才考虑加一个馆，不能承诺看完全部收藏。",
+          "url": "https://www.milanocastello.it/it/",
+          "photo": {
+            "url": "media/italy/castle.jpg",
+            "title": "斯福尔扎城堡 · 外观",
+            "caption": "景观参考照片，非本次实拍；不代表已预约或自由活动获准。原作者许可：CC BY-SA 4.0；https://creativecommons.org/licenses/by-sa/4.0。保留 Commons 提供的缩略图，未另作修改。",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:20110725_Castello_Sforzesco_Milan_5557.jpg",
+            "credit": "Jakub Hałun · CC BY-SA 4.0",
+            "checkedDate": "2026-10-10"
+          },
+          "photos": []
+        },
+        {
+          "id": "italy-option-ambrosiana",
+          "name": "自由探索建议 · 安布罗修美术馆",
+          "point": [
+            45.4631,
+            9.1854
+          ],
+          "time": "仅在领队确认窗口后",
+          "duration": "至少 120 分钟（含往返）",
+          "transport": "步行 · 预算非实测",
+          "status": "optional",
+          "note": "比跨城赶场更适合利用米兰中心的一段空闲：挑自己感兴趣的少数作品，给观看留时间。与城堡二选一。\n路线：米兰大教堂广场 → Piazza Pio XI 2 → 美术馆 → 大教堂广场\n时间：步行单程约 8–12 分钟；看展约 60–75 分钟；排队和集合余量约 25 分钟。\n条件：常规周三休馆；PDF 无年份，暂不套用星期。确认旅行年份、开放日、集合时间和可预约时段后再买票。",
+          "url": "https://www.ambrosiana.it/en/ambrosiana-info/pinacoteca/",
+          "photo": null,
+          "photos": []
+        }
+      ],
+      "routePlans": [
+        {
+          "id": "italy-d7-tour",
+          "name": "团队行程 · 参考路线",
+          "note": "参考资料中的先后顺序；未知小镇与酒店保留缺口，不虚构道路或集合点。",
+          "stops": [
+            {
+              "id": "italy-d7-s0",
+              "name": "米兰大教堂",
+              "point": [
+                45.46416667,
+                9.19138889
+              ],
+              "eventIds": [
+                "italy-d7-a2",
+                "italy-d7-a4"
+              ],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            },
+            {
+              "id": "italy-d7-s1",
+              "name": "蒙特卡蒂尼（城市参考点）",
+              "point": [
+                43.88277778,
+                10.77111111
+              ],
+              "eventIds": [],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            }
+          ],
+          "legs": [
+            {
+              "id": "italy-d7-leg1",
+              "from": "italy-d7-s0",
+              "to": "italy-d7-s1",
+              "mode": "团队交通",
+              "duration": "以领队安排为准",
+              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "url": "",
+              "checkedDate": "",
+              "road": null
+            }
+          ]
+        },
+        {
+          "id": "italy-plan-castle",
+          "name": "备选 · 斯福尔扎城堡庭院",
+          "note": "起终点按大教堂广场估算。庭院与馆内是两种方案；150–180 分钟以上才考虑加一个馆，不能承诺看完全部收藏。\n步行单程约 20–25 分钟；庭院 20–25 分钟；另留 20 分钟集合余量。若放行不足 90 分钟，就缩短为 Via Dante 街区散步。",
+          "stops": [
+            {
+              "id": "start",
+              "name": "米兰大教堂（参考起点）",
+              "point": [
+                45.46416667,
+                9.19138889
+              ],
+              "eventIds": [],
+              "note": "实际集合点待确认。",
+              "url": ""
+            },
+            {
+              "id": "visit",
+              "name": "斯福尔扎城堡庭院",
+              "point": [
+                45.47,
+                9.17861111
+              ],
+              "eventIds": [
+                "italy-option-castle"
+              ],
+              "note": "起终点按大教堂广场估算。庭院与馆内是两种方案；150–180 分钟以上才考虑加一个馆，不能承诺看完全部收藏。",
+              "url": "https://www.milanocastello.it/it/"
+            },
+            {
+              "id": "return",
+              "name": "返回参考起点 · 实际集合点待确认",
+              "point": [
+                45.46416667,
+                9.19138889
+              ],
+              "eventIds": [],
+              "note": "必须核实集合位置，按领队通知返团。",
+              "url": ""
+            }
+          ],
+          "legs": [
+            {
+              "id": "walk-0",
+              "from": "start",
+              "to": "visit",
+              "mode": "步行 · 示意",
+              "duration": "总窗口至少 90 分钟",
+              "note": "步行单程约 20–25 分钟；庭院 20–25 分钟；另留 20 分钟集合余量。若放行不足 90 分钟，就缩短为 Via Dante 街区散步。 直线仅为位置关系，不是可步行路径；路线与入口须现场核对。",
+              "url": "https://www.milanocastello.it/it/",
+              "checkedDate": "2026-10-10",
+              "road": null
+            },
+            {
+              "id": "walk-1",
+              "from": "visit",
+              "to": "return",
+              "mode": "步行 · 示意",
+              "duration": "总窗口至少 90 分钟",
+              "note": "步行单程约 20–25 分钟；庭院 20–25 分钟；另留 20 分钟集合余量。若放行不足 90 分钟，就缩短为 Via Dante 街区散步。 直线仅为位置关系，不是可步行路径；路线与入口须现场核对。",
+              "url": "https://www.milanocastello.it/it/",
+              "checkedDate": "2026-10-10",
+              "road": null
+            }
+          ]
+        },
+        {
+          "id": "italy-plan-ambrosiana",
+          "name": "备选 · 安布罗修美术馆",
+          "note": "常规周三休馆；PDF 无年份，暂不套用星期。确认旅行年份、开放日、集合时间和可预约时段后再买票。\n步行单程约 8–12 分钟；看展约 60–75 分钟；排队和集合余量约 25 分钟。",
+          "stops": [
+            {
+              "id": "start",
+              "name": "米兰大教堂（参考起点）",
+              "point": [
+                45.46416667,
+                9.19138889
+              ],
+              "eventIds": [],
+              "note": "实际集合点待确认。",
+              "url": ""
+            },
+            {
+              "id": "visit",
+              "name": "安布罗修美术馆",
+              "point": [
+                45.4631,
+                9.1854
+              ],
+              "eventIds": [
+                "italy-option-ambrosiana"
+              ],
+              "note": "常规周三休馆；PDF 无年份，暂不套用星期。确认旅行年份、开放日、集合时间和可预约时段后再买票。",
+              "url": "https://www.ambrosiana.it/en/ambrosiana-info/pinacoteca/"
+            },
+            {
+              "id": "return",
+              "name": "返回参考起点 · 实际集合点待确认",
+              "point": [
+                45.46416667,
+                9.19138889
+              ],
+              "eventIds": [],
+              "note": "必须核实集合位置，按领队通知返团。",
+              "url": ""
+            }
+          ],
+          "legs": [
+            {
+              "id": "walk-0",
+              "from": "start",
+              "to": "visit",
+              "mode": "步行 · 示意",
+              "duration": "总窗口至少 120 分钟",
+              "note": "步行单程约 8–12 分钟；看展约 60–75 分钟；排队和集合余量约 25 分钟。 直线仅为位置关系，不是可步行路径；路线与入口须现场核对。",
+              "url": "https://www.ambrosiana.it/en/ambrosiana-info/pinacoteca/",
+              "checkedDate": "2026-10-10",
+              "road": null
+            },
+            {
+              "id": "walk-1",
+              "from": "visit",
+              "to": "return",
+              "mode": "步行 · 示意",
+              "duration": "总窗口至少 120 分钟",
+              "note": "步行单程约 8–12 分钟；看展约 60–75 分钟；排队和集合余量约 25 分钟。 直线仅为位置关系，不是可步行路径；路线与入口须现场核对。",
+              "url": "https://www.ambrosiana.it/en/ambrosiana-info/pinacoteca/",
+              "checkedDate": "2026-10-10",
+              "road": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "italy-d8",
+      "date": "",
+      "stops": [
+        {
+          "name": "蒙特卡蒂尼",
+          "point": [
+            43.88277778,
+            10.77111111
+          ]
+        },
+        {
+          "name": "比萨",
+          "point": [
+            43.72305556,
+            10.39638889
+          ]
+        },
+        {
+          "name": "佛罗伦萨",
+          "point": [
+            43.77305556,
+            11.25694444
+          ]
+        },
+        {
+          "name": "罗马",
+          "point": [
+            41.9028,
+            12.4964
+          ]
+        }
+      ],
+      "mode": "大巴",
+      "departure": "",
+      "arrival": "",
+      "duration": "10.28 · 见当日安排",
+      "lodging": "四星级酒店 · 名称与地址待定",
+      "lodgingStatus": "pending",
+      "status": "pending",
+      "note": "团队安排：08:00 早餐出发；10:00 比萨斜塔外观、不上塔 ≥45 分钟；12:00 午餐；14:00 前往佛罗伦萨：大教堂外观 ≥20 分钟、乔托钟楼外观 ≥5 分钟、但丁故居外观 ≥10 分钟、圣十字广场 ≥10 分钟；18:00 晚餐。\n自己的时间：当天多次转场，不安排乌菲兹、学院美术馆或登穹顶。问能否沿团队路线补看领主广场与佣兵凉廊；完全独立往返建议至少 75 分钟。\n待确认：14:00 原文是“前往”，不是确认抵达；佛罗伦萨至罗马标注 270 km，住宿地点待定。",
+      "source": "用户提供的 10 月 9 日版意大利 10 天行程单，第 1–4 页；参考安排，未代替最终通知。",
+      "road": null,
+      "activities": [
+        {
+          "id": "italy-d8-a1",
+          "name": "酒店早餐后出发",
+          "point": null,
+          "time": "08:00",
+          "duration": "",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "蒙特卡蒂尼出发，酒店未知。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-d8-a2",
+          "name": "比萨斜塔（外观，不上塔）",
+          "point": [
+            43.72305556,
+            10.39638889
+          ],
+          "time": "10:00",
+          "duration": "不少于 45 分钟",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "跟团参观。",
+          "url": "https://commons.wikimedia.org/wiki/File:Italy_-_Pisa_-_Leaning_Tower.jpg",
+          "photo": {
+            "url": "media/italy/pisa.jpg",
+            "title": "比萨斜塔",
+            "caption": "景观参考照片，非本次实拍；不代表已预约或自由活动获准。原作者许可：CC BY-SA 3.0 de；https://creativecommons.org/licenses/by-sa/3.0/de/deed.en。保留 Commons 提供的缩略图，未另作修改。",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Italy_-_Pisa_-_Leaning_Tower.jpg",
+            "credit": "Arne Müseler · CC BY-SA 3.0 de",
+            "checkedDate": "2026-10-10"
+          },
+          "photos": []
+        },
+        {
+          "id": "italy-d8-a3",
+          "name": "团队午餐",
+          "point": null,
+          "time": "12:00",
+          "duration": "",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "餐厅待定。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-d8-a4",
+          "name": "前往佛罗伦萨",
+          "point": null,
+          "time": "14:00",
+          "duration": "",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "14:00 是出发安排，不是确认抵达。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-d8-a5",
+          "name": "佛罗伦萨大教堂（外观）",
+          "point": [
+            43.77305556,
+            11.25694444
+          ],
+          "time": "抵达后",
+          "duration": "不少于 20 分钟",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "不安排登穹顶。",
+          "url": "https://commons.wikimedia.org/wiki/File:Cattedrale_di_Santa_Maria_del_Fiore_%E2%80%93_Il_Duomo_di_Firenze.jpg",
+          "photo": {
+            "url": "media/italy/florence.jpg",
+            "title": "佛罗伦萨大教堂",
+            "caption": "景观参考照片，非本次实拍；不代表已预约或自由活动获准。原作者许可：CC BY 2.0；https://creativecommons.org/licenses/by/2.0。保留 Commons 提供的缩略图，未另作修改。",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cattedrale_di_Santa_Maria_del_Fiore_%E2%80%93_Il_Duomo_di_Firenze.jpg",
+            "credit": "Gary Campbell-Hall · CC BY 2.0",
+            "checkedDate": "2026-10-10"
+          },
+          "photos": []
+        },
+        {
+          "id": "italy-d8-a6",
+          "name": "乔托钟楼（外观）",
+          "point": [
+            43.772895,
+            11.255235
+          ],
+          "time": "随后",
+          "duration": "不少于 5 分钟",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "与大教堂相邻。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-d8-a7",
+          "name": "但丁故居（外观）",
+          "point": [
+            43.77109,
+            11.25705
+          ],
+          "time": "随后",
+          "duration": "不少于 10 分钟",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "仅外观，具体停留点与步行路线以领队为准。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-d8-a8",
+          "name": "圣十字广场",
+          "point": [
+            43.76841667,
+            11.26272222
+          ],
+          "time": "随后",
+          "duration": "不少于 10 分钟",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "地图点为教堂附近参考，不代表集合点。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-d8-a9",
+          "name": "团队晚餐",
+          "point": null,
+          "time": "18:00",
+          "duration": "",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "后续赴罗马，实际转场与酒店待确认。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-option-florence",
+          "name": "自由探索建议 · 领主广场与佣兵凉廊",
+          "point": [
+            43.76920278,
+            11.25565833
+          ],
+          "time": "仅在领队确认窗口后",
+          "duration": "至少 75 分钟（含往返）",
+          "transport": "步行 · 预算非实测",
+          "status": "optional",
+          "note": "用一小段步行观察市政宫立面、广场与雕塑之间的关系。佛罗伦萨是《刺客信条 II》的城市背景，真实空间比打卡更多一层趣味。\n路线：但丁故居附近 → 领主广场 → 佣兵凉廊外侧 → 与领队约定位置汇合\n时间：但丁故居至广场步行约 5–8 分钟；观看 20–25 分钟；返程或汇合步行约 10–15 分钟；另留 20 分钟余量。\n条件：先问是否本就在团队步行路线上。这里是申请方案，不是已获准离团；圣十字广场集合时重新核对路线。",
+          "url": "https://www.feelflorence.it/it/punti-di-interesse/loggia-de-lanzi",
+          "photo": {
+            "url": "media/italy/loggia.jpg",
+            "title": "领主广场与佣兵凉廊",
+            "caption": "景观参考照片，非本次实拍；不代表已预约或自由活动获准。原作者许可：CC BY-SA 4.0；https://creativecommons.org/licenses/by-sa/4.0。保留 Commons 提供的缩略图，未另作修改。",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Firenze,_loggia_dei_lanzi_(2020)_01.jpg",
+            "credit": "Francesco Bini · CC BY-SA 4.0",
+            "checkedDate": "2026-10-10"
+          },
+          "photos": []
+        }
+      ],
+      "routePlans": [
+        {
+          "id": "italy-d8-tour",
+          "name": "团队行程 · 参考路线",
+          "note": "参考资料中的先后顺序；未知小镇与酒店保留缺口，不虚构道路或集合点。",
+          "stops": [
+            {
+              "id": "italy-d8-s0",
+              "name": "蒙特卡蒂尼（城市参考点）",
+              "point": [
+                43.88277778,
+                10.77111111
+              ],
+              "eventIds": [],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            },
+            {
+              "id": "italy-d8-s1",
+              "name": "比萨斜塔",
+              "point": [
+                43.72305556,
+                10.39638889
+              ],
+              "eventIds": [
+                "italy-d8-a2"
+              ],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            },
+            {
+              "id": "italy-d8-s2",
+              "name": "佛罗伦萨大教堂",
+              "point": [
+                43.77305556,
+                11.25694444
+              ],
+              "eventIds": [
+                "italy-d8-a5"
+              ],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            },
+            {
+              "id": "italy-d8-s3",
+              "name": "罗马（城市参考点）",
+              "point": [
+                41.9028,
+                12.4964
+              ],
+              "eventIds": [],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            },
+            {
+              "id": "italy-d8-a6-point",
+              "name": "乔托钟楼（外观）",
+              "point": [
+                43.772895,
+                11.255235
+              ],
+              "eventIds": [
+                "italy-d8-a6"
+              ],
+              "note": "与大教堂相邻。",
+              "url": ""
+            },
+            {
+              "id": "italy-d8-a7-point",
+              "name": "但丁故居（外观）",
+              "point": [
+                43.77109,
+                11.25705
+              ],
+              "eventIds": [
+                "italy-d8-a7"
+              ],
+              "note": "仅外观，具体停留点与步行路线以领队为准。",
+              "url": ""
+            },
+            {
+              "id": "italy-d8-a8-point",
+              "name": "圣十字广场",
+              "point": [
+                43.76841667,
+                11.26272222
+              ],
+              "eventIds": [
+                "italy-d8-a8"
+              ],
+              "note": "地图点为教堂附近参考，不代表集合点。",
+              "url": ""
+            }
+          ],
+          "legs": [
+            {
+              "id": "italy-d8-leg1",
+              "from": "italy-d8-s0",
+              "to": "italy-d8-s1",
+              "mode": "团队交通",
+              "duration": "以领队安排为准",
+              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "url": "",
+              "checkedDate": "",
+              "road": null
+            },
+            {
+              "id": "italy-d8-leg2",
+              "from": "italy-d8-s1",
+              "to": "italy-d8-s2",
+              "mode": "团队交通",
+              "duration": "以领队安排为准",
+              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "url": "",
+              "checkedDate": "",
+              "road": null
+            },
+            {
+              "id": "italy-d8-leg3",
+              "from": "italy-d8-s2",
+              "to": "italy-d8-s3",
+              "mode": "团队交通",
+              "duration": "以领队安排为准",
+              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "url": "",
+              "checkedDate": "",
+              "road": null
+            }
+          ]
+        },
+        {
+          "id": "italy-plan-florence",
+          "name": "备选 · 领主广场与佣兵凉廊",
+          "note": "先问是否本就在团队步行路线上。这里是申请方案，不是已获准离团；圣十字广场集合时重新核对路线。\n但丁故居至广场步行约 5–8 分钟；观看 20–25 分钟；返程或汇合步行约 10–15 分钟；另留 20 分钟余量。",
+          "stops": [
+            {
+              "id": "start",
+              "name": "但丁故居（参考起点）",
+              "point": [
+                43.77109,
+                11.25705
+              ],
+              "eventIds": [],
+              "note": "实际集合点待确认。",
+              "url": ""
+            },
+            {
+              "id": "visit",
+              "name": "领主广场与佣兵凉廊",
+              "point": [
+                43.76920278,
+                11.25565833
+              ],
+              "eventIds": [
+                "italy-option-florence"
+              ],
+              "note": "先问是否本就在团队步行路线上。这里是申请方案，不是已获准离团；圣十字广场集合时重新核对路线。",
+              "url": "https://www.feelflorence.it/it/punti-di-interesse/loggia-de-lanzi"
+            },
+            {
+              "id": "return",
+              "name": "返回参考起点 · 实际集合点待确认",
+              "point": [
+                43.77109,
+                11.25705
+              ],
+              "eventIds": [],
+              "note": "必须核实集合位置，按领队通知返团。",
+              "url": ""
+            }
+          ],
+          "legs": [
+            {
+              "id": "walk-0",
+              "from": "start",
+              "to": "visit",
+              "mode": "步行 · 示意",
+              "duration": "总窗口至少 75 分钟",
+              "note": "但丁故居至广场步行约 5–8 分钟；观看 20–25 分钟；返程或汇合步行约 10–15 分钟；另留 20 分钟余量。 直线仅为位置关系，不是可步行路径；路线与入口须现场核对。",
+              "url": "https://www.feelflorence.it/it/punti-di-interesse/loggia-de-lanzi",
+              "checkedDate": "2026-10-10",
+              "road": null
+            },
+            {
+              "id": "walk-1",
+              "from": "visit",
+              "to": "return",
+              "mode": "步行 · 示意",
+              "duration": "总窗口至少 75 分钟",
+              "note": "但丁故居至广场步行约 5–8 分钟；观看 20–25 分钟；返程或汇合步行约 10–15 分钟；另留 20 分钟余量。 直线仅为位置关系，不是可步行路径；路线与入口须现场核对。",
+              "url": "https://www.feelflorence.it/it/punti-di-interesse/loggia-de-lanzi",
+              "checkedDate": "2026-10-10",
+              "road": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "italy-d9",
+      "date": "",
+      "stops": [
+        {
+          "name": "罗马",
+          "point": [
+            41.9028,
+            12.4964
+          ]
+        },
+        {
+          "name": "罗马菲乌米奇诺机场",
+          "point": [
+            41.80027778,
+            12.23888889
+          ]
+        }
+      ],
+      "mode": "飞机",
+      "departure": "",
+      "arrival": "",
+      "duration": "10.29 · 见当日安排",
+      "lodging": "飞机上",
+      "lodgingStatus": "pending",
+      "status": "pending",
+      "note": "团队安排：08:00 早餐后前往机场；参考 3U3896：罗马 12:00 → 成都次日 05:30，夜宿飞机。\n自己的时间：不加晨游。原文另说团队国际航班提前 4 小时到机场，与 08:00 早餐后的安排存在待澄清点。\n待确认：向领队核实实际离店时间、到机场要求及退税安排；航班和航站楼以出票与航司通知为准。",
+      "source": "用户提供的 10 月 9 日版意大利 10 天行程单，第 1–4 页；参考安排，未代替最终通知。",
+      "road": null,
+      "activities": [
+        {
+          "id": "italy-d9-a1",
+          "name": "早餐后前往机场",
+          "point": null,
+          "time": "08:00",
+          "duration": "",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "与行程说明“国际航班提前 4 小时到场”存在待澄清点，需核实离店时间。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-d9-a2",
+          "name": "罗马 → 成都 · 3U3896",
+          "point": [
+            41.80027778,
+            12.23888889
+          ],
+          "time": "12:00",
+          "duration": "次日 05:30 抵达",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "参考 FCO T3 → TFU T1；实际航班以票面为准。不安排晨游。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        }
+      ],
+      "routePlans": [
+        {
+          "id": "italy-d9-tour",
+          "name": "团队行程 · 参考路线",
+          "note": "参考资料中的先后顺序；未知小镇与酒店保留缺口，不虚构道路或集合点。",
+          "stops": [
+            {
+              "id": "italy-d9-s0",
+              "name": "罗马（城市参考点）",
+              "point": [
+                41.9028,
+                12.4964
+              ],
+              "eventIds": [],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            },
+            {
+              "id": "italy-d9-s1",
+              "name": "罗马菲乌米奇诺机场",
+              "point": [
+                41.80027778,
+                12.23888889
+              ],
+              "eventIds": [
+                "italy-d9-a2"
+              ],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            }
+          ],
+          "legs": [
+            {
+              "id": "italy-d9-leg1",
+              "from": "italy-d9-s0",
+              "to": "italy-d9-s1",
+              "mode": "团队交通",
+              "duration": "以领队安排为准",
+              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "url": "",
+              "checkedDate": "",
+              "road": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "italy-d10",
+      "date": "",
+      "stops": [
+        {
+          "name": "成都天府机场",
+          "point": [
+            30.319,
+            104.445
+          ]
+        },
+        {
+          "name": "行程结束",
+          "point": null
+        }
+      ],
+      "mode": "飞机",
+      "departure": "",
+      "arrival": "",
+      "duration": "10.30 · 见当日安排",
+      "lodging": "行程结束",
+      "lodgingStatus": "pending",
+      "status": "pending",
+      "note": "团队安排：参考 05:30 抵达成都，散团，行程结束。\n自己的时间：保留回家交通与休息时间。\n待确认：全程航班时刻都是参考；当地时间按票面确认。",
+      "source": "用户提供的 10 月 9 日版意大利 10 天行程单，第 1–4 页；参考安排，未代替最终通知。",
+      "road": null,
+      "activities": [
+        {
+          "id": "italy-d10-a1",
+          "name": "抵达成都，散团",
+          "point": [
+            30.319,
+            104.445
+          ],
+          "time": "05:30",
+          "duration": "",
+          "transport": "按团队安排",
+          "status": "pending",
+          "note": "参考到达时间；保留后续回家交通与休息时间。",
+          "url": "",
+          "photo": null,
+          "photos": []
+        }
+      ],
+      "routePlans": [
+        {
+          "id": "italy-d10-tour",
+          "name": "团队行程 · 参考路线",
+          "note": "参考资料中的先后顺序；未知小镇与酒店保留缺口，不虚构道路或集合点。",
+          "stops": [
+            {
+              "id": "italy-d10-s0",
+              "name": "成都天府机场",
+              "point": [
+                30.319,
+                104.445
+              ],
+              "eventIds": [
+                "italy-d10-a1"
+              ],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            },
+            {
+              "id": "italy-d10-s1",
+              "name": "行程结束",
+              "point": null,
+              "eventIds": [],
+              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "url": ""
+            }
+          ],
+          "legs": []
+        }
+      ]
+    }
+  ],
+  "packing": [
+    {
+      "id": "italy-check-0",
+      "name": "确认出行年份、最终版行程、实际机票与出发集合时间。",
+      "category": "其他物品",
+      "done": false
+    },
+    {
+      "id": "italy-check-1",
+      "name": "确认 10.27 米兰自由活动开始 / 结束时刻，以及精确集合位置。",
+      "category": "其他物品",
+      "done": false
+    },
+    {
+      "id": "italy-check-2",
+      "name": "确认 10.26 威尼斯是否允许自由活动，15:30 是船还是大巴出发。",
+      "category": "其他物品",
+      "done": false
+    },
+    {
+      "id": "italy-check-3",
+      "name": "确认 10.28 佛罗伦萨实际抵达时间，能否顺路停留领主广场。",
+      "category": "其他物品",
+      "done": false
+    },
+    {
+      "id": "italy-check-4",
+      "name": "确认海岸船班、阿马尔菲停靠点和自理餐的实际时间范围。",
+      "category": "其他物品",
+      "done": false
+    },
+    {
+      "id": "italy-check-5",
+      "name": "确认 7 晚酒店名称与地址；“意小镇”的实际名称。",
+      "category": "其他物品",
+      "done": false
+    },
+    {
+      "id": "italy-check-6",
+      "name": "核实 10.29 离店和到机场时间，解决 08:00 早餐与提前 4 小时到场的冲突。",
+      "category": "其他物品",
+      "done": false
+    },
+    {
+      "id": "italy-check-7",
+      "name": "取得领队认可的返团方案后，再决定是否预约馆内参观。",
+      "category": "其他物品",
+      "done": false
+    },
+    {
+      "id": "italy-check-8",
+      "name": "保存领队联络方式、集合点和城市离线地图；测试网页断网重开。",
+      "category": "其他物品",
+      "done": false
+    }
+  ],
+  "notes": [],
+  "guides": [
+    {
+      "id": "italy-guide-before",
+      "title": "跟团中留出自己的时间",
+      "category": "当地提醒",
+      "body": "时间预算 = 领队允许的窗口 − 去程 − 回程 − 入场排队 − 至少 20–30 分钟集合余量。威尼斯另计返船时间。自理餐和时间表空白不等于可以离团。",
+      "url": "",
+      "checkedDate": "2026-10-10",
+      "summary": "米兰有明确自由活动；其他城市先确认窗口，建议与原行程分开。",
+      "sections": [
+        {
+          "title": "优先选择",
+          "body": "全程最值得争取的一段。90 分钟选城堡庭院；120 分钟可选安布罗修美术馆。只选一条，不把多个博物馆硬拼。\n米兰城堡 / 美术馆二选一；威尼斯散步 / 总督府二选一。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": []
+        },
+        {
+          "title": "这次不硬塞进去的地点",
+          "body": "《最后的晚餐》须先核实预约。乌菲兹、学院美术馆、穹顶攀登需要连续时间；圣吉米尼亚诺、蒙特里久尼、卢卡等跨城支线不在团线内。那不勒斯没有明确市区自由活动，酒店也未知。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": []
+        },
+        {
+          "title": "离线使用",
+          "body": "首次联网等待“离线内容已就绪”。意大利照片、全部文字、地理轮廓、景点标记和路线示意均随应用缓存；可缩放地图并打开点位、照片和攻略。离线轮廓没有街道细节，步行导航仍需提前下载地图应用的城市离线包。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": []
+        }
+      ]
+    },
+    {
+      "id": "italy-guide-castle",
+      "title": "10.27 · 斯福尔扎城堡庭院",
+      "category": "景点预约",
+      "body": "从城门、塔楼和庭院看一座防御设施如何变成统治者的宫廷。很适合观察游戏关卡里的入口、视线与空间层次。",
+      "url": "https://www.milanocastello.it/it/",
+      "checkedDate": "2026-10-10",
+      "summary": "城堡 · 中世纪与文艺复兴 · 首选 · 至少 90 分钟 · 未获准离团",
+      "sections": [
+        {
+          "title": "怎么走与在哪里集合",
+          "body": "米兰大教堂广场 → Via Dante → 城堡庭院 → 原路回集合点\n地图及照片请在每日行程 D7 对应备选安排中查看。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": []
+        },
+        {
+          "title": "时间预算与放弃条件",
+          "body": "步行单程约 20–25 分钟；庭院 20–25 分钟；另留 20 分钟集合余量。若放行不足 90 分钟，就缩短为 Via Dante 街区散步。\n起终点按大教堂广场估算。庭院与馆内是两种方案；150–180 分钟以上才考虑加一个馆，不能承诺看完全部收藏。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": []
+        },
+        {
+          "title": "官方信息与临行复核",
+          "body": "庭院免费；每日 07:00–19:30。馆内周二至周日 10:00–17:30，最后入场 16:30；Sala delle Asse 因修复关闭。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "斯福尔扎城堡 · 米兰市政府",
+              "url": "https://www.milanocastello.it/it/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "italy-guide-ambrosiana",
+      "title": "10.27 · 安布罗修美术馆",
+      "category": "景点预约",
+      "body": "比跨城赶场更适合利用米兰中心的一段空闲：挑自己感兴趣的少数作品，给观看留时间。与城堡二选一。",
+      "url": "https://www.ambrosiana.it/en/ambrosiana-info/pinacoteca/",
+      "checkedDate": "2026-10-10",
+      "summary": "艺术 · 绘画与手稿 · 艺术向备选 · 至少 120 分钟 · 未获准离团",
+      "sections": [
+        {
+          "title": "怎么走与在哪里集合",
+          "body": "米兰大教堂广场 → Piazza Pio XI 2 → 美术馆 → 大教堂广场\n地图及照片请在每日行程 D7 对应备选安排中查看。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": []
+        },
+        {
+          "title": "时间预算与放弃条件",
+          "body": "步行单程约 8–12 分钟；看展约 60–75 分钟；排队和集合余量约 25 分钟。\n常规周三休馆；PDF 无年份，暂不套用星期。确认旅行年份、开放日、集合时间和可预约时段后再买票。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": []
+        },
+        {
+          "title": "官方信息与临行复核",
+          "body": "常规 10:00–18:00，周三闭馆。出发前再核实临时调整与票务。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "安布罗修美术馆 · 官方参观资料",
+              "url": "https://www.ambrosiana.it/en/ambrosiana-info/pinacoteca/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "italy-guide-venice-walk",
+      "title": "10.26 · 圣马可到里亚托的水城散步",
+      "category": "景点预约",
+      "body": "《刺客信条 II》的威尼斯城市背景适合用脚步感受：桥梁把街巷分段，狭窄通道忽然打开成广场。只体验街道，不攀爬建筑。",
+      "url": "https://www.ubisoft.com/en-ca/games/assassins-creed-ii",
+      "checkedDate": "2026-10-10",
+      "summary": "游戏 · 城市人文 · 短线优先 · 至少 90 分钟 · 未获准离团",
+      "sections": [
+        {
+          "title": "怎么走与在哪里集合",
+          "body": "圣马可广场 → 沿 Rialto 路标到里亚托桥 → 原路回圣马可\n地图及照片请在每日行程 D6 对应备选安排中查看。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": []
+        },
+        {
+          "title": "时间预算与放弃条件",
+          "body": "单程步行约 15–25 分钟；桥边与街巷停留 15–20 分钟；至少 20 分钟返团余量。拥堵时提前折返。\n未确认自由活动。餐厅、码头、集合点可能不在广场；15:30 可能是大巴发车时间，返船时间必须另算。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": []
+        },
+        {
+          "title": "官方信息与临行复核",
+          "body": "官方明确游戏以文艺复兴意大利为背景，涉及佛罗伦萨与威尼斯。城市漫步是主题联想，不是逐个场景考据。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "Assassin’s Creed II · Ubisoft",
+              "url": "https://www.ubisoft.com/en-ca/games/assassins-creed-ii"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "italy-guide-ducal",
+      "title": "10.26 · 总督府",
+      "category": "景点预约",
+      "body": "适合看共和国的权力空间、宫殿与装饰艺术。就在团队经过的圣马可一带，但进馆需要连续时间。",
+      "url": "https://palazzoducale.visitmuve.it/en/visitor-information/",
+      "checkedDate": "2026-10-10",
+      "summary": "艺术 · 城邦权力与建筑 · 长窗口才选 · 至少 150 分钟 · 未获准离团",
+      "sections": [
+        {
+          "title": "怎么走与在哪里集合",
+          "body": "圣马可广场 → 总督府 Porta del Frumento 入口 → 领队指定集合点\n地图及照片请在每日行程 D6 对应备选安排中查看。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": []
+        },
+        {
+          "title": "时间预算与放弃条件",
+          "body": "近距离步行及入场预算约 30 分钟；馆内约 90 分钟；返团至少 30 分钟。这里只是简略参观预算。\n只有领队确认完整窗口、入场票合适且返船有余量时才选；不与里亚托路线叠加，排队超预算就取消。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": []
+        },
+        {
+          "title": "官方信息与临行复核",
+          "body": "4–10 月常规 09:00–19:00，最后入场 18:00；对本行程真正的限制是团队离岛时间。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "威尼斯总督府 · MUVE 官方",
+              "url": "https://palazzoducale.visitmuve.it/en/visitor-information/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "italy-guide-florence",
+      "title": "10.28 · 领主广场与佣兵凉廊",
+      "category": "景点预约",
+      "body": "用一小段步行观察市政宫立面、广场与雕塑之间的关系。佛罗伦萨是《刺客信条 II》的城市背景，真实空间比打卡更多一层趣味。",
+      "url": "https://www.feelflorence.it/it/punti-di-interesse/loggia-de-lanzi",
+      "checkedDate": "2026-10-10",
+      "summary": "游戏 · 文艺复兴雕塑 · 顺路补看 · 至少 75 分钟 · 未获准离团",
+      "sections": [
+        {
+          "title": "怎么走与在哪里集合",
+          "body": "但丁故居附近 → 领主广场 → 佣兵凉廊外侧 → 与领队约定位置汇合\n地图及照片请在每日行程 D8 对应备选安排中查看。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": []
+        },
+        {
+          "title": "时间预算与放弃条件",
+          "body": "但丁故居至广场步行约 5–8 分钟；观看 20–25 分钟；返程或汇合步行约 10–15 分钟；另留 20 分钟余量。\n先问是否本就在团队步行路线上。这里是申请方案，不是已获准离团；圣十字广场集合时重新核对路线。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": []
+        },
+        {
+          "title": "官方信息与临行复核",
+          "body": "位于领主广场、毗邻乌菲兹；以广场与建筑外观短线为主，围栏内可进入范围服从现场。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "佣兵凉廊 · 佛罗伦萨官方旅游局",
+              "url": "https://www.feelflorence.it/it/punti-di-interesse/loggia-de-lanzi"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "italy-guide-amalfi",
+      "title": "10.23 · 天堂回廊与主教堂广场",
+      "category": "景点预约",
+      "body": "小尺度回廊、交错拱券与教堂建筑群，比另坐车去远处景点更适合短停。只有半小时就看广场与立面。",
+      "url": "https://www.visitamalfi.info/punti-di-interesse-ad-amalfi/complesso-monumentale-della-cattedrale-di-amalfi/",
+      "checkedDate": "2026-10-10",
+      "summary": "中世纪 · 海上共和国 · 确认停留后 · 至少 75 分钟 · 未获准离团",
+      "sections": [
+        {
+          "title": "怎么走与在哪里集合",
+          "body": "阿马尔菲主教堂广场 → 天堂回廊 → 原路返回\n地图及照片请在每日行程 D3 对应备选安排中查看。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": []
+        },
+        {
+          "title": "时间预算与放弃条件",
+          "body": "广场附近步行及入场约 15 分钟；回廊 25–30 分钟；返回与集合约 25–30 分钟。\n须确认船停靠阿马尔菲镇且集合位置合适。票务、台阶与实际开放安排待复核；不加拉韦洛或跨镇公交。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": []
+        },
+        {
+          "title": "官方信息与临行复核",
+          "body": "建筑群包含天堂回廊、圣安德烈地下墓室与教区博物馆；不把整套参观塞进 30 分钟停留。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "阿马尔菲大教堂建筑群 · 官方旅游站",
+              "url": "https://www.visitamalfi.info/punti-di-interesse-ad-amalfi/complesso-monumentale-della-cattedrale-di-amalfi/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "italy-guide-rome",
+      "title": "10.22 · 圣依纳爵堂的错视穹顶",
+      "category": "景点预约",
+      "body": "适合关注空间与视觉叙事：站在地面看透视绘画如何创造建筑纵深。不是中世纪，但很贴近游戏场景里的视觉引导。",
+      "url": "https://www.turismoroma.it/en/places/church-st-ignatius-loyola",
+      "checkedDate": "2026-10-10",
+      "summary": "艺术 · 巴洛克空间错觉 · 非常顺路才去 · 至少 60 分钟 · 未获准离团",
+      "sections": [
+        {
+          "title": "怎么走与在哪里集合",
+          "body": "万神殿附近 → 圣依纳爵堂 → 万神殿附近集合点\n地图及照片请在每日行程 D2 对应备选安排中查看。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": []
+        },
+        {
+          "title": "时间预算与放弃条件",
+          "body": "步行单程约 5–8 分钟；观看 15–20 分钟；其余留给入场和返团。\n罗马深度游本身不是自由时间；若领队只给拍照时间就不离队。宗教活动或排队时取消，不影响转场。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": []
+        },
+        {
+          "title": "官方信息与临行复核",
+          "body": "注意是 Sant’Ignazio di Loyola，位于罗马中心；开放与宗教活动安排需临行复核。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "圣依纳爵堂 · 罗马官方旅游局",
+              "url": "https://www.turismoroma.it/en/places/church-st-ignatius-loyola"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "italy-guide-sources",
+      "title": "行程来源、图片授权与待确认事项",
+      "category": "其他攻略",
+      "body": "团队摘要来自《1021 3U意大利一地10天(1009).pdf》第 1–4 页；原件保留本机。所有位置用于景区 / 城市定位，不自动代表团队出入口。照片使用 Wikimedia Commons 授权缩略图，未另作修改；不是本次旅行实拍。底图轮廓来自 Natural Earth 公有领域数据。",
+      "url": "https://www.naturalearthdata.com/about/terms-of-use/",
+      "checkedDate": "2026-10-10",
+      "summary": "行程来自用户 PDF；图片为景观参考；年份、酒店、集合位置待最终通知。",
+      "sections": [
+        {
+          "title": "斯福尔扎城堡 · 米兰市政府",
+          "body": "庭院免费；每日 07:00–19:30。馆内周二至周日 10:00–17:30，最后入场 16:30；Sala delle Asse 因修复关闭。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "官方来源",
+              "url": "https://www.milanocastello.it/it/"
+            }
+          ]
+        },
+        {
+          "title": "安布罗修美术馆 · 官方参观资料",
+          "body": "常规 10:00–18:00，周三闭馆。出发前再核实临时调整与票务。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "官方来源",
+              "url": "https://www.ambrosiana.it/en/ambrosiana-info/pinacoteca/"
+            }
+          ]
+        },
+        {
+          "title": "威尼斯总督府 · MUVE 官方",
+          "body": "4–10 月常规 09:00–19:00，最后入场 18:00；对本行程真正的限制是团队离岛时间。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "官方来源",
+              "url": "https://palazzoducale.visitmuve.it/en/visitor-information/"
+            }
+          ]
+        },
+        {
+          "title": "佣兵凉廊 · 佛罗伦萨官方旅游局",
+          "body": "位于领主广场、毗邻乌菲兹；以广场与建筑外观短线为主，围栏内可进入范围服从现场。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "官方来源",
+              "url": "https://www.feelflorence.it/it/punti-di-interesse/loggia-de-lanzi"
+            }
+          ]
+        },
+        {
+          "title": "阿马尔菲大教堂建筑群 · 官方旅游站",
+          "body": "建筑群包含天堂回廊、圣安德烈地下墓室与教区博物馆；不把整套参观塞进 30 分钟停留。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "官方来源",
+              "url": "https://www.visitamalfi.info/punti-di-interesse-ad-amalfi/complesso-monumentale-della-cattedrale-di-amalfi/"
+            }
+          ]
+        },
+        {
+          "title": "圣依纳爵堂 · 罗马官方旅游局",
+          "body": "注意是 Sant’Ignazio di Loyola，位于罗马中心；开放与宗教活动安排需临行复核。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "官方来源",
+              "url": "https://www.turismoroma.it/en/places/church-st-ignatius-loyola"
+            }
+          ]
+        },
+        {
+          "title": "庞贝考古公园 · 官方参观信息",
+          "body": "开放建筑及路线可能变化，跟随当天人工讲解线路。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "官方来源",
+              "url": "https://pompeiisites.org/en/visiting-info/"
+            }
+          ]
+        },
+        {
+          "title": "白露里治奥 · 目的地网站",
+          "body": "用于古镇参观参考；不据此证明动画取景或灵感来源。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "官方来源",
+              "url": "https://civitadibagnoregio.cloud/en/to-visit"
+            }
+          ]
+        },
+        {
+          "title": "Assassin’s Creed II · Ubisoft",
+          "body": "官方明确游戏以文艺复兴意大利为背景，涉及佛罗伦萨与威尼斯。城市漫步是主题联想，不是逐个场景考据。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "官方来源",
+              "url": "https://www.ubisoft.com/en-ca/games/assassins-creed-ii"
+            }
+          ]
+        },
+        {
+          "title": "最后的晚餐 · 官方参观 FAQ",
+          "body": "需要事先核实预约，不作为当日随到随看的备选。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "官方来源",
+              "url": "https://cenacolovinciano.org/en/faq-eng/"
+            }
+          ]
+        },
+        {
+          "title": "Leaning Tower of Pisa · 图片许可",
+          "body": "Arne Müseler · CC BY-SA 3.0 de；Wikimedia Commons 缩略图，未另作修改。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "图片来源与作者",
+              "url": "https://commons.wikimedia.org/wiki/File:Italy_-_Pisa_-_Leaning_Tower.jpg"
+            },
+            {
+              "label": "授权条款",
+              "url": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en"
+            }
+          ]
+        },
+        {
+          "title": "Colosseum · 图片许可",
+          "body": "FeaturedPics · CC BY-SA 4.0；Wikimedia Commons 缩略图，未另作修改。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "图片来源与作者",
+              "url": "https://commons.wikimedia.org/wiki/File:Colosseo_2020.jpg"
+            },
+            {
+              "label": "授权条款",
+              "url": "https://creativecommons.org/licenses/by-sa/4.0"
+            }
+          ]
+        },
+        {
+          "title": "Piazza San Marco · 图片许可",
+          "body": "Matthias Süßen · CC BY-SA 4.0；Wikimedia Commons 缩略图，未另作修改。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "图片来源与作者",
+              "url": "https://commons.wikimedia.org/wiki/File:Piazza_San_Marco_(Venice)_at_night-msu-2021-6449-.jpg"
+            },
+            {
+              "label": "授权条款",
+              "url": "https://creativecommons.org/licenses/by-sa/4.0"
+            }
+          ]
+        },
+        {
+          "title": "Doge's Palace · 图片许可",
+          "body": "Didier Descouens · CC BY-SA 4.0；Wikimedia Commons 缩略图，未另作修改。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "图片来源与作者",
+              "url": "https://commons.wikimedia.org/wiki/File:(Venice)_Doge%27s_Palace_and_campanile_of_St._Mark%27s_Basilica_facing_the_sea.jpg"
+            },
+            {
+              "label": "授权条款",
+              "url": "https://creativecommons.org/licenses/by-sa/4.0"
+            }
+          ]
+        },
+        {
+          "title": "Florence Cathedral · 图片许可",
+          "body": "Gary Campbell-Hall · CC BY 2.0；Wikimedia Commons 缩略图，未另作修改。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "图片来源与作者",
+              "url": "https://commons.wikimedia.org/wiki/File:Cattedrale_di_Santa_Maria_del_Fiore_%E2%80%93_Il_Duomo_di_Firenze.jpg"
+            },
+            {
+              "label": "授权条款",
+              "url": "https://creativecommons.org/licenses/by/2.0"
+            }
+          ]
+        },
+        {
+          "title": "Milan Cathedral · 图片许可",
+          "body": "Jiuguang Wang · CC BY-SA 3.0；Wikimedia Commons 缩略图，未另作修改。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "图片来源与作者",
+              "url": "https://commons.wikimedia.org/wiki/File:Milan_Cathedral_from_Piazza_del_Duomo.jpg"
+            },
+            {
+              "label": "授权条款",
+              "url": "https://creativecommons.org/licenses/by-sa/3.0"
+            }
+          ]
+        },
+        {
+          "title": "Positano · 图片许可",
+          "body": "JeCCo · CC BY 4.0；Wikimedia Commons 缩略图，未另作修改。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "图片来源与作者",
+              "url": "https://commons.wikimedia.org/wiki/File:Positano_Sunset.JPG"
+            },
+            {
+              "label": "授权条款",
+              "url": "https://creativecommons.org/licenses/by/4.0"
+            }
+          ]
+        },
+        {
+          "title": "Sant'Ignazio, Rome · 图片许可",
+          "body": "Fiat 500e · CC BY 4.0；Wikimedia Commons 缩略图，未另作修改。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "图片来源与作者",
+              "url": "https://commons.wikimedia.org/wiki/File:Church_of_Sant%27Ignazio_di_Loyola.jpg"
+            },
+            {
+              "label": "授权条款",
+              "url": "https://creativecommons.org/licenses/by/4.0"
+            }
+          ]
+        },
+        {
+          "title": "Civita di Bagnoregio · 图片许可",
+          "body": "Orlando Paride · CC BY-SA 4.0；Wikimedia Commons 缩略图，未另作修改。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "图片来源与作者",
+              "url": "https://commons.wikimedia.org/wiki/File:Civita_(Bagnoregio)_-_Panorama.jpg"
+            },
+            {
+              "label": "授权条款",
+              "url": "https://creativecommons.org/licenses/by-sa/4.0"
+            }
+          ]
+        },
+        {
+          "title": "Sforza Castle · 图片许可",
+          "body": "Jakub Hałun · CC BY-SA 4.0；Wikimedia Commons 缩略图，未另作修改。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "图片来源与作者",
+              "url": "https://commons.wikimedia.org/wiki/File:20110725_Castello_Sforzesco_Milan_5557.jpg"
+            },
+            {
+              "label": "授权条款",
+              "url": "https://creativecommons.org/licenses/by-sa/4.0"
+            }
+          ]
+        },
+        {
+          "title": "Loggia dei Lanzi · 图片许可",
+          "body": "Francesco Bini · CC BY-SA 4.0；Wikimedia Commons 缩略图，未另作修改。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "图片来源与作者",
+              "url": "https://commons.wikimedia.org/wiki/File:Firenze,_loggia_dei_lanzi_(2020)_01.jpg"
+            },
+            {
+              "label": "授权条款",
+              "url": "https://creativecommons.org/licenses/by-sa/4.0"
+            }
+          ]
+        },
+        {
+          "title": "Pompeii · 图片许可",
+          "body": "Carsten Steger · CC BY-SA 4.0；Wikimedia Commons 缩略图，未另作修改。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "图片来源与作者",
+              "url": "https://commons.wikimedia.org/wiki/File:Aerial_image_of_Pompeii_and_Mount_Vesuvius_(view_from_the_southeast).jpg"
+            },
+            {
+              "label": "授权条款",
+              "url": "https://creativecommons.org/licenses/by-sa/4.0"
+            }
+          ]
+        },
+        {
+          "title": "Amalfi Cathedral · 图片许可",
+          "body": "Berthold Werner · CC BY-SA 3.0；Wikimedia Commons 缩略图，未另作修改。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "图片来源与作者",
+              "url": "https://commons.wikimedia.org/wiki/File:Amalfi_BW_2013-05-15_10-09-21.jpg"
+            },
+            {
+              "label": "授权条款",
+              "url": "https://creativecommons.org/licenses/by-sa/3.0"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

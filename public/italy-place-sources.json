@@ -1,0 +1,115 @@
+{
+  "Arch of Constantine": {
+    "point": [
+      41.88972222,
+      12.49083333
+    ],
+    "source": "https://en.wikipedia.org/wiki/Arch_of_Constantine"
+  },
+  "Biblioteca Ambrosiana": {
+    "point": [
+      45.4631,
+      9.1854
+    ],
+    "source": "https://en.wikipedia.org/wiki/Biblioteca_Ambrosiana"
+  },
+  "Naples": {
+    "point": [
+      40.8358,
+      14.2486
+    ],
+    "source": "https://en.wikipedia.org/wiki/Naples"
+  },
+  "Pantheon, Rome": {
+    "point": [
+      41.8986,
+      12.4768
+    ],
+    "source": "https://en.wikipedia.org/wiki/Pantheon,_Rome"
+  },
+  "Rialto Bridge": {
+    "point": [
+      45.438,
+      12.336
+    ],
+    "source": "https://en.wikipedia.org/wiki/Rialto_Bridge"
+  },
+  "Rome Fiumicino Airport": {
+    "point": [
+      41.80027778,
+      12.23888889
+    ],
+    "source": "https://en.wikipedia.org/wiki/Rome_Fiumicino_Airport"
+  },
+  "Salerno": {
+    "point": [
+      40.6806,
+      14.7594
+    ],
+    "source": "https://en.wikipedia.org/wiki/Salerno"
+  },
+  "Spanish Steps": {
+    "point": [
+      41.9061,
+      12.4828
+    ],
+    "source": "https://en.wikipedia.org/wiki/Spanish_Steps"
+  },
+  "Trevi Fountain": {
+    "point": [
+      41.90083333,
+      12.48305556
+    ],
+    "source": "https://en.wikipedia.org/wiki/Trevi_Fountain"
+  },
+  "Chengdu Tianfu International Airport": {
+    "point": [
+      30.319,
+      104.445
+    ],
+    "source": "https://en.wikipedia.org/wiki/Chengdu_Tianfu_International_Airport"
+  },
+  "Giotto's Campanile": {
+    "point": [
+      43.772895,
+      11.255235
+    ],
+    "source": "https://en.wikipedia.org/wiki/Giotto's_Campanile"
+  },
+  "Santa Croce, Florence": {
+    "point": [
+      43.76841667,
+      11.26272222
+    ],
+    "source": "https://en.wikipedia.org/wiki/Santa_Croce,_Florence"
+  },
+  "Montecatini Terme": {
+    "point": [
+      43.88277778,
+      10.77111111
+    ],
+    "source": "https://www.wikidata.org/wiki/Q49605"
+  },
+  "Bridge of Sighs": {
+    "point": [
+      45.43405556,
+      12.34086111
+    ],
+    "source": "https://www.wikidata.org/wiki/Q52517"
+  },
+  "Dante house": {
+    "point": [
+      43.77109,
+      11.25705
+    ],
+    "source": "https://www.openstreetmap.org/node/2934171474",
+    "addressSource": "https://www.museocasadidante.it/en/"
+  },
+  "Rome city reference": {
+    "point": [
+      41.9028,
+      12.4964
+    ],
+    "source": "https://www.openstreetmap.org/#map=12/41.9028/12.4964"
+  }
+}

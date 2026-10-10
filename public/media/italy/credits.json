@@ -1,0 +1,171 @@
+{
+  "pisa": {
+    "path": "media/italy/pisa.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Italy_-_Pisa_-_Leaning_Tower.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Italy_-_Pisa_-_Leaning_Tower.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en",
+    "point": [
+      43.72305556,
+      10.39638889
+    ],
+    "title": "Leaning Tower of Pisa"
+  },
+  "rome": {
+    "path": "media/italy/rome.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Colosseo_2020.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/d/de/Colosseo_2020.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "credit": "FeaturedPics",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "point": [
+      41.8903,
+      12.4922
+    ],
+    "title": "Colosseum"
+  },
+  "venice": {
+    "path": "media/italy/venice.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Piazza_San_Marco_(Venice)_at_night-msu-2021-6449-.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/1/17/Piazza_San_Marco_%28Venice%29_at_night-msu-2021-6449-.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "credit": "Matthias Süßen",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "point": [
+      45.43388889,
+      12.33805556
+    ],
+    "title": "Piazza San Marco"
+  },
+  "ducal": {
+    "path": "media/italy/ducal.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:(Venice)_Doge%27s_Palace_and_campanile_of_St._Mark%27s_Basilica_facing_the_sea.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/0/00/%28Venice%29_Doge%27s_Palace_and_campanile_of_St._Mark%27s_Basilica_facing_the_sea.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "credit": "Didier Descouens",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "point": [
+      45.4337,
+      12.3405
+    ],
+    "title": "Doge's Palace"
+  },
+  "florence": {
+    "path": "media/italy/florence.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cattedrale_di_Santa_Maria_del_Fiore_%E2%80%93_Il_Duomo_di_Firenze.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/c/c7/Cattedrale_di_Santa_Maria_del_Fiore_%E2%80%93_Il_Duomo_di_Firenze.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "credit": "Gary Campbell-Hall",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "point": [
+      43.77305556,
+      11.25694444
+    ],
+    "title": "Florence Cathedral"
+  },
+  "milan": {
+    "path": "media/italy/milan.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Milan_Cathedral_from_Piazza_del_Duomo.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/7/70/Milan_Cathedral_from_Piazza_del_Duomo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "credit": "Jiuguang Wang",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "point": [
+      45.46416667,
+      9.19138889
+    ],
+    "title": "Milan Cathedral"
+  },
+  "positano": {
+    "path": "media/italy/positano.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Positano_Sunset.JPG",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Positano_Sunset.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "credit": "JeCCo",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "point": [
+      40.63333333,
+      14.48333333
+    ],
+    "title": "Positano"
+  },
+  "ignazio": {
+    "path": "media/italy/ignazio.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Church_of_Sant%27Ignazio_di_Loyola.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/7/76/Church_of_Sant%27Ignazio_di_Loyola.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "credit": "Fiat 500e",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "point": [
+      41.899,
+      12.47977778
+    ],
+    "title": "Sant'Ignazio, Rome"
+  },
+  "civita": {
+    "path": "media/italy/civita.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Civita_(Bagnoregio)_-_Panorama.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Civita_%28Bagnoregio%29_-_Panorama.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "credit": "Orlando Paride",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "point": [
+      42.62777778,
+      12.11388889
+    ],
+    "title": "Civita di Bagnoregio"
+  },
+  "castle": {
+    "path": "media/italy/castle.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:20110725_Castello_Sforzesco_Milan_5557.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/7/7e/20110725_Castello_Sforzesco_Milan_5557.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "credit": "Jakub Hałun",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "point": [
+      45.47,
+      9.17861111
+    ],
+    "title": "Sforza Castle"
+  },
+  "loggia": {
+    "path": "media/italy/loggia.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Firenze,_loggia_dei_lanzi_(2020)_01.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/8/80/Firenze%2C_loggia_dei_lanzi_%282020%29_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "credit": "Francesco Bini",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "point": [
+      43.76920278,
+      11.25565833
+    ],
+    "title": "Loggia dei Lanzi"
+  },
+  "pompeii": {
+    "path": "media/italy/pompeii.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aerial_image_of_Pompeii_and_Mount_Vesuvius_(view_from_the_southeast).jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Aerial_image_of_Pompeii_and_Mount_Vesuvius_%28view_from_the_southeast%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "credit": "Carsten Steger",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "point": [
+      40.75,
+      14.48611111
+    ],
+    "title": "Pompeii"
+  },
+  "amalfi": {
+    "path": "media/italy/amalfi.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Amalfi_BW_2013-05-15_10-09-21.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/3/38/Amalfi_BW_2013-05-15_10-09-21.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "credit": "Berthold Werner",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "point": [
+      40.63444444,
+      14.60305556
+    ],
+    "title": "Amalfi Cathedral"
+  }
+}

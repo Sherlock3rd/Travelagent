@@ -13,7 +13,7 @@ await mkdir(output, { recursive: true });
 await cp(new URL('public/', root), output, { recursive: true });
 const fingerprint = createHash('sha256');
 for (const name of (await readdir(new URL('public/', root), { recursive: true })).sort()) {
-  if (/\.(?:js|mjs|html|css|json)$/.test(name)) fingerprint.update(name).update(await readFile(new URL('public/' + name.replaceAll('\\', '/'), root)));
+  if (/\.(?:js|mjs|html|css|json|jpg|png|svg)$/.test(name)) fingerprint.update(name).update(await readFile(new URL('public/' + name.replaceAll('\\', '/'), root)));
 }
 const revision = process.env.GITHUB_SHA || fingerprint.digest('hex').slice(0, 16);
 // Version app modules as a graph so previously visited Pages URLs cannot keep

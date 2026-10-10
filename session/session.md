@@ -191,3 +191,10 @@
 - 实现提交 a4e6feb1aabd19536af6d2d97fb1a3cf09998dda 已推送，线上 release.json 与 sw.js VERSION 回读一致。后续验收文档提交不改变已发布应用资源。
 - 线上 index.html、italy.html、trip.html、sw.js 均 HTTP 200；private/italy-source.txt、rules/rules.md 均 404。
 - 线上真实浏览器显示“离线内容已就绪”，意大利 7 条建议可见，主页往返成功，控制台无 error/warn。交付截图在被忽略的 .runtime/home-published.jpg。
+
+## 2026-10-10 意大利工作台一致性修正
+
+- 用户指出意大利格式、地图、图片及切页未沿用原版；承认设计偏离，按原有工作台重做。
+- 共用原组件，补充 10 天 51 项安排、13 张本地参考照片和独立备选路线；新增离线地理轮廓，旧勾选迁移，埃及存储与云端接口保持隔离。
+- 31 项测试与构建通过；浏览器图文、跳转、移动端以及应用源停止后的重开检查通过。未关闭整机互联网，离线街道细节不承诺。
+- 详见 [修正需求](requirements/italy-workbench-correction.md)、[错误复盘](../mistakes/trip-workbench-consistency.md)。

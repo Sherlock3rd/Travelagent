@@ -465,3 +465,6 @@ details.guide-card { display:block; padding:0; overflow:hidden; }
   .day-heading{gap:10px}
   .day-map-button{min-height:44px}
 }
+
+/* Italy uses the same workbench, including its offline route overlays. */
+.has-offline-geography { background: #dce9ea; }
