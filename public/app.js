@@ -8,6 +8,7 @@ import { COUNTRIES } from './countries.js';
 import { loadInitialTrip } from './initial-trip.js';
 import { applyContentUpdate } from './content-update.js';
 import { hotelUpdate } from './italy-hotels-update.js';
+import { flightUpdate } from './italy-flights-update.js';
 import { cloudClient } from './cloud-sync.js';
 import { isItaly, STORAGE_KEY, RECOVERY_KEY, publishedPath, dateLabel, localTripClient, migrateItalyChecklist } from './trip-context.js';
 mountLightbox();
@@ -34,18 +35,18 @@ try {
     return published;
   }, STORAGE_KEY);
   state = initial.state; lastSaved = initial.serialized;
-  if(isItaly) {
+  if(isItaly) for(const update of [hotelUpdate,flightUpdate]) {
     try {
-      const updated=applyContentUpdate(localStorage,STORAGE_KEY,hotelUpdate);
+      const updated=applyContentUpdate(localStorage,STORAGE_KEY,update);
       if(updated){state=updated.state;lastSaved=updated.serialized;}
       if(updated?.conflicts.length){
         const notice=document.createElement('p');notice.className='storage-warning';
-        notice.textContent='酒店资料已更新。部分内容保留了你的手动修改，请在“附加攻略 → 7 晚酒店与出发路线”核对：'+updated.conflicts.join('、');
+        notice.textContent=(update===hotelUpdate?'酒店资料已更新。部分内容保留了你的手动修改，请在“附加攻略 → 7 晚酒店与出发路线”核对：':'航班衔接更新保留了你的手动修改，请核对这些日期的地图路线：')+updated.conflicts.join('、');
         $('#main').prepend(notice);
       }
     } catch {
       const notice=document.createElement('p');notice.className='storage-warning';
-      notice.textContent='酒店增量更新暂未完成，原有本机内容已保留。请先导出备份，释放空间后刷新重试。';
+      notice.textContent='行程增量更新暂未完成，原有本机内容已保留。请先导出备份，释放空间后刷新重试。';
       $('#main').prepend(notice);
     }
   }
