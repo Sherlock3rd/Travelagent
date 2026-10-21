@@ -104,10 +104,10 @@
           ]
         },
         {
-          "name": "那不勒斯",
+          "name": "波佐利 · Grand Hotel Serapide",
           "point": [
-            40.8358,
-            14.2486
+            40.822909,
+            14.142697
           ]
         }
       ],
@@ -115,11 +115,11 @@
       "departure": "",
       "arrival": "",
       "duration": "10.22 · 见当日安排",
-      "lodging": "四星级酒店 · 名称与地址待定",
-      "lodgingStatus": "pending",
+      "lodging": "Grand Hotel Serapide · 波佐利｜Via S. Gennaro Agnano, 34, Pozzuoli",
+      "lodgingStatus": "confirmed",
       "status": "pending",
-      "note": "团队安排：参考 3U3895：成都 01:40 → 罗马 07:00。10:00 斗兽场入内 ≥60 分钟、君士坦丁凯旋门 ≥10 分钟；12:00 午餐；14:00 罗马深度游 ≥120 分钟：许愿池、万神殿外观、西班牙广场；18:00 晚餐。\n自己的时间：只有领队明确放行才考虑万神殿附近的圣依纳爵堂；建议至少留出 60 分钟独立窗口。长途飞行后优先跟稳团队。\n待确认：标题含罗马至那不勒斯 229 km，但正文未写转场时刻；四星酒店名称和位置待定。",
-      "source": "用户提供的 10 月 9 日版意大利 10 天行程单，第 1–4 页；参考安排，未代替最终通知。",
+      "note": "酒店更新后的路线：罗马机场 → 罗马团队游览 → 波佐利 Grand Hotel Serapide。当天转场很长，晚间活动以实际抵达为准。\n自己的时间：只有领队确认可离团后再执行备选；酒店确定不代表新增自由活动。",
+      "source": "用户提供的 10 月 9 日版意大利 10 天行程单，第 1–4 页；参考安排，未代替最终通知。 酒店更新：用户提供《意大利一团酒店.docx》，2026-10-21 核对；10.22 酒店名由用户确认。",
       "road": null,
       "activities": [
         {
@@ -240,13 +240,13 @@
         },
         {
           "id": "italy-d2-a8",
-          "name": "团队晚餐与入住",
+          "name": "团队晚餐 · 地点待通知",
           "point": null,
           "time": "18:00",
           "duration": "",
           "transport": "按团队安排",
           "status": "pending",
-          "note": "那不勒斯转场时刻及酒店地址待定。",
+          "note": "餐厅和抵达酒店的时间待领队通知；酒店已另列为入住安排。",
           "url": "",
           "photo": null,
           "photos": []
@@ -273,13 +273,29 @@
             "checkedDate": "2026-10-10"
           },
           "photos": []
+        },
+        {
+          "id": "italy-d2-hotel",
+          "name": "入住 · Grand Hotel Serapide",
+          "point": [
+            40.822909,
+            14.142697
+          ],
+          "time": "按领队通知",
+          "duration": "",
+          "transport": "团队交通",
+          "status": "confirmed",
+          "note": "10.22 入住 / 次日退房。住宿已确认；抵达、晚餐地点与时刻仍按领队通知。\nVia S. Gennaro Agnano, 34, Pozzuoli\n用户确认以文档截图与地址为准，原文字中的 Towers Hotel 不采用。位于那不勒斯以西的波佐利，不能按那不勒斯市中心安排夜游。\n定位依据：官网 GPS；2026-10-21 核验。",
+          "url": "https://www.grandhotelserapide.it/contatti/",
+          "photo": null,
+          "photos": []
         }
       ],
       "routePlans": [
         {
           "id": "italy-d2-tour",
           "name": "团队行程 · 参考路线",
-          "note": "参考资料中的先后顺序；未知小镇与酒店保留缺口，不虚构道路或集合点。",
+          "note": "入住地点已按酒店表补全；地点间连线只示意先后，非道路导航。团队游览、用餐和发车时刻仍以领队通知为准。",
           "stops": [
             {
               "id": "italy-d2-s0",
@@ -291,29 +307,31 @@
               "eventIds": [
                 "italy-d2-a1"
               ],
-              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "note": "景区 / 城市参考点，非确认集合点。",
               "url": ""
             },
             {
               "id": "italy-d2-s1",
-              "name": "罗马（城市参考点）",
+              "name": "罗马",
               "point": [
                 41.9028,
                 12.4964
               ],
               "eventIds": [],
-              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "note": "景区 / 城市参考点，非确认集合点。",
               "url": ""
             },
             {
               "id": "italy-d2-s2",
-              "name": "那不勒斯（城市参考点）",
+              "name": "波佐利 · Grand Hotel Serapide",
               "point": [
-                40.8358,
-                14.2486
+                40.822909,
+                14.142697
               ],
-              "eventIds": [],
-              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "eventIds": [
+                "italy-d2-hotel"
+              ],
+              "note": "酒店位置参考；上车点与集合时间由领队指定。",
               "url": ""
             },
             {
@@ -387,22 +405,22 @@
               "id": "italy-d2-leg1",
               "from": "italy-d2-s0",
               "to": "italy-d2-s1",
-              "mode": "团队交通",
+              "mode": "团队交通 · 示意",
               "duration": "以领队安排为准",
-              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "note": "按酒店位置调整的先后示意线，不是实际道路或耗时，不用于导航。",
               "url": "",
-              "checkedDate": "",
+              "checkedDate": "2026-10-21",
               "road": null
             },
             {
               "id": "italy-d2-leg2",
               "from": "italy-d2-s1",
               "to": "italy-d2-s2",
-              "mode": "团队交通",
+              "mode": "团队交通 · 示意",
               "duration": "以领队安排为准",
-              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "note": "按酒店位置调整的先后示意线，不是实际道路或耗时，不用于导航。",
               "url": "",
-              "checkedDate": "",
+              "checkedDate": "2026-10-21",
               "road": null
             }
           ]
@@ -480,10 +498,10 @@
       "date": "",
       "stops": [
         {
-          "name": "那不勒斯",
+          "name": "波佐利 · Grand Hotel Serapide",
           "point": [
-            40.8358,
-            14.2486
+            40.822909,
+            14.142697
           ]
         },
         {
@@ -501,10 +519,10 @@
           ]
         },
         {
-          "name": "萨勒诺",
+          "name": "梅尔卡托圣塞韦里诺 · San Severino Park Hotel & Spa",
           "point": [
-            40.6806,
-            14.7594
+            40.772151,
+            14.744192
           ]
         }
       ],
@@ -512,23 +530,26 @@
       "departure": "",
       "arrival": "",
       "duration": "10.23 · 见当日安排",
-      "lodging": "四星级酒店 · 名称与地址待定",
-      "lodgingStatus": "pending",
+      "lodging": "San Severino Park Hotel & Spa · 梅尔卡托圣塞韦里诺｜Via Bagnara, 10, Mercato San Severino",
+      "lodgingStatus": "confirmed",
       "status": "pending",
-      "note": "团队安排：08:30 早餐后出发；10:00 波西塔诺 ≥30 分钟；14:00 阿马尔菲海岸 ≥30 分钟；18:00 入住。午餐、晚餐自理。\n自己的时间：自理餐不等于可离团。确认至少 75 分钟且集合在阿马尔菲镇中心，才考虑天堂回廊；只有 30 分钟就留在主教堂广场。\n待确认：海岸船票列在包含项目中，船班、码头与当天运行情况未列。四星酒店待定。",
-      "source": "用户提供的 10 月 9 日版意大利 10 天行程单，第 1–4 页；参考安排，未代替最终通知。",
+      "note": "酒店更新后的路线：波佐利酒店 → 波西塔诺 → 阿马尔菲 → 梅尔卡托圣塞韦里诺酒店。海岸车船衔接与停靠点仍待确认。\n自己的时间：只有领队确认可离团后再执行备选；酒店确定不代表新增自由活动。",
+      "source": "用户提供的 10 月 9 日版意大利 10 天行程单，第 1–4 页；参考安排，未代替最终通知。 酒店更新：用户提供《意大利一团酒店.docx》，2026-10-21 核对；10.22 酒店名由用户确认。",
       "road": null,
       "activities": [
         {
           "id": "italy-d3-a1",
-          "name": "酒店早餐后出发",
-          "point": null,
+          "name": "从 波佐利 酒店出发",
+          "point": [
+            40.822909,
+            14.142697
+          ],
           "time": "08:30",
           "duration": "",
           "transport": "按团队安排",
           "status": "pending",
-          "note": "随团赴波西塔诺。",
-          "url": "",
+          "note": "出发酒店：Grand Hotel Serapide；Via S. Gennaro Agnano, 34, Pozzuoli。\n原单时刻仅作参考，早餐和发车以领队通知为准。",
+          "url": "https://www.grandhotelserapide.it/contatti/",
           "photo": null,
           "photos": []
         },
@@ -593,13 +614,13 @@
         },
         {
           "id": "italy-d3-a5",
-          "name": "萨勒诺方向入住",
+          "name": "晚餐自理 · 时间待通知",
           "point": null,
           "time": "18:00",
           "duration": "",
           "transport": "按团队安排",
           "status": "pending",
-          "note": "晚餐自理，四星酒店名称与位置待定。",
+          "note": "餐厅和抵达酒店的时间待领队通知；酒店已另列为入住安排。",
           "url": "",
           "photo": null,
           "photos": []
@@ -626,23 +647,41 @@
             "checkedDate": "2026-10-10"
           },
           "photos": []
+        },
+        {
+          "id": "italy-d3-hotel",
+          "name": "入住 · San Severino Park Hotel & Spa",
+          "point": [
+            40.772151,
+            14.744192
+          ],
+          "time": "按领队通知",
+          "duration": "",
+          "transport": "团队交通",
+          "status": "confirmed",
+          "note": "10.23 入住 / 次日退房。住宿已确认；抵达、晚餐地点与时刻仍按领队通知。\nVia Bagnara, 10, Mercato San Severino\n萨勒诺内陆住宿，不在海边市中心。文档与官网邮编不同，导航以酒店名、街道及城市为准。\n定位依据：官网嵌入地图参考位置，非精确门口；2026-10-21 核验。",
+          "url": "https://sanseverinoparkhotel.com/contatti/",
+          "photo": null,
+          "photos": []
         }
       ],
       "routePlans": [
         {
           "id": "italy-d3-tour",
           "name": "团队行程 · 参考路线",
-          "note": "参考资料中的先后顺序；未知小镇与酒店保留缺口，不虚构道路或集合点。",
+          "note": "入住地点已按酒店表补全；地点间连线只示意先后，非道路导航。团队游览、用餐和发车时刻仍以领队通知为准。",
           "stops": [
             {
               "id": "italy-d3-s0",
-              "name": "那不勒斯（城市参考点）",
+              "name": "波佐利 · Grand Hotel Serapide",
               "point": [
-                40.8358,
-                14.2486
+                40.822909,
+                14.142697
               ],
-              "eventIds": [],
-              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "eventIds": [
+                "italy-d3-a1"
+              ],
+              "note": "酒店位置参考；上车点与集合时间由领队指定。",
               "url": ""
             },
             {
@@ -655,31 +694,34 @@
               "eventIds": [
                 "italy-d3-a2"
               ],
-              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "note": "景区 / 城市参考点，非确认集合点。",
               "url": ""
             },
             {
               "id": "italy-d3-s2",
-              "name": "阿马尔菲主教堂广场",
+              "name": "阿马尔菲",
               "point": [
                 40.63444444,
                 14.60305556
               ],
               "eventIds": [
-                "italy-d3-a4"
+                "italy-d3-a4",
+                "italy-option-amalfi"
               ],
-              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "note": "景区 / 城市参考点，非确认集合点。",
               "url": ""
             },
             {
               "id": "italy-d3-s3",
-              "name": "萨勒诺（城市参考点）",
+              "name": "梅尔卡托圣塞韦里诺 · San Severino Park Hotel & Spa",
               "point": [
-                40.6806,
-                14.7594
+                40.772151,
+                14.744192
               ],
-              "eventIds": [],
-              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "eventIds": [
+                "italy-d3-hotel"
+              ],
+              "note": "酒店位置参考；上车点与集合时间由领队指定。",
               "url": ""
             }
           ],
@@ -688,33 +730,33 @@
               "id": "italy-d3-leg1",
               "from": "italy-d3-s0",
               "to": "italy-d3-s1",
-              "mode": "团队交通（车船待确认）",
+              "mode": "团队交通 · 示意",
               "duration": "以领队安排为准",
-              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "note": "按酒店位置调整的先后示意线，不是实际道路或耗时，不用于导航。",
               "url": "",
-              "checkedDate": "",
+              "checkedDate": "2026-10-21",
               "road": null
             },
             {
               "id": "italy-d3-leg2",
               "from": "italy-d3-s1",
               "to": "italy-d3-s2",
-              "mode": "团队交通（车船待确认）",
+              "mode": "团队交通 · 示意",
               "duration": "以领队安排为准",
-              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "note": "按酒店位置调整的先后示意线，不是实际道路或耗时，不用于导航。",
               "url": "",
-              "checkedDate": "",
+              "checkedDate": "2026-10-21",
               "road": null
             },
             {
               "id": "italy-d3-leg3",
               "from": "italy-d3-s2",
               "to": "italy-d3-s3",
-              "mode": "团队交通（车船待确认）",
+              "mode": "团队交通 · 示意",
               "duration": "以领队安排为准",
-              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "note": "按酒店位置调整的先后示意线，不是实际道路或耗时，不用于导航。",
               "url": "",
-              "checkedDate": "",
+              "checkedDate": "2026-10-21",
               "road": null
             }
           ]
@@ -792,10 +834,10 @@
       "date": "",
       "stops": [
         {
-          "name": "萨勒诺",
+          "name": "梅尔卡托圣塞韦里诺 · San Severino Park Hotel & Spa",
           "point": [
-            40.6806,
-            14.7594
+            40.772151,
+            14.744192
           ]
         },
         {
@@ -806,10 +848,10 @@
           ]
         },
         {
-          "name": "罗马",
+          "name": "波梅齐亚 · Hotel Principe",
           "point": [
-            41.9028,
-            12.4964
+            41.679114,
+            12.501461
           ]
         }
       ],
@@ -817,23 +859,26 @@
       "departure": "",
       "arrival": "",
       "duration": "10.24 · 见当日安排",
-      "lodging": "四星级酒店 · 名称与地址待定",
-      "lodgingStatus": "pending",
+      "lodging": "Hotel Principe · 波梅齐亚｜Via dei Castelli Romani, 14A, Pomezia",
+      "lodgingStatus": "confirmed",
       "status": "pending",
-      "note": "团队安排：08:30 早餐后出发；10:00 庞贝考古遗址，含人工讲解，≥1 小时；午餐自理；18:00 团队晚餐。\n自己的时间：把兴趣放进既有参观：请讲解员重点讲街道、民居与商铺。只有明确延长参观才加看其他街区，避免另跑远处遗址。\n待确认：萨勒诺至庞贝 34 km、庞贝至罗马 240 km（行程单标注）；实际出入口及四星酒店待定。",
-      "source": "用户提供的 10 月 9 日版意大利 10 天行程单，第 1–4 页；参考安排，未代替最终通知。",
+      "note": "酒店更新后的路线：梅尔卡托圣塞韦里诺酒店 → 庞贝 → 波梅齐亚 Hotel Principe。原单写罗马方向，不自动增加罗马市内游览。\n自己的时间：只有领队确认可离团后再执行备选；酒店确定不代表新增自由活动。",
+      "source": "用户提供的 10 月 9 日版意大利 10 天行程单，第 1–4 页；参考安排，未代替最终通知。 酒店更新：用户提供《意大利一团酒店.docx》，2026-10-21 核对；10.22 酒店名由用户确认。",
       "road": null,
       "activities": [
         {
           "id": "italy-d4-a1",
-          "name": "酒店早餐后出发",
-          "point": null,
+          "name": "从 梅尔卡托圣塞韦里诺 酒店出发",
+          "point": [
+            40.772151,
+            14.744192
+          ],
           "time": "08:30",
           "duration": "",
           "transport": "按团队安排",
           "status": "pending",
-          "note": "萨勒诺前往庞贝。",
-          "url": "",
+          "note": "出发酒店：San Severino Park Hotel & Spa；Via Bagnara, 10, Mercato San Severino。\n原单时刻仅作参考，早餐和发车以领队通知为准。",
+          "url": "https://sanseverinoparkhotel.com/contatti/",
           "photo": null,
           "photos": []
         },
@@ -875,14 +920,30 @@
         },
         {
           "id": "italy-d4-a4",
-          "name": "团队晚餐与入住",
+          "name": "团队晚餐 · 地点待通知",
           "point": null,
           "time": "18:00",
           "duration": "",
           "transport": "按团队安排",
           "status": "pending",
-          "note": "罗马方向，酒店待定。",
+          "note": "餐厅和抵达酒店的时间待领队通知；酒店已另列为入住安排。",
           "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-d4-hotel",
+          "name": "入住 · Hotel Principe",
+          "point": [
+            41.679114,
+            12.501461
+          ],
+          "time": "按领队通知",
+          "duration": "",
+          "transport": "团队交通",
+          "status": "confirmed",
+          "note": "10.24 入住 / 次日退房。住宿已确认；抵达、晚餐地点与时刻仍按领队通知。\nVia dei Castelli Romani, 14A, Pomezia\n罗马以南的波梅齐亚住宿，不是罗马市中心；不据此安排步行返回罗马景点。文档邮编 00040、官网 00071，保留街道与城市用于核对。\n定位依据：官网嵌入地图街道参考位置，非精确门口；2026-10-21 核验。",
+          "url": "https://www.hotelprincipegroup.it/contatti",
           "photo": null,
           "photos": []
         }
@@ -891,17 +952,19 @@
         {
           "id": "italy-d4-tour",
           "name": "团队行程 · 参考路线",
-          "note": "参考资料中的先后顺序；未知小镇与酒店保留缺口，不虚构道路或集合点。",
+          "note": "入住地点已按酒店表补全；地点间连线只示意先后，非道路导航。团队游览、用餐和发车时刻仍以领队通知为准。",
           "stops": [
             {
               "id": "italy-d4-s0",
-              "name": "萨勒诺（城市参考点）",
+              "name": "梅尔卡托圣塞韦里诺 · San Severino Park Hotel & Spa",
               "point": [
-                40.6806,
-                14.7594
+                40.772151,
+                14.744192
               ],
-              "eventIds": [],
-              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "eventIds": [
+                "italy-d4-a1"
+              ],
+              "note": "酒店位置参考；上车点与集合时间由领队指定。",
               "url": ""
             },
             {
@@ -914,18 +977,20 @@
               "eventIds": [
                 "italy-d4-a2"
               ],
-              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "note": "景区 / 城市参考点，非确认集合点。",
               "url": ""
             },
             {
               "id": "italy-d4-s2",
-              "name": "罗马（城市参考点）",
+              "name": "波梅齐亚 · Hotel Principe",
               "point": [
-                41.9028,
-                12.4964
+                41.679114,
+                12.501461
               ],
-              "eventIds": [],
-              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "eventIds": [
+                "italy-d4-hotel"
+              ],
+              "note": "酒店位置参考；上车点与集合时间由领队指定。",
               "url": ""
             }
           ],
@@ -934,22 +999,22 @@
               "id": "italy-d4-leg1",
               "from": "italy-d4-s0",
               "to": "italy-d4-s1",
-              "mode": "团队交通",
+              "mode": "团队交通 · 示意",
               "duration": "以领队安排为准",
-              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "note": "按酒店位置调整的先后示意线，不是实际道路或耗时，不用于导航。",
               "url": "",
-              "checkedDate": "",
+              "checkedDate": "2026-10-21",
               "road": null
             },
             {
               "id": "italy-d4-leg2",
               "from": "italy-d4-s1",
               "to": "italy-d4-s2",
-              "mode": "团队交通",
+              "mode": "团队交通 · 示意",
               "duration": "以领队安排为准",
-              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "note": "按酒店位置调整的先后示意线，不是实际道路或耗时，不用于导航。",
               "url": "",
-              "checkedDate": "",
+              "checkedDate": "2026-10-21",
               "road": null
             }
           ]
@@ -961,10 +1026,10 @@
       "date": "",
       "stops": [
         {
-          "name": "罗马",
+          "name": "波梅齐亚 · Hotel Principe",
           "point": [
-            41.9028,
-            12.4964
+            41.679114,
+            12.501461
           ]
         },
         {
@@ -975,31 +1040,37 @@
           ]
         },
         {
-          "name": "意大利小镇（名称待定）",
-          "point": null
+          "name": "卡尔皮 · Hotel Carpi",
+          "point": [
+            44.777162,
+            10.861098
+          ]
         }
       ],
       "mode": "大巴",
       "departure": "",
       "arrival": "",
       "duration": "10.25 · 见当日安排",
-      "lodging": "四星级酒店 · 名称与地址待定",
-      "lodgingStatus": "pending",
+      "lodging": "Hotel Carpi · 卡尔皮｜Via delle Magliaie, 2/4, 41012 Carpi",
+      "lodgingStatus": "confirmed",
       "status": "pending",
-      "note": "团队安排：08:00 早餐后出发；14:00 天空之城 ≥30 分钟；午餐自理；18:00 团队晚餐。\n自己的时间：中世纪石巷、城门与聚落空间本身就值得看。先确认 30 分钟是否包括长桥往返；有余量再走广场附近，不另开跨城支线。\n待确认：后续“意小镇”未给名称。原文的《天空之城》原型说法缺少创作者证据，页面不当成已证实事实。",
-      "source": "用户提供的 10 月 9 日版意大利 10 天行程单，第 1–4 页；参考安排，未代替最终通知。",
+      "note": "酒店更新后的路线：波梅齐亚酒店 → 白露里治奥 → 卡尔皮 Hotel Carpi。原单 14:00 古镇、18:00 晚餐的时间需结合实际长途转场复核。\n自己的时间：只有领队确认可离团后再执行备选；酒店确定不代表新增自由活动。",
+      "source": "用户提供的 10 月 9 日版意大利 10 天行程单，第 1–4 页；参考安排，未代替最终通知。 酒店更新：用户提供《意大利一团酒店.docx》，2026-10-21 核对；10.22 酒店名由用户确认。",
       "road": null,
       "activities": [
         {
           "id": "italy-d5-a1",
-          "name": "酒店早餐后出发",
-          "point": null,
+          "name": "从 波梅齐亚 酒店出发",
+          "point": [
+            41.679114,
+            12.501461
+          ],
           "time": "08:00",
           "duration": "",
           "transport": "按团队安排",
           "status": "pending",
-          "note": "前往白露里治奥。",
-          "url": "",
+          "note": "出发酒店：Hotel Principe；Via dei Castelli Romani, 14A, Pomezia。\n原单时刻仅作参考，早餐和发车以领队通知为准。",
+          "url": "https://www.hotelprincipegroup.it/contatti",
           "photo": null,
           "photos": []
         },
@@ -1028,14 +1099,30 @@
         },
         {
           "id": "italy-d5-a3",
-          "name": "团队晚餐与入住",
+          "name": "团队晚餐 · 地点待通知",
           "point": null,
           "time": "18:00",
           "duration": "",
           "transport": "按团队安排",
           "status": "pending",
-          "note": "“意小镇”未给名称，地图不虚构其位置；午餐自理。",
+          "note": "餐厅和抵达酒店的时间待领队通知；酒店已另列为入住安排。",
           "url": "",
+          "photo": null,
+          "photos": []
+        },
+        {
+          "id": "italy-d5-hotel",
+          "name": "入住 · Hotel Carpi",
+          "point": [
+            44.777162,
+            10.861098
+          ],
+          "time": "按领队通知",
+          "duration": "",
+          "transport": "团队交通",
+          "status": "confirmed",
+          "note": "10.25 入住 / 次日退房。住宿已确认；抵达、晚餐地点与时刻仍按领队通知。\nVia delle Magliaie, 2/4, 41012 Carpi\n原行程未命名的“意大利小镇”住宿落实为卡尔皮；不是新增团队游览项目。\n定位依据：官网 GPS；2026-10-21 核验。",
+          "url": "https://www.hotelcarpi.it/en/contacts",
           "photo": null,
           "photos": []
         }
@@ -1044,17 +1131,19 @@
         {
           "id": "italy-d5-tour",
           "name": "团队行程 · 参考路线",
-          "note": "参考资料中的先后顺序；未知小镇与酒店保留缺口，不虚构道路或集合点。",
+          "note": "入住地点已按酒店表补全；地点间连线只示意先后，非道路导航。团队游览、用餐和发车时刻仍以领队通知为准。",
           "stops": [
             {
               "id": "italy-d5-s0",
-              "name": "罗马（城市参考点）",
+              "name": "波梅齐亚 · Hotel Principe",
               "point": [
-                41.9028,
-                12.4964
+                41.679114,
+                12.501461
               ],
-              "eventIds": [],
-              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "eventIds": [
+                "italy-d5-a1"
+              ],
+              "note": "酒店位置参考；上车点与集合时间由领队指定。",
               "url": ""
             },
             {
@@ -1067,15 +1156,20 @@
               "eventIds": [
                 "italy-d5-a2"
               ],
-              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "note": "景区 / 城市参考点，非确认集合点。",
               "url": ""
             },
             {
               "id": "italy-d5-s2",
-              "name": "意大利小镇（名称待定）",
-              "point": null,
-              "eventIds": [],
-              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "name": "卡尔皮 · Hotel Carpi",
+              "point": [
+                44.777162,
+                10.861098
+              ],
+              "eventIds": [
+                "italy-d5-hotel"
+              ],
+              "note": "酒店位置参考；上车点与集合时间由领队指定。",
               "url": ""
             }
           ],
@@ -1084,11 +1178,22 @@
               "id": "italy-d5-leg1",
               "from": "italy-d5-s0",
               "to": "italy-d5-s1",
-              "mode": "团队交通",
+              "mode": "团队交通 · 示意",
               "duration": "以领队安排为准",
-              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "note": "按酒店位置调整的先后示意线，不是实际道路或耗时，不用于导航。",
               "url": "",
-              "checkedDate": "",
+              "checkedDate": "2026-10-21",
+              "road": null
+            },
+            {
+              "id": "italy-d5-leg2",
+              "from": "italy-d5-s1",
+              "to": "italy-d5-s2",
+              "mode": "团队交通 · 示意",
+              "duration": "以领队安排为准",
+              "note": "按酒店位置调整的先后示意线，不是实际道路或耗时，不用于导航。",
+              "url": "",
+              "checkedDate": "2026-10-21",
               "road": null
             }
           ]
@@ -1100,8 +1205,11 @@
       "date": "",
       "stops": [
         {
-          "name": "意大利小镇（名称待定）",
-          "point": null
+          "name": "卡尔皮 · Hotel Carpi",
+          "point": [
+            44.777162,
+            10.861098
+          ]
         },
         {
           "name": "威尼斯",
@@ -1111,10 +1219,10 @@
           ]
         },
         {
-          "name": "米兰",
+          "name": "林比亚泰 · AS Hotel Limbiate Fiera",
           "point": [
-            45.46416667,
-            9.19138889
+            45.605722,
+            9.139944
           ]
         }
       ],
@@ -1122,23 +1230,26 @@
       "departure": "",
       "arrival": "",
       "duration": "10.26 · 见当日安排",
-      "lodging": "四星级酒店 · 名称与地址待定",
-      "lodgingStatus": "pending",
+      "lodging": "AS Hotel Limbiate Fiera · 林比亚泰｜Corso Como, 52, 20812 Limbiate",
+      "lodgingStatus": "confirmed",
       "status": "pending",
-      "note": "团队安排：08:00 早餐后出发；10:30 贡多拉 ≥25 分钟，叹息桥外观 ≥15 分钟，圣马可广场 ≥20 分钟；12:00 午餐；15:30 前往米兰；团队晚餐。\n自己的时间：12:00—15:30 不是已确认自由时间。至少 90 分钟可选圣马可—里亚托步行往返；总督府建议至少 150 分钟独立窗口，且有合适入场时段。\n待确认：必须确认 15:30 指哪里出发，是否还需乘船返回大巴；米兰四星酒店待定。",
-      "source": "用户提供的 10 月 9 日版意大利 10 天行程单，第 1–4 页；参考安排，未代替最终通知。",
+      "note": "酒店更新后的路线：卡尔皮酒店 → 威尼斯 → 林比亚泰 AS Hotel Limbiate Fiera。威尼斯上下船码头与集合位置仍待领队通知。\n自己的时间：只有领队确认可离团后再执行备选；酒店确定不代表新增自由活动。",
+      "source": "用户提供的 10 月 9 日版意大利 10 天行程单，第 1–4 页；参考安排，未代替最终通知。 酒店更新：用户提供《意大利一团酒店.docx》，2026-10-21 核对；10.22 酒店名由用户确认。",
       "road": null,
       "activities": [
         {
           "id": "italy-d6-a1",
-          "name": "酒店早餐后前往威尼斯",
-          "point": null,
+          "name": "从 卡尔皮 酒店出发",
+          "point": [
+            44.777162,
+            10.861098
+          ],
           "time": "08:00",
           "duration": "",
           "transport": "按团队安排",
           "status": "pending",
-          "note": "出发小镇、乘船码头未知。",
-          "url": "",
+          "note": "出发酒店：Hotel Carpi；Via delle Magliaie, 2/4, 41012 Carpi。\n原单时刻仅作参考，早餐和发车以领队通知为准。",
+          "url": "https://www.hotelcarpi.it/en/contacts",
           "photo": null,
           "photos": []
         },
@@ -1215,7 +1326,7 @@
           "duration": "",
           "transport": "按团队安排",
           "status": "pending",
-          "note": "确认这是船班还是大巴发车时间；团队晚餐后入住。",
+          "note": "原单 15:30 前往米兰方向；实际入住林比亚泰 AS Hotel Limbiate Fiera，是否先在米兰市区停留、晚餐位置与抵达时间待领队确认。",
           "url": "",
           "photo": null,
           "photos": []
@@ -1258,25 +1369,46 @@
             "checkedDate": "2026-10-10"
           },
           "photos": []
+        },
+        {
+          "id": "italy-d6-hotel",
+          "name": "入住 · AS Hotel Limbiate Fiera",
+          "point": [
+            45.605722,
+            9.139944
+          ],
+          "time": "按领队通知",
+          "duration": "",
+          "transport": "团队交通",
+          "status": "confirmed",
+          "note": "10.26 入住 / 次日退房。住宿已确认；抵达、晚餐地点与时刻仍按领队通知。\nCorso Como, 52, 20812 Limbiate\n位于米兰北侧林比亚泰；米兰教堂后的自由活动从市区集合点出发，不以酒店作步行起点。\n定位依据：酒店官方手册 GPS：45°36′20.6″N 9°08′23.8″E；2026-10-21 核验。",
+          "url": "https://www.ashotels.it/as-hotel-limbiate-fiera",
+          "photo": null,
+          "photos": []
         }
       ],
       "routePlans": [
         {
           "id": "italy-d6-tour",
           "name": "团队行程 · 参考路线",
-          "note": "参考资料中的先后顺序；未知小镇与酒店保留缺口，不虚构道路或集合点。",
+          "note": "入住地点已按酒店表补全；地点间连线只示意先后，非道路导航。团队游览、用餐和发车时刻仍以领队通知为准。",
           "stops": [
             {
               "id": "italy-d6-s0",
-              "name": "意大利小镇（名称待定）",
-              "point": null,
-              "eventIds": [],
-              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "name": "卡尔皮 · Hotel Carpi",
+              "point": [
+                44.777162,
+                10.861098
+              ],
+              "eventIds": [
+                "italy-d6-a1"
+              ],
+              "note": "酒店位置参考；上车点与集合时间由领队指定。",
               "url": ""
             },
             {
               "id": "italy-d6-s1",
-              "name": "圣马可广场",
+              "name": "威尼斯",
               "point": [
                 45.43388889,
                 12.33805556
@@ -1284,18 +1416,20 @@
               "eventIds": [
                 "italy-d6-a4"
               ],
-              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "note": "景区 / 城市参考点，非确认集合点。",
               "url": ""
             },
             {
               "id": "italy-d6-s2",
-              "name": "米兰大教堂",
+              "name": "林比亚泰 · AS Hotel Limbiate Fiera",
               "point": [
-                45.46416667,
-                9.19138889
+                45.605722,
+                9.139944
               ],
-              "eventIds": [],
-              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "eventIds": [
+                "italy-d6-hotel"
+              ],
+              "note": "酒店位置参考；上车点与集合时间由领队指定。",
               "url": ""
             },
             {
@@ -1314,14 +1448,25 @@
           ],
           "legs": [
             {
+              "id": "italy-d6-leg1",
+              "from": "italy-d6-s0",
+              "to": "italy-d6-s1",
+              "mode": "团队交通 · 示意",
+              "duration": "以领队安排为准",
+              "note": "按酒店位置调整的先后示意线，不是实际道路或耗时，不用于导航。",
+              "url": "",
+              "checkedDate": "2026-10-21",
+              "road": null
+            },
+            {
               "id": "italy-d6-leg2",
               "from": "italy-d6-s1",
               "to": "italy-d6-s2",
-              "mode": "团队交通",
+              "mode": "团队交通 · 示意",
               "duration": "以领队安排为准",
-              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "note": "按酒店位置调整的先后示意线，不是实际道路或耗时，不用于导航。",
               "url": "",
-              "checkedDate": "",
+              "checkedDate": "2026-10-21",
               "road": null
             }
           ]
@@ -1465,17 +1610,24 @@
       "date": "",
       "stops": [
         {
-          "name": "米兰",
+          "name": "林比亚泰 · AS Hotel Limbiate Fiera",
+          "point": [
+            45.605722,
+            9.139944
+          ]
+        },
+        {
+          "name": "米兰大教堂",
           "point": [
             45.46416667,
             9.19138889
           ]
         },
         {
-          "name": "蒙特卡蒂尼",
+          "name": "皮斯托亚 · Grand Hotel Villa Cappugi",
           "point": [
-            43.88277778,
-            10.77111111
+            43.94995,
+            10.920279
           ]
         }
       ],
@@ -1483,23 +1635,26 @@
       "departure": "",
       "arrival": "",
       "duration": "10.27 · 见当日安排",
-      "lodging": "四星级酒店 · 名称与地址待定",
-      "lodgingStatus": "pending",
+      "lodging": "Grand Hotel Villa Cappugi · 皮斯托亚｜Via di Collegigliato, 45, 51100 Pistoia",
+      "lodgingStatus": "confirmed",
       "status": "pending",
-      "note": "团队安排：08:00 早餐后游米兰；10:00 米兰大教堂入内及登顶 ≥60 分钟；12:00 午餐；参观完教堂后自由活动，指定时间集合；18:00 晚餐。\n自己的时间：全程最值得争取的一段。90 分钟选城堡庭院；120 分钟可选安布罗修美术馆。只选一条，不把多个博物馆硬拼。\n待确认：结束时刻未写，随后还有标注 310 km 转场。集合位置和实际可用时长必须先问清；四星酒店待定。",
-      "source": "用户提供的 10 月 9 日版意大利 10 天行程单，第 1–4 页；参考安排，未代替最终通知。",
+      "note": "酒店更新后的路线：林比亚泰酒店 → 米兰大教堂及自由活动 → 皮斯托亚 Grand Hotel Villa Cappugi。自由活动结束后随团长途转场。\n自己的时间：米兰教堂后明确有自由活动，开始、结束和集合点待通知。",
+      "source": "用户提供的 10 月 9 日版意大利 10 天行程单，第 1–4 页；参考安排，未代替最终通知。 酒店更新：用户提供《意大利一团酒店.docx》，2026-10-21 核对；10.22 酒店名由用户确认。",
       "road": null,
       "activities": [
         {
           "id": "italy-d7-a1",
-          "name": "酒店早餐后游米兰",
-          "point": null,
+          "name": "从 林比亚泰 酒店出发",
+          "point": [
+            45.605722,
+            9.139944
+          ],
           "time": "08:00",
           "duration": "",
           "transport": "按团队安排",
           "status": "pending",
-          "note": "酒店未知。",
-          "url": "",
+          "note": "出发酒店：AS Hotel Limbiate Fiera；Corso Como, 52, 20812 Limbiate。\n原单时刻仅作参考，早餐和发车以领队通知为准。",
+          "url": "https://www.ashotels.it/as-hotel-limbiate-fiera",
           "photo": null,
           "photos": []
         },
@@ -1564,13 +1719,13 @@
         },
         {
           "id": "italy-d7-a5",
-          "name": "晚餐后入住",
+          "name": "团队晚餐 · 地点待通知",
           "point": null,
           "time": "18:00",
           "duration": "",
           "transport": "按团队安排",
           "status": "pending",
-          "note": "随后蒙特卡蒂尼方向转场；酒店名称、具体时间待定。",
+          "note": "餐厅和抵达酒店的时间待领队通知；酒店已另列为入住安排。",
           "url": "",
           "photo": null,
           "photos": []
@@ -1613,16 +1768,45 @@
           "url": "https://www.ambrosiana.it/en/ambrosiana-info/pinacoteca/",
           "photo": null,
           "photos": []
+        },
+        {
+          "id": "italy-d7-hotel",
+          "name": "入住 · Grand Hotel Villa Cappugi",
+          "point": [
+            43.94995,
+            10.920279
+          ],
+          "time": "按领队通知",
+          "duration": "",
+          "transport": "团队交通",
+          "status": "confirmed",
+          "note": "10.27 入住 / 次日退房。住宿已确认；抵达、晚餐地点与时刻仍按领队通知。\nVia di Collegigliato, 45, 51100 Pistoia\n文档分组写“蒙特卡蒂尼”，酒店与地址实际在皮斯托亚；当晚住宿和次晨出发按皮斯托亚标注。\n定位依据：官网十进制 GPS；2026-10-21 核验。",
+          "url": "https://www.hotelvillacappugi.com/en/four-stars-hotel-pistoia/",
+          "photo": null,
+          "photos": []
         }
       ],
       "routePlans": [
         {
           "id": "italy-d7-tour",
           "name": "团队行程 · 参考路线",
-          "note": "参考资料中的先后顺序；未知小镇与酒店保留缺口，不虚构道路或集合点。",
+          "note": "入住地点已按酒店表补全；地点间连线只示意先后，非道路导航。团队游览、用餐和发车时刻仍以领队通知为准。",
           "stops": [
             {
               "id": "italy-d7-s0",
+              "name": "林比亚泰 · AS Hotel Limbiate Fiera",
+              "point": [
+                45.605722,
+                9.139944
+              ],
+              "eventIds": [
+                "italy-d7-a1"
+              ],
+              "note": "酒店位置参考；上车点与集合时间由领队指定。",
+              "url": ""
+            },
+            {
+              "id": "italy-d7-s1",
               "name": "米兰大教堂",
               "point": [
                 45.46416667,
@@ -1632,18 +1816,20 @@
                 "italy-d7-a2",
                 "italy-d7-a4"
               ],
-              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "note": "景区 / 城市参考点，非确认集合点。",
               "url": ""
             },
             {
-              "id": "italy-d7-s1",
-              "name": "蒙特卡蒂尼（城市参考点）",
+              "id": "italy-d7-s2",
+              "name": "皮斯托亚 · Grand Hotel Villa Cappugi",
               "point": [
-                43.88277778,
-                10.77111111
+                43.94995,
+                10.920279
               ],
-              "eventIds": [],
-              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "eventIds": [
+                "italy-d7-hotel"
+              ],
+              "note": "酒店位置参考；上车点与集合时间由领队指定。",
               "url": ""
             }
           ],
@@ -1652,11 +1838,22 @@
               "id": "italy-d7-leg1",
               "from": "italy-d7-s0",
               "to": "italy-d7-s1",
-              "mode": "团队交通",
+              "mode": "团队交通 · 示意",
               "duration": "以领队安排为准",
-              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "note": "按酒店位置调整的先后示意线，不是实际道路或耗时，不用于导航。",
               "url": "",
-              "checkedDate": "",
+              "checkedDate": "2026-10-21",
+              "road": null
+            },
+            {
+              "id": "italy-d7-leg2",
+              "from": "italy-d7-s1",
+              "to": "italy-d7-s2",
+              "mode": "团队交通 · 示意",
+              "duration": "以领队安排为准",
+              "note": "按酒店位置调整的先后示意线，不是实际道路或耗时，不用于导航。",
+              "url": "",
+              "checkedDate": "2026-10-21",
               "road": null
             }
           ]
@@ -1800,10 +1997,10 @@
       "date": "",
       "stops": [
         {
-          "name": "蒙特卡蒂尼",
+          "name": "皮斯托亚 · Grand Hotel Villa Cappugi",
           "point": [
-            43.88277778,
-            10.77111111
+            43.94995,
+            10.920279
           ]
         },
         {
@@ -1821,10 +2018,10 @@
           ]
         },
         {
-          "name": "罗马",
+          "name": "蒂沃利温泉区 · Grand Hotel Duca d'Este",
           "point": [
-            41.9028,
-            12.4964
+            41.952948,
+            12.716396
           ]
         }
       ],
@@ -1832,23 +2029,26 @@
       "departure": "",
       "arrival": "",
       "duration": "10.28 · 见当日安排",
-      "lodging": "四星级酒店 · 名称与地址待定",
-      "lodgingStatus": "pending",
+      "lodging": "Grand Hotel Duca d'Este · 蒂沃利温泉区｜Via Nazionale Tiburtina, 330, 00019 Tivoli Terme",
+      "lodgingStatus": "confirmed",
       "status": "pending",
-      "note": "团队安排：08:00 早餐出发；10:00 比萨斜塔外观、不上塔 ≥45 分钟；12:00 午餐；14:00 前往佛罗伦萨：大教堂外观 ≥20 分钟、乔托钟楼外观 ≥5 分钟、但丁故居外观 ≥10 分钟、圣十字广场 ≥10 分钟；18:00 晚餐。\n自己的时间：当天多次转场，不安排乌菲兹、学院美术馆或登穹顶。问能否沿团队路线补看领主广场与佣兵凉廊；完全独立往返建议至少 75 分钟。\n待确认：14:00 原文是“前往”，不是确认抵达；佛罗伦萨至罗马标注 270 km，住宿地点待定。",
-      "source": "用户提供的 10 月 9 日版意大利 10 天行程单，第 1–4 页；参考安排，未代替最终通知。",
+      "note": "酒店更新后的路线：皮斯托亚酒店 → 比萨 → 佛罗伦萨 → 蒂沃利温泉区 Grand Hotel Duca d'Este。晚间抵达时间待定。\n自己的时间：只有领队确认可离团后再执行备选；酒店确定不代表新增自由活动。",
+      "source": "用户提供的 10 月 9 日版意大利 10 天行程单，第 1–4 页；参考安排，未代替最终通知。 酒店更新：用户提供《意大利一团酒店.docx》，2026-10-21 核对；10.22 酒店名由用户确认。",
       "road": null,
       "activities": [
         {
           "id": "italy-d8-a1",
-          "name": "酒店早餐后出发",
-          "point": null,
+          "name": "从 皮斯托亚 酒店出发",
+          "point": [
+            43.94995,
+            10.920279
+          ],
           "time": "08:00",
           "duration": "",
           "transport": "按团队安排",
           "status": "pending",
-          "note": "蒙特卡蒂尼出发，酒店未知。",
-          "url": "",
+          "note": "出发酒店：Grand Hotel Villa Cappugi；Via di Collegigliato, 45, 51100 Pistoia。\n原单时刻仅作参考，早餐和发车以领队通知为准。",
+          "url": "https://www.hotelvillacappugi.com/en/four-stars-hotel-pistoia/",
           "photo": null,
           "photos": []
         },
@@ -1974,13 +2174,13 @@
         },
         {
           "id": "italy-d8-a9",
-          "name": "团队晚餐",
+          "name": "团队晚餐 · 地点待通知",
           "point": null,
           "time": "18:00",
           "duration": "",
           "transport": "按团队安排",
           "status": "pending",
-          "note": "后续赴罗马，实际转场与酒店待确认。",
+          "note": "餐厅和抵达酒店的时间待领队通知；酒店已另列为入住安排。",
           "url": "",
           "photo": null,
           "photos": []
@@ -2007,28 +2207,46 @@
             "checkedDate": "2026-10-10"
           },
           "photos": []
+        },
+        {
+          "id": "italy-d8-hotel",
+          "name": "入住 · Grand Hotel Duca d'Este",
+          "point": [
+            41.952948,
+            12.716396
+          ],
+          "time": "按领队通知",
+          "duration": "",
+          "transport": "团队交通",
+          "status": "confirmed",
+          "note": "10.28 入住 / 次日退房。住宿已确认；抵达、晚餐地点与时刻仍按领队通知。\nVia Nazionale Tiburtina, 330, 00019 Tivoli Terme\n在罗马以东的 Tivoli Terme，不在罗马市中心或蒂沃利山城。次日从此去 FCO；先核实离店、集合与机场到达时间，不安排返程晨游。\n定位依据：官网 GPS；官网建议导航入口 Via Emilio Salgari；2026-10-21 核验。",
+          "url": "https://www.ducadeste.com/en/contatti/",
+          "photo": null,
+          "photos": []
         }
       ],
       "routePlans": [
         {
           "id": "italy-d8-tour",
           "name": "团队行程 · 参考路线",
-          "note": "参考资料中的先后顺序；未知小镇与酒店保留缺口，不虚构道路或集合点。",
+          "note": "入住地点已按酒店表补全；地点间连线只示意先后，非道路导航。团队游览、用餐和发车时刻仍以领队通知为准。",
           "stops": [
             {
               "id": "italy-d8-s0",
-              "name": "蒙特卡蒂尼（城市参考点）",
+              "name": "皮斯托亚 · Grand Hotel Villa Cappugi",
               "point": [
-                43.88277778,
-                10.77111111
+                43.94995,
+                10.920279
               ],
-              "eventIds": [],
-              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "eventIds": [
+                "italy-d8-a1"
+              ],
+              "note": "酒店位置参考；上车点与集合时间由领队指定。",
               "url": ""
             },
             {
               "id": "italy-d8-s1",
-              "name": "比萨斜塔",
+              "name": "比萨",
               "point": [
                 43.72305556,
                 10.39638889
@@ -2036,12 +2254,12 @@
               "eventIds": [
                 "italy-d8-a2"
               ],
-              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "note": "景区 / 城市参考点，非确认集合点。",
               "url": ""
             },
             {
               "id": "italy-d8-s2",
-              "name": "佛罗伦萨大教堂",
+              "name": "佛罗伦萨",
               "point": [
                 43.77305556,
                 11.25694444
@@ -2049,18 +2267,20 @@
               "eventIds": [
                 "italy-d8-a5"
               ],
-              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "note": "景区 / 城市参考点，非确认集合点。",
               "url": ""
             },
             {
               "id": "italy-d8-s3",
-              "name": "罗马（城市参考点）",
+              "name": "蒂沃利温泉区 · Grand Hotel Duca d'Este",
               "point": [
-                41.9028,
-                12.4964
+                41.952948,
+                12.716396
               ],
-              "eventIds": [],
-              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "eventIds": [
+                "italy-d8-hotel"
+              ],
+              "note": "酒店位置参考；上车点与集合时间由领队指定。",
               "url": ""
             },
             {
@@ -2108,33 +2328,33 @@
               "id": "italy-d8-leg1",
               "from": "italy-d8-s0",
               "to": "italy-d8-s1",
-              "mode": "团队交通",
+              "mode": "团队交通 · 示意",
               "duration": "以领队安排为准",
-              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "note": "按酒店位置调整的先后示意线，不是实际道路或耗时，不用于导航。",
               "url": "",
-              "checkedDate": "",
+              "checkedDate": "2026-10-21",
               "road": null
             },
             {
               "id": "italy-d8-leg2",
               "from": "italy-d8-s1",
               "to": "italy-d8-s2",
-              "mode": "团队交通",
+              "mode": "团队交通 · 示意",
               "duration": "以领队安排为准",
-              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "note": "按酒店位置调整的先后示意线，不是实际道路或耗时，不用于导航。",
               "url": "",
-              "checkedDate": "",
+              "checkedDate": "2026-10-21",
               "road": null
             },
             {
               "id": "italy-d8-leg3",
               "from": "italy-d8-s2",
               "to": "italy-d8-s3",
-              "mode": "团队交通",
+              "mode": "团队交通 · 示意",
               "duration": "以领队安排为准",
-              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "note": "按酒店位置调整的先后示意线，不是实际道路或耗时，不用于导航。",
               "url": "",
-              "checkedDate": "",
+              "checkedDate": "2026-10-21",
               "road": null
             }
           ]
@@ -2212,10 +2432,10 @@
       "date": "",
       "stops": [
         {
-          "name": "罗马",
+          "name": "蒂沃利温泉区 · Grand Hotel Duca d'Este",
           "point": [
-            41.9028,
-            12.4964
+            41.952948,
+            12.716396
           ]
         },
         {
@@ -2233,20 +2453,23 @@
       "lodging": "飞机上",
       "lodgingStatus": "pending",
       "status": "pending",
-      "note": "团队安排：08:00 早餐后前往机场；参考 3U3896：罗马 12:00 → 成都次日 05:30，夜宿飞机。\n自己的时间：不加晨游。原文另说团队国际航班提前 4 小时到机场，与 08:00 早餐后的安排存在待澄清点。\n待确认：向领队核实实际离店时间、到机场要求及退税安排；航班和航站楼以出票与航司通知为准。",
+      "note": "酒店更新后的路线：蒂沃利温泉区酒店 → 罗马 FCO 机场 → 成都。12:00 航班为原单参考；离店和机场到达时间请领队重新核定。\n自己的时间：只有领队确认可离团后再执行备选；酒店确定不代表新增自由活动。",
       "source": "用户提供的 10 月 9 日版意大利 10 天行程单，第 1–4 页；参考安排，未代替最终通知。",
       "road": null,
       "activities": [
         {
           "id": "italy-d9-a1",
-          "name": "早餐后前往机场",
-          "point": null,
+          "name": "从 蒂沃利温泉区 酒店出发",
+          "point": [
+            41.952948,
+            12.716396
+          ],
           "time": "08:00",
           "duration": "",
           "transport": "按团队安排",
           "status": "pending",
-          "note": "与行程说明“国际航班提前 4 小时到场”存在待澄清点，需核实离店时间。",
-          "url": "",
+          "note": "出发酒店：Grand Hotel Duca d'Este；Via Nazionale Tiburtina, 330, 00019 Tivoli Terme。\n原单 08:00 早餐出发，与 12:00 国际航班提前 4 小时到机场的说明存在冲突；需领队确认实际离店时间，不安排晨游。",
+          "url": "https://www.ducadeste.com/en/contatti/",
           "photo": null,
           "photos": []
         },
@@ -2271,17 +2494,19 @@
         {
           "id": "italy-d9-tour",
           "name": "团队行程 · 参考路线",
-          "note": "参考资料中的先后顺序；未知小镇与酒店保留缺口，不虚构道路或集合点。",
+          "note": "入住地点已按酒店表补全；地点间连线只示意先后，非道路导航。团队游览、用餐和发车时刻仍以领队通知为准。",
           "stops": [
             {
               "id": "italy-d9-s0",
-              "name": "罗马（城市参考点）",
+              "name": "蒂沃利温泉区 · Grand Hotel Duca d'Este",
               "point": [
-                41.9028,
-                12.4964
+                41.952948,
+                12.716396
               ],
-              "eventIds": [],
-              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "eventIds": [
+                "italy-d9-a1"
+              ],
+              "note": "酒店位置参考；上车点与集合时间由领队指定。",
               "url": ""
             },
             {
@@ -2294,7 +2519,7 @@
               "eventIds": [
                 "italy-d9-a2"
               ],
-              "note": "城市 / 景区参考点，不代表酒店、停车点或集合位置。",
+              "note": "景区 / 城市参考点，非确认集合点。",
               "url": ""
             }
           ],
@@ -2303,11 +2528,11 @@
               "id": "italy-d9-leg1",
               "from": "italy-d9-s0",
               "to": "italy-d9-s1",
-              "mode": "团队交通",
+              "mode": "团队交通 · 示意",
               "duration": "以领队安排为准",
-              "note": "虚线只表示行程先后，不是实际道路或航线，不用于导航。",
+              "note": "按酒店位置调整的先后示意线，不是实际道路或耗时，不用于导航。",
               "url": "",
-              "checkedDate": "",
+              "checkedDate": "2026-10-21",
               "road": null
             }
           ]
@@ -2424,7 +2649,7 @@
     },
     {
       "id": "italy-check-5",
-      "name": "确认 7 晚酒店名称与地址；“意小镇”的实际名称。",
+      "name": "核对已确认的 7 晚酒店、每日酒店集合点与次晨发车时间。",
       "category": "其他物品",
       "done": false
     },
@@ -2450,6 +2675,137 @@
   "notes": [],
   "guides": [
     {
+      "id": "italy-guide-hotels-20261021",
+      "title": "7 晚酒店与出发路线",
+      "category": "住宿信息",
+      "body": "按入住夜对应 D2—D8，次日从上一晚酒店出发。团队景点未改为自由行；酒店位置不会自动确认用餐地点、发车或离团时段。名称、街道和城市供核对，导航请同时搜索酒店名。",
+      "url": "",
+      "checkedDate": "2026-10-21",
+      "summary": "10.22—10.28 酒店已确认；卡尔皮、林比亚泰、皮斯托亚和罗马周边落脚点已补入地图。",
+      "sections": [
+        {
+          "title": "10.22 · 波佐利 · Grand Hotel Serapide",
+          "body": "Via S. Gennaro Agnano, 34, Pozzuoli\n用户确认以文档截图与地址为准，原文字中的 Towers Hotel 不采用。位于那不勒斯以西的波佐利，不能按那不勒斯市中心安排夜游。\n定位：官网 GPS。地图标记不是约定集合点。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "酒店官网",
+              "url": "https://www.grandhotelserapide.it/contatti/"
+            }
+          ]
+        },
+        {
+          "title": "10.23 · 梅尔卡托圣塞韦里诺 · San Severino Park Hotel & Spa",
+          "body": "Via Bagnara, 10, Mercato San Severino\n萨勒诺内陆住宿，不在海边市中心。文档与官网邮编不同，导航以酒店名、街道及城市为准。\n定位：官网嵌入地图参考位置，非精确门口。地图标记不是约定集合点。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "酒店官网",
+              "url": "https://sanseverinoparkhotel.com/contatti/"
+            }
+          ]
+        },
+        {
+          "title": "10.24 · 波梅齐亚 · Hotel Principe",
+          "body": "Via dei Castelli Romani, 14A, Pomezia\n罗马以南的波梅齐亚住宿，不是罗马市中心；不据此安排步行返回罗马景点。文档邮编 00040、官网 00071，保留街道与城市用于核对。\n定位：官网嵌入地图街道参考位置，非精确门口。地图标记不是约定集合点。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "酒店官网",
+              "url": "https://www.hotelprincipegroup.it/contatti"
+            }
+          ]
+        },
+        {
+          "title": "10.25 · 卡尔皮 · Hotel Carpi",
+          "body": "Via delle Magliaie, 2/4, 41012 Carpi\n原行程未命名的“意大利小镇”住宿落实为卡尔皮；不是新增团队游览项目。\n定位：官网 GPS。地图标记不是约定集合点。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "酒店官网",
+              "url": "https://www.hotelcarpi.it/en/contacts"
+            }
+          ]
+        },
+        {
+          "title": "10.26 · 林比亚泰 · AS Hotel Limbiate Fiera",
+          "body": "Corso Como, 52, 20812 Limbiate\n位于米兰北侧林比亚泰；米兰教堂后的自由活动从市区集合点出发，不以酒店作步行起点。\n定位：酒店官方手册 GPS：45°36′20.6″N 9°08′23.8″E。地图标记不是约定集合点。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "酒店官网",
+              "url": "https://www.ashotels.it/as-hotel-limbiate-fiera"
+            },
+            {
+              "label": "官方定位手册",
+              "url": "https://www.ashotels.it/pdf/hotel/limbiate_es.pdf"
+            }
+          ]
+        },
+        {
+          "title": "10.27 · 皮斯托亚 · Grand Hotel Villa Cappugi",
+          "body": "Via di Collegigliato, 45, 51100 Pistoia\n文档分组写“蒙特卡蒂尼”，酒店与地址实际在皮斯托亚；当晚住宿和次晨出发按皮斯托亚标注。\n定位：官网十进制 GPS。地图标记不是约定集合点。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "酒店官网",
+              "url": "https://www.hotelvillacappugi.com/en/four-stars-hotel-pistoia/"
+            }
+          ]
+        },
+        {
+          "title": "10.28 · 蒂沃利温泉区 · Grand Hotel Duca d'Este",
+          "body": "Via Nazionale Tiburtina, 330, 00019 Tivoli Terme\n在罗马以东的 Tivoli Terme，不在罗马市中心或蒂沃利山城。次日从此去 FCO；先核实离店、集合与机场到达时间，不安排返程晨游。\n定位：官网 GPS；官网建议导航入口 Via Emilio Salgari。地图标记不是约定集合点。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "酒店官网",
+              "url": "https://www.ducadeste.com/en/contatti/"
+            }
+          ]
+        },
+        {
+          "title": "入住后的人文散步候选",
+          "body": "10.25 卡尔皮：若抵达后领队允许且返程交通已落实，可考虑 Piazza dei Martiri 与 Palazzo dei Pio 外观，感受城堡、宫殿和广场的关系。酒店不在历史中心，不默认步行可达。\n10.27 皮斯托亚：若长途转场后仍有余力，可考虑 Piazza del Duomo 的中世纪广场与建筑外观。须先核实酒店往返路线与返回时间；不承诺晚间场馆开放。\n这两项只是酒店确定后可询问领队的候选，未加入团队必经路线。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": [
+            {
+              "label": "卡尔皮官方旅游：Palazzo dei Pio",
+              "url": "https://www.visitcarpi.it/palazzo-dei-pio"
+            },
+            {
+              "label": "托斯卡纳官方旅游：皮斯托亚大教堂广场",
+              "url": "https://www.visittuscany.com/en/attractions/piazza-duomo-in-pistoia/"
+            }
+          ]
+        },
+        {
+          "title": "返程早晨",
+          "body": "10.29 从蒂沃利温泉区前往 FCO，不能用罗马市中心出发时间代替。原单 08:00 早餐出发与 12:00 国际航班提前 4 小时到场要求冲突；请领队明确发车时间。这里不编造实时车程，不安排出发前支线。",
+          "steps": [],
+          "phrases": [],
+          "images": [],
+          "links": []
+        }
+      ]
+    },
+    {
       "id": "italy-guide-before",
       "title": "跟团中留出自己的时间",
       "category": "当地提醒",
@@ -2468,7 +2824,7 @@
         },
         {
           "title": "这次不硬塞进去的地点",
-          "body": "《最后的晚餐》须先核实预约。乌菲兹、学院美术馆、穹顶攀登需要连续时间；圣吉米尼亚诺、蒙特里久尼、卢卡等跨城支线不在团线内。那不勒斯没有明确市区自由活动，酒店也未知。",
+          "body": "《最后的晚餐》须先核实预约。乌菲兹、学院美术馆、穹顶攀登需要连续时间；圣吉米尼亚诺、蒙特里久尼、卢卡等跨城支线不在团线内。那不勒斯没有明确市区自由活动，10.22 实际住波佐利；不把酒店当市中心出发点。",
           "steps": [],
           "phrases": [],
           "images": [],
@@ -2768,10 +3124,10 @@
       "id": "italy-guide-sources",
       "title": "行程来源、图片授权与待确认事项",
       "category": "其他攻略",
-      "body": "团队摘要来自《1021 3U意大利一地10天(1009).pdf》第 1–4 页；原件保留本机。所有位置用于景区 / 城市定位，不自动代表团队出入口。照片使用 Wikimedia Commons 授权缩略图，未另作修改；不是本次旅行实拍。底图轮廓来自 Natural Earth 公有领域数据。",
+      "body": "团队摘要来自《1021 3U意大利一地10天(1009).pdf》第 1–4 页；原件保留本机。所有位置用于景区 / 城市定位，不自动代表团队出入口。照片使用 Wikimedia Commons 授权缩略图，未另作修改；不是本次旅行实拍。底图轮廓来自 Natural Earth 公有领域数据。 酒店名称与入住夜来自用户补充文档；10.22 以用户明确回复的 Grand Hotel Serapide 为准。酒店定位为官网 GPS 或官网嵌入地图参考点，不等于团队停车入口。",
       "url": "https://www.naturalearthdata.com/about/terms-of-use/",
-      "checkedDate": "2026-10-10",
-      "summary": "行程来自用户 PDF；图片为景观参考；年份、酒店、集合位置待最终通知。",
+      "checkedDate": "2026-10-21",
+      "summary": "团队行程来自用户 PDF，7 晚酒店来自补充 DOCX；图片为景观参考，集合时间待最终通知。",
       "sections": [
         {
           "title": "斯福尔扎城堡 · 米兰市政府",

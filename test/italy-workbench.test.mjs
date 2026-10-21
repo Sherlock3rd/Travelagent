@@ -21,7 +21,8 @@ test('新行程含可关联的地图、每日相册和独立备选；本地照�
   const state=validateState(seed);assert.equal(state.days.length,10);
   assert.equal(state.days.flatMap(d=>d.activities).filter(a=>a.status==='optional').length,7);
   for(const day of state.days.slice(1,8))assert.ok(day.activities.some(a=>a.photo),day.id);
-  assert.equal(state.days[4].stops.at(-1).point,null);
+  assert.match(state.days[4].stops.at(-1).name,/Hotel Carpi/);
+  assert.ok(state.days[4].stops.at(-1).point);
   const day=state.days[6];assert.equal(day.routePlans.length,3);
   const primaryEvents=day.routePlans[0].stops.flatMap(s=>s.eventIds);
   assert.ok(!primaryEvents.some(id=>id.startsWith('italy-option-')));

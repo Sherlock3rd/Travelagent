@@ -6,6 +6,8 @@ import { createMap, addBasemap } from './map.js';
 import { planPlaces, forgetEvent } from './journeys.js';
 import { COUNTRIES } from './countries.js';
 import { loadInitialTrip } from './initial-trip.js';
+import { applyContentUpdate } from './content-update.js';
+import { hotelUpdate } from './italy-hotels-update.js';
 import { cloudClient } from './cloud-sync.js';
 import { isItaly, STORAGE_KEY, RECOVERY_KEY, publishedPath, dateLabel, localTripClient, migrateItalyChecklist } from './trip-context.js';
 mountLightbox();
@@ -32,6 +34,21 @@ try {
     return published;
   }, STORAGE_KEY);
   state = initial.state; lastSaved = initial.serialized;
+  if(isItaly) {
+    try {
+      const updated=applyContentUpdate(localStorage,STORAGE_KEY,hotelUpdate);
+      if(updated){state=updated.state;lastSaved=updated.serialized;}
+      if(updated?.conflicts.length){
+        const notice=document.createElement('p');notice.className='storage-warning';
+        notice.textContent='酒店资料已更新。部分内容保留了你的手动修改，请在“附加攻略 → 7 晚酒店与出发路线”核对：'+updated.conflicts.join('、');
+        $('#main').prepend(notice);
+      }
+    } catch {
+      const notice=document.createElement('p');notice.className='storage-warning';
+      notice.textContent='酒店增量更新暂未完成，原有本机内容已保留。请先导出备份，释放空间后刷新重试。';
+      $('#main').prepend(notice);
+    }
+  }
 } catch {
   writable = false;
   try { lastSaved = localStorage.getItem(STORAGE_KEY); } catch {}
