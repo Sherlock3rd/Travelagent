@@ -1,5 +1,6 @@
 import { photoButton } from './lightbox.js';
 import { createMap, addBasemap } from './map.js';
+import { legDisplayPath } from './journeys.js';
 const previewSelection = new Map();
 export const PHOTO_HOSTS = ['egymonuments.gov.eg', '1442038683.rsc.cdn77.org', 'dohahamadairport.com', 'upload.wikimedia.org', 'thumb.wikimedia.org', 'orange-bay.tours'];
 export function parsePhoto(raw, { safeURL, validDate }) {
@@ -15,7 +16,7 @@ export function previewGeometry(day, planId) {
   const plan = day.routePlans.find(p => p.id === planId) || day.routePlans[0];
   if (plan) return { name:plan.name, planId:plan.id, stops:plan.stops, paths:plan.legs.flatMap(l => {
     const a=plan.stops.find(s=>s.id===l.from), b=plan.stops.find(s=>s.id===l.to);
-    return a.point && b.point ? [{points:l.road?.points || [a.point,b.point],road:Boolean(l.road),label:a.name+' → '+b.name+' · '+l.mode+' · '+l.duration}] : [];
+    return a.point && b.point ? [{points:legDisplayPath(plan,l),road:Boolean(l.road),label:a.name+' → '+b.name+' · '+l.mode+' · '+l.duration}] : [];
   }) };
   const stops = day.activities.some(a=>a.point) ? day.activities.map(a=>({...a,eventIds:[a.id]})) : day.stops.map((s,i)=>({...s,id:'stop-'+i,eventIds:[]}));
   const paths=[];

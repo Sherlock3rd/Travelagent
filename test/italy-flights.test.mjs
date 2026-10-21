@@ -5,7 +5,19 @@ import { previewGeometry } from '../public/day-media.js';
 import { applyContentUpdate, mergeContentUpdate } from '../public/content-update.js';
 import { hotelUpdate } from '../public/italy-hotels-update.js';
 import { flightUpdate } from '../public/italy-flights-update.js';
+import { legDisplayPath } from '../public/journeys.js';
 const seed=JSON.parse(await readFile(new URL('../public/italy-trip.json',import.meta.url),'utf8'));
+test('往返航线在两侧可区分，保持真实端点且不改变旅行数据',()=>{
+  const before=JSON.stringify(seed),out=previewGeometry(seed.days[0]).paths[0].points,back=previewGeometry(seed.days[8]).paths.at(-1).points;
+  assert.deepEqual(out[0],back.at(-1));assert.deepEqual(out.at(-1),back[0]);
+  assert.ok(Math.abs(out[16][0]-back[16][0])>5);
+  assert.ok(out.length>2 && back.length>2);
+  assert.equal(JSON.stringify(seed),before);
+  const plan=structuredClone(seed.days[8].routePlans[0]),local=plan.legs[0];
+  assert.equal(legDisplayPath(plan,local).length,2);
+  local.road={points:[[40,12],[41,13],[42,14]]};assert.deepEqual(legDisplayPath(plan,local),local.road.points);
+  plan.stops[0].point=null;assert.deepEqual(legDisplayPath(plan,local),[]);
+});
 test('跨日航班连接已知机场，D1 集合与 D2 起飞日期不混淆',()=>{
   const outbound=previewGeometry(seed.days[0]);
   assert.equal(outbound.paths.length,1);assert.match(outbound.paths[0].label,/飞机.*3U3895.*10.22/);

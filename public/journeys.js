@@ -8,6 +8,23 @@ const list = (items, max, parse) => {
   return result;
 };
 export const legSignature = (plan, leg) => JSON.stringify({ mode: leg.mode, from: plan.stops.find(s => s.id === leg.from)?.point, to: plan.stops.find(s => s.id === leg.to)?.point });
+// Display-only flight arcs: reversing direction puts the return on the opposite
+// side. These are schematic, never persisted as roads or actual flight tracks.
+export function legDisplayPath(plan, leg) {
+  const from=plan.stops.find(s=>s.id===leg.from)?.point, to=plan.stops.find(s=>s.id===leg.to)?.point;
+  if(!from || !to)return [];
+  if(leg.road)return leg.road.points;
+  if(!leg.mode.startsWith('飞机'))return [from,to];
+  const rad=Math.PI/180;
+  const project=p=>[p[1],Math.log(Math.tan(Math.PI/4+Math.max(-85,Math.min(85,p[0]))*rad/2))/rad];
+  const a=project(from),b=project(to),dx=b[0]-a[0],dy=b[1]-a[1];
+  const c=[(a[0]+b[0])/2-dy*.18,(a[1]+b[1])/2+dx*.18];
+  return Array.from({length:33},(_,i)=>{
+    if(i===0)return from;if(i===32)return to;
+    const t=i/32,u=1-t,x=u*u*a[0]+2*u*t*c[0]+t*t*b[0],y=u*u*a[1]+2*u*t*c[1]+t*t*b[1];
+    return [Math.max(-85,Math.min(85,(2*Math.atan(Math.exp(y*rad))-Math.PI/2)/rad)),x];
+  });
+}
 export function parsePlans(raw, activities, { coordinates, safeURL, validDate }) {
   return list(raw ?? [], 8, p => {
     const plan = { id: id(p.id), name: text(p.name, 120), note: text(p.note ?? ''), stops: [], legs: [] };

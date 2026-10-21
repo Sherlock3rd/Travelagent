@@ -3,7 +3,7 @@ import { dayMediaHTML, mountDayMedia } from './day-media.js';
 import { guideHTML } from './guides.js';
 import { COLORS, CATEGORIES, MODES, GUIDE_CATEGORIES, blankState, validateState, routeSignature, dayForSave, activitySegments, mergeDayActivities, mergeRoutePlans, mergeGuides, mergeActivityPhotos } from './model.js';
 import { createMap, addBasemap } from './map.js';
-import { planPlaces, forgetEvent } from './journeys.js';
+import { planPlaces, forgetEvent, legDisplayPath } from './journeys.js';
 import { COUNTRIES } from './countries.js';
 import { loadInitialTrip } from './initial-trip.js';
 import { applyContentUpdate } from './content-update.js';
@@ -160,9 +160,11 @@ function drawMap() {
       shown.forEach(({p,l}) => {
         const a=p.stops.find(s=>s.id===l.from),b=p.stops.find(s=>s.id===l.to);
         if(!a.point||!b.point)return;
-        const path=l.road?.points || [a.point,b.point]; pointsCount+=2;
+        const path=legDisplayPath(p,l); pointsCount+=2;
         L.polyline(path,{color:'#fff',weight:9,opacity:.95,interactive:false}).addTo(layers);
-        L.polyline(path,{color:color(index),weight:5,opacity:1,dashArray:l.road?null:'12 7'}).addTo(layers).on('click',()=>showLeg(day.id,p.id,l.id));
+        const line=L.polyline(path,{color:color(index),weight:5,opacity:1,dashArray:l.road?null:'12 7'}).addTo(layers).on('click',()=>showLeg(day.id,p.id,l.id));
+        line.getElement()?.setAttribute('aria-label','D'+(index+1)+' 路段：'+a.name+' → '+b.name);
+        if(l.mode.startsWith('飞机'))flightAnnotation(day,l,path,color(index));
       });
       return;
     }
@@ -208,8 +210,8 @@ function drawMap() {
 function fitMap(day) {
   if (!map) return;
   const days = day ? [day] : state.days;
-  if (day?.routePlans.length && mapView === 'activities') { const plan = activePlan(day), points = [...plan.stops.map(s => s.point).filter(Boolean), ...plan.legs.flatMap(l => l.road?.points || [])]; if (points.length) map.fitBounds(points, {padding:[55,55],maxZoom:15,animate:false}); return; }
-  const points = days.flatMap(d => !day && d.routePlans.length ? d.routePlans.flatMap(p => p.stops.map(s=>s.point).filter(Boolean)) : day && mapView === 'activities' ? d.activities.map(s => s.point).filter(Boolean) : d.road?.points || d.stops.map(s => s.point).filter(Boolean));
+  if (day?.routePlans.length && mapView === 'activities') { const plan = activePlan(day), points = [...plan.stops.map(s => s.point).filter(Boolean), ...plan.legs.flatMap(l => legDisplayPath(plan,l))]; if (points.length) map.fitBounds(points, {padding:[55,55],maxZoom:15,animate:false}); return; }
+  const points = days.flatMap(d => !day && d.routePlans.length ? d.routePlans.flatMap(p => [...p.stops.map(s=>s.point).filter(Boolean),...p.legs.flatMap(l=>legDisplayPath(p,l))]) : day && mapView === 'activities' ? d.activities.map(s => s.point).filter(Boolean) : d.road?.points || d.stops.map(s => s.point).filter(Boolean));
   if (points.length) map.fitBounds(L.latLngBounds(points), { padding: [50, 50], maxZoom: 14, animate:false });
   else if (day) toast('这一天还未标记位置，可先查看文字安排。');
 }
@@ -588,12 +590,21 @@ function drawPlaces(places, numbered = false, routeColor = '#285d46') {
     else { marker.bindPopup(placePopup(place), {maxWidth:330,maxHeight:300,autoPanPadding:[25,25]}); placeMarkers.set(place.key, marker); }
   });
 }
+function flightAnnotation(day,leg,path,routeColor) {
+  const mid=Math.floor(path.length/2),a=map.project(path[mid-1]),b=map.project(path[mid]);
+  const angle=Math.atan2(b.y-a.y,b.x-a.x)*180/Math.PI;
+  L.marker(path[mid],{interactive:false,keyboard:false,icon:L.divIcon({className:'direction-marker',iconSize:[24,24],iconAnchor:[12,12],html:'<span style="color:'+routeColor+';transform:rotate('+angle+'deg)">➤</span>'})}).addTo(layers);
+  const flight=leg.mode.match(/\b[A-Z0-9]{2}\d{3,4}\b/)?.[0] || leg.mode;
+  const above=path.at(-1)[1]>=path[0][1];
+  L.tooltip({permanent:true,pane:'popupPane',direction:above?'top':'bottom',offset:[0,above?-12:12],className:'flight-line-label'})
+    .setLatLng(path[mid]).setContent('D'+(state.days.indexOf(day)+1)+' · '+esc(flight)+' · 航段示意<br>'+esc(leg.duration)).addTo(layers);
+}
 function drawPlan(day) {
   const plan = activePlan(day), routeColor = color(state.days.indexOf(day));
   for (const leg of plan.legs) {
     const from = plan.stops.find(s => s.id === leg.from), to = plan.stops.find(s => s.id === leg.to);
     if (!from.point || !to.point) continue;
-    const path = leg.road?.points || [from.point,to.point], active = highlightedLeg === leg.id;
+    const path = legDisplayPath(plan,leg), active = highlightedLeg === leg.id;
     L.polyline(path, {color:'#fff',weight:active?14:10,opacity:1,interactive:false}).addTo(layers);
     const line = L.polyline(path, {color:routeColor,weight:active?9:6,opacity:1,dashArray:leg.road?null:'10 7'}).addTo(layers)
       .bindTooltip(esc(from.name + ' → ' + to.name + ' · ' + leg.mode + ' · ' + leg.duration), {sticky:true})
@@ -601,12 +612,13 @@ function drawPlan(day) {
     const pathElement=line.getElement();
     pathElement?.setAttribute('role','button'); pathElement?.setAttribute('tabindex','0'); pathElement?.setAttribute('aria-label','路段：'+from.name+' → '+to.name);
     pathElement?.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showLeg(day.id,plan.id,leg.id);}});
+    if(leg.mode.startsWith('飞机')){flightAnnotation(day,leg,path,routeColor);continue;}
     const mid = Math.floor(path.length / 2), a = map.project(path[Math.max(0,mid-1)]), b = map.project(path[mid]);
     const angle = Math.atan2(b.y-a.y,b.x-a.x)*180/Math.PI;
     L.marker(map.unproject(a.add(b).divideBy(2)), {interactive:false,keyboard:false,icon:L.divIcon({className:'direction-marker',iconSize:[24,24],iconAnchor:[12,12],html:'<span style="color:'+routeColor+';transform:rotate('+angle+'deg)">➤</span>'})}).addTo(layers);
   }
   const all = planPlaces(state.days), keys = [...new Set(plan.stops.filter(s => s.point).map(s => placeKey(s.point)))];
-  drawPlaces(keys.map(k => all.find(p => p.key === k)),true,routeColor);
+  drawPlaces(keys.map(k => ({...all.find(p => p.key === k),name:plan.stops.find(s=>placeKey(s.point)===k).name})),true,routeColor);
 }
 function legCard(day, plan, leg, popup = false) {
   const from = plan.stops.find(s => s.id === leg.from), to = plan.stops.find(s => s.id === leg.to);
@@ -632,7 +644,7 @@ function showLeg(dayId, planId, legId) {
   selectedPlans.set(day.id,plan.id); selectedDay = day.id; mapView='activities'; highlightedLeg=leg.id;
   renderRoutes(); drawMap();
   const from=plan.stops.find(s=>s.id===leg.from),to=plan.stops.find(s=>s.id===leg.to);
-  const points=leg.road?.points || [from.point,to.point].filter(Boolean);
+  const points=legDisplayPath(plan,leg);
   if (points.length) {
     map.fitBounds(points,{padding:[65,65],maxZoom:16,animate:false});
     L.popup({maxWidth:330,maxHeight:290}).setLatLng(points[Math.floor(points.length/2)]).setContent('<div class="route-popup-summary"><strong>'+esc(from.name+' → '+to.name)+'</strong><p>'+esc(leg.mode+' · '+leg.duration)+'</p><button class="text-button" data-go-day="'+day.id+'">查看当日行程 ↗</button></div>').openOn(map);
